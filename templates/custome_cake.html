@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+{% block tittle %} All Product - Fatin Cake {% endblock %}
+
+{% block body %}
+
+{% block active %}
+<div class="collapse navbar-collapse justify-content-end me-4" id="navbarNav">
+    <ul class="navbar-nav gap-4">
+        <li class="nav-item d-flex align-items-center page-now ">
+            <a class="nav-link text-white" aria-current="page" href="#"> Home </a>
+            <img src=" {{url_for('static', filename='img/home-deac.svg')}} " class="img-fluid animated " alt="">
+        </li>
+        <li class="nav-item d-flex align-items-center">
+            <a class="nav-link text-white" href="base.html"> All Product </a>
+            <img src="{{url_for('static', filename='img/Cupcake.svg')}}" class="img-fluid animated " alt="">
+        </li>
+        <li class="nav-item d-flex align-items-center">
+            <a class="nav-link text-pink" href="#"> Custom Cake </a>
+            <img src="{{url_for('static', filename='img/bag-active.svg')}}" class="img-fluid animated " alt="">
+        </li>
+        <li class="nav-item d-flex align-items-center">
+            <a class="nav-link text-white" href="#"> Cart </a>
+            <img src="{{url_for('static', filename='img/icn shopping-cart .icn-sm.svg')}}" class="img-fluid animated "
+                alt="">
+        </li>
+        <li class="nav-item d-flex align-items-center">
+            <a class="nav-link text-white" href="#"> Login </a>
+            <img src="{{url_for('static', filename='img/Profile.svg')}}" class="img-fluid animated " alt="">
+        </li>
+    </ul>
+</div>
+
+{% endblock %}
+
+<div class="container mt-5">
+
+    <div class="row">
+        <div class="col-7">
+
+            <img src="{{url_for('static', filename='img/custome_cake.png')}}" class="img-fluid"
+                style="width: 682px; height: 572px;">
+
+        </div>
+
+        <div class="col-5 mt-5">
+
+            <h2> DIY Cake </h2>
+
+            <h4 class="mt-4"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate fuga ducimus molestiae
+                vel voluptatum repellat?</h2>
+
+                <h1 class="mt-5" style="font-size: 30px;"> Mulai dari IDR 100,000</h1>
+
+                <div class="text-center mb-3">
+                    <button type="button" class="btn btn custom-button-2 mt-5 "
+                        style="border-radius: 10px !important; padding: 10px 20px !important;"> MAKE YOUR DREAM CAKE
+                    </button>
+                </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div style="background-color:  #F3808B;">
+    <div class="container mt-3 mb-5">
+        <h1 class="text-white"> UKURAN KUE</h1>
+
+        <div class="row">
+            <div class="col d-flex mt-3 mb-4 gap-3 ">
+                <div class="col d-flex justify-content-center">
+                    <div class=" d-block justify-content-center">
+                        <div class="card" style="width: 25rem;">
+                            <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
+                        </div>
+                        <h1 class="text-white mt-3" style="font-size: 20px;"> 16 cm </h1>
+                    </div>
+                </div>
+
+                <div class="col d-flex justify-content-center">
+                    <div class=" d-block justify-content-center">
+                        <div class="card" style="width: 25rem;">
+                            <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
+                        </div>
+                        <h1 class="text-white mt-3" style="font-size: 20px;"> 18 cm </h1>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="col d-flex mb-3 gap-3">
+                <div class="col d-flex justify-content-center">
+                    <div class=" d-block justify-content-center">
+                        <div class="card" style="width: 25rem;">
+                            <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
+                        </div>
+                        <h1 class="text-white mt-3" style="font-size: 20px;"> 20 cm </h1>
+                    </div>
+                </div>
+
+                <div class="col d-flex justify-content-center">
+                    <div class=" d-block justify-content-center">
+                        <div class="card" style="width: 25rem;">
+                            <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
+                        </div>
+                        <h1 class="text-white mt-3" style="font-size: 20px;"> 22 cm </h1>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="col-12 d-flex justify-content-center">
+                <div class=" d-block justify-content-center">
+                    <div class="card" style="width: 25rem;">
+                        <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
+                    </div>
+                    <h1 class="text-white mt-3" style="font-size: 20px;"> 24 cm </h1>
+                </div>
+
+            </div>
+
+        
+        </div>
+
+
+
+
+    </div>
+</div>
+
+{% endblock %}

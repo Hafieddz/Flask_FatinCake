@@ -1,0 +1,237 @@
+{% extends 'base.html' %}
+
+{% block tittle %} All Product - Fatin Cake {% endblock %}
+
+{% block body %}
+
+{% block active %}
+<div class="collapse navbar-collapse justify-content-end me-4" id="navbarNav">
+    <ul class="navbar-nav gap-4">
+        <li class="nav-item d-flex align-items-center page-now ">
+            <a class="nav-link text-white" aria-current="page" href="#"> Home </a>
+            <img src=" {{url_for('static', filename='img/home-deac.svg')}} " class="img-fluid animated " alt="">
+        </li>
+        <li class="nav-item d-flex align-items-center">
+            <a class="nav-link text-pink" href="base.html"> All Product </a>
+            <img src="{{url_for('static', filename='img/cup-active.svg')}}" class="img-fluid animated " alt="">
+        </li>
+        <li class="nav-item d-flex align-items-center">
+            <a class="nav-link text-white" href="#"> Custom Cake </a>
+            <img src="{{url_for('static', filename='img/Pastry Bag.svg')}}" class="img-fluid animated " alt="">
+        </li>
+        <li class="nav-item d-flex align-items-center">
+            <a class="nav-link text-white" href="#"> Cart </a>
+            <img src="{{url_for('static', filename='img/icn shopping-cart .icn-sm.svg')}}" class="img-fluid animated "
+                alt="">
+        </li>
+        <li class="nav-item d-flex align-items-center">
+            <a class="nav-link text-white" href="#"> Login </a>
+            <img src="{{url_for('static', filename='img/Profile.svg')}}" class="img-fluid animated " alt="">
+        </li>
+    </ul>
+</div>
+
+{% endblock %}
+
+<!-- Start -->
+<div class="container">
+
+    <h1 class="text-center pt-3"> All Cake </h1>
+
+    <!-- Card 1-->
+
+    <div class="container py-4">
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            <div class="col">
+                <div class="card card-body-third h-100">
+                    <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
+                    <div class="card-body text-center">
+                        <h5 class="card-title ">Nama Kue </h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.
+                        </p>
+                    </div>
+                    <div class="text-center mb-3">
+                        <button type="button" class="btn btn custom-button-2 ">Lihat Detail</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card card-body-third h-100">
+                    <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Nama Kue </h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.
+                        </p>
+                    </div>
+                    <div class="text-center mb-3">
+                        <button type="button" class="btn btn custom-button-2 ">Lihat Detail</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col ">
+                <div class="card card-body-third h-100">
+                    <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Nama Kue </h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.
+                        </p>
+                    </div>
+                    <div class="text-center mb-3">
+                        <button type="button" class="btn btn custom-button-2 ">Lihat Detail</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card card-body-third h-100">
+                    <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Nama Kue </h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.
+                        </p>
+                    </div>
+                    <div class="text-center mb-3">
+                        <button type="button" class="btn btn custom-button-2 ">Lihat Detail</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card 1-->
+
+    <!-- Card 2-->
+
+    <div class="container py-4">
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            <div class="col">
+                <div class="card card-body-third h-100">
+                    <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
+                    <div class="card-body text-center">
+                        <h5 class="card-title ">Nama Kue </h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.
+                        </p>
+                    </div>
+                    <div class="text-center mb-3">
+                        <button type="button" class="btn btn custom-button-2 ">Lihat Detail</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card card-body-third h-100">
+                    <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Nama Kue </h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.
+                        </p>
+                    </div>
+                    <div class="text-center mb-3">
+                        <button type="button" class="btn btn custom-button-2 ">Lihat Detail</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col ">
+                <div class="card card-body-third h-100">
+                    <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Nama Kue </h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.
+                        </p>
+                    </div>
+                    <div class="text-center mb-3">
+                        <button type="button" class="btn btn custom-button-2 ">Lihat Detail</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card card-body-third h-100">
+                    <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Nama Kue </h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.
+                        </p>
+                    </div>
+                    <div class="text-center mb-3">
+                        <button type="button" class="btn btn custom-button-2 ">Lihat Detail</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card 2 -->
+
+    <!-- Card 3 -->
+
+    <div class="container py-4">
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            <div class="col">
+                <div class="card card-body-third h-100">
+                    <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
+                    <div class="card-body text-center">
+                        <h5 class="card-title ">Nama Kue </h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.
+                        </p>
+                    </div>
+                    <div class="text-center mb-3">
+                        <button type="button" class="btn btn custom-button-2 ">Lihat Detail</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card card-body-third h-100">
+                    <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Nama Kue </h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.
+                        </p>
+                    </div>
+                    <div class="text-center mb-3">
+                        <button type="button" class="btn btn custom-button-2 ">Lihat Detail</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col ">
+                <div class="card card-body-third h-100">
+                    <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Nama Kue </h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.
+                        </p>
+                    </div>
+                    <div class="text-center mb-3">
+                        <button type="button" class="btn btn custom-button-2 ">Lihat Detail</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card card-body-third h-100">
+                    <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Nama Kue </h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.
+                        </p>
+                    </div>
+                    <div class="text-center mb-3">
+                        <button type="button" class="btn btn custom-button-2 ">Lihat Detail</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card 3 -->
+
+    <div class="container text-center mb-5 mt-2 ">
+        <button type="button" class="btn button-custom me-3 "> 
+            <i class="fa-solid fa-chevron-left fa-sm me-1"> </i> Previous
+        </button>
+
+        <button type="button" class="btn button-custom ms-3 "> Next
+            <i class="fa-solid fa-chevron-right fa-sm ms-1"></i>
+        </button>
+
+    </div>
+
+</div>
+
+{% endblock %}
