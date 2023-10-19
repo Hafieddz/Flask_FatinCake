@@ -64,6 +64,45 @@
 
     <!-- Navbar -->
 
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h1 class="mx-4 mt-4"> Log in </h1>
+
+                    <div class="content mx-4 my-4">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label"> Email </label>
+                            <input type="email" class="form-control" id="exampleFormControlInput1"
+                                placeholder=" Ketik di sini">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label"> Kata Sandi </label>
+                            <input type="password" class="form-control" id="exampleFormControlInput1"
+                                placeholder=" Ketik di sini">
+                        </div>
+                        <button type="button" class="btn btn-primary col-12" data-bs-dismiss="modal"> Log in </button>
+                        <div class="container-fluid mt-2 d-flex">
+                            <h2> Belum punya akun? </h2>
+                            <a class="ms-2" href=""> Yuk, Daftar Sekarang! </a>
+                        </div>
+                        <div class="google mt-5">
+                            <button type="button" class="btn btn-primary col-12 align-items-center"
+                                data-bs-dismiss="modal">
+                                <i class="fa-brands fa-google fa-lg me-1" style="color: #a2a0a0;"> </i>
+                                Continue with Google
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal / Login Pop Up-->
+
     {% block body %}
 
     {% endblock %}
@@ -74,12 +113,12 @@
     <div class="footer-bg py-4 mt-auto py-3">
         <div class="container">
             <div class="row">
-                <div class="col" >
+                <div class="col-4">
                     <img src="{{url_for('static', filename='img/fatin_cake_logo.png')}}" alt="" class="footer-logo"
                         style="height: 230px; width: 290px;">
                 </div>
 
-                <div class="col mb-5 pt-2">
+                <div class="col-3 mb-5 pt-2">
                     <h6 class="mb-3" style="font-size: 28px;"> Hubungi Kami</h6>
                     <ul class="navbar-nav gap-3">
                         <li class="d-flex align-items-center gap-2">
@@ -101,15 +140,15 @@
                     </ul>
                 </div>
 
-                <div class="col-lg-4 text-center">
-                    <h6 class="mb-4"> Kami Menerima Pembayaran</h6>
+                <div class="col-5 text-center">
+                    <h6 class="mb-4" style="font-size: 28px;"> Kami Menerima Pembayaran</h6>
 
                     <div class="container mt-4">
                         <img class="me-4" src="{{url_for('static', filename='img/bri.png')}}"
-                            style="width: 100px; height: 80px;">
+                            style="width: 120px; height: 90px;">
                         <img class="me-4" src="{{url_for('static', filename='img/dana.png')}}"
-                            style="width: 130px; height: 35px;">
-                        <img src="{{url_for('static', filename='img/bsi.png')}}" style="width: 100px; height: 70px;">
+                            style="width: 180px; height: 60px;">
+                        <img src="{{url_for('static', filename='img/bsi.png')}}" style="width: 120px; height: 70px;">
                     </div>
                 </div>
 
