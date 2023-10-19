@@ -5,32 +5,32 @@
 {% block body %}
 
 {% block active %}
-<div class="collapse navbar-collapse justify-content-end me-4" id="navbarNav">
+<nav class="collapse navbar-collapse justify-content-end me-4" id="navbarNav">
   <ul class="navbar-nav gap-4">
       <li class="nav-item d-flex align-items-center page-now ">
-          <a class="nav-link text-white" aria-current="page" href="#"> Home </a>
+          <a class="nav-link text-white"  href="{{ url_for('index') }}"> Home </a>
           <img src=" {{url_for('static', filename='img/home-deac.svg')}} " class="img-fluid animated " alt="">
       </li>
       <li class="nav-item d-flex align-items-center">
-          <a class="nav-link text-white" href="base.html"> All Product </a>
+          <a class="nav-link text-white" href="{{ url_for('products') }}"> All Product </a>
           <img src="{{url_for('static', filename='img/Cupcake.svg')}}" class="img-fluid animated " alt="">
       </li>
       <li class="nav-item d-flex align-items-center">
-          <a class="nav-link text-white" href="#"> Custom Cake </a>
+          <a class="nav-link text-white" href="{{ url_for('custome') }}"> Custom Cake </a>
           <img src="{{url_for('static', filename='img/Pastry Bag.svg')}}" class="img-fluid animated "
           alt="">
       </li>
       <li class="nav-item d-flex align-items-center">
-          <a class="nav-link text-pink" href="#"> Cart </a>
+          <a class="nav-link text-pink" href=""> Cart </a>
           <img src="{{url_for('static', filename='img/cart-active.svg')}}"
           class="img-fluid animated " alt="">
       </li>
       <li class="nav-item d-flex align-items-center">
-          <a class="nav-link text-white" href="#"> Login </a>
+          <a class="nav-link text-white" href="{{ url_for('login') }}" data-bs-toggle="modal" data-bs-target="#exampleModal" > Login </a>
           <img src="{{url_for('static', filename='img/Profile.svg')}}" class="img-fluid animated " alt="">
       </li>
   </ul>
-</div>
+</nav>
 
 {% endblock %}
 
