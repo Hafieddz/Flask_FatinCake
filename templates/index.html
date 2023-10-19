@@ -5,32 +5,35 @@
 {% block body %}
 
 {% block active %}
-<div class="collapse navbar-collapse justify-content-end me-4" id="navbarNav">
+<nav class="collapse navbar-collapse justify-content-end me-4" id="navbarNav">
   <ul class="navbar-nav gap-4">
     <li class="nav-item d-flex align-items-center page-now ">
-      <a class="nav-link text-pink" aria-current="page" href="#"> Home </a>
+      <a class="nav-link text-pink"  href="#" aria-disabled="true" > Home </a>
       <img src=" {{url_for('static', filename='img/Home.svg')}} " class="img-fluid animated " alt="">
     </li>
     <li class="nav-item d-flex align-items-center">
-      <a class="nav-link text-white" href="#"> All Product </a>
+      <a class="nav-link text-white" href="{{ url_for('products') }}"> All Product </a>
       <img src="{{url_for('static', filename='img/Cupcake.svg')}}" class="img-fluid animated " alt="">
     </li>
     <li class="nav-item d-flex align-items-center">
-      <a class="nav-link text-white" href="#"> Custom Cake </a>
+      <a class="nav-link text-white" href="{{ url_for('custome') }}"> Custom Cake </a>
       <img src="{{url_for('static', filename='img/Pastry Bag.svg')}}" class="img-fluid animated " alt="">
     </li>
     <li class="nav-item d-flex align-items-center">
-      <a class="nav-link text-white" href="#"> Cart </a>
+      <a class="nav-link text-white" href="{{ url_for('cart') }}"> Cart </a>
       <img src="{{url_for('static', filename='img/icn shopping-cart .icn-sm.svg')}}" class="img-fluid animated " alt="">
     </li>
     <li class="nav-item d-flex align-items-center">
-      <a class="nav-link text-white" href="#"> Login </a>
+      <a class="nav-link text-white" href="{{ url_for('login') }}" data-bs-toggle="modal" data-bs-target="#exampleModal" > Login </a>
       <img src="{{url_for('static', filename='img/Profile.svg')}}" class="img-fluid animated " alt="">
     </li>
   </ul>
-</div>
+</nav>
 
 {% endblock %}
+
+
+<!-- Modal / Login Pop Up-->
 
 <div class="first_img">
   <img src="{{url_for('static', filename='img/bg.png')}}" class="img-fluid ">
@@ -52,7 +55,7 @@
             <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.</p>
           </div>
           <div class="text-center mb-3">
-            <button type="button" class="btn custom-button-2 ">Lihat Detail</button>
+            <button type="button" class="btn custom-button-2" href="{{ url_for('index') }}">Lihat Detail</button>
           </div>
         </div>
       </div>
@@ -229,7 +232,6 @@
     <button type="button" class="btn button-custom "> Lihat Lebih Banyak
       <i class="fa-solid fa-arrow-right"> </i>
     </button>
-
   </div>
 
 </div>
