@@ -8,7 +8,6 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-
 # Product Page
 @app.route('/products')
 def products():
