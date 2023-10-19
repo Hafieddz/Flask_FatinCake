@@ -29,16 +29,6 @@ def custome():
 def cart():
     return render_template('cart.html')
 
-# Just For Testing
-@app.route('/dump')
-def example():
-    return render_template('example_testing.html')
-
-# Login Page
-@app.route('/login')
-def login():
-    return render_template('index.html')
-
 # Detail Page
 @app.route('/details')
 def details():
