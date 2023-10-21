@@ -1,37 +1,96 @@
 {% extends 'base.html' %}
 
-{% block tittle %}  Cart - Fatin Cake {% endblock %}
+{% block tittle %} Cart - Fatin Cake {% endblock %}
+
+{% block active %}
+<div class="collapse navbar-collapse justify-content-end me-4 mx-1" id="navbarNav">
+    <ul class="navbar-nav gap-4 ms-auto" id="navbarExample01">
+        <li class="nav-item d-flex align-items-center page-now ">
+            <a class="nav-link text-white" aria-current="page" href="#"> Home </a>
+            <img src=" {{url_for('static', filename='img/home-deac.svg')}} " class="img-fluid animated ms-2" alt="">
+        </li>
+        <li class="nav-item d-flex align-items-center">
+            <a class="nav-link text-white" href="{{ url_for('products') }}"> All Product </a>
+            <img src="{{url_for('static', filename='img/Cupcake.svg')}}" class="img-fluid animated ms-2 " alt="">
+        </li>
+        <li class="nav-item d-flex align-items-center">
+            <a class="nav-link text-white" href="{{ url_for('custome') }}"> Custom Cake </a>
+            <img src="{{url_for('static', filename='img/Pastry Bag.svg')}}" class="img-fluid animated ms-2 "
+                alt="">
+        </li>
+        <li class="nav-item d-flex align-items-center">
+            <a class="nav-link text-pink" href="{{ url_for('cart') }}"> Cart </a>
+            <img src="{{url_for('static', filename='img/cart-active.svg')}}"
+                class="img-fluid animated ms-2 " alt="">
+        </li>
+        <li class="nav-item d-flex align-items-center">
+            <a class="nav-link text-white" href="" data-bs-toggle="modal" data-bs-target="#exampleModal"> Login </a>
+            <img src="{{url_for('static', filename='img/Profile.svg')}}" class="img-fluid animated ms-2 " alt="">
+        </li>
+    </ul>
+</div>
+
+{% endblock %}
 
 {% block body %}
 
-{% block active %}
-<nav class="collapse navbar-collapse justify-content-end me-4" id="navbarNav">
-  <ul class="navbar-nav gap-4">
-      <li class="nav-item d-flex align-items-center page-now ">
-          <a class="nav-link text-white"  href="{{ url_for('index') }}"> Home </a>
-          <img src=" {{url_for('static', filename='img/home-deac.svg')}} " class="img-fluid animated " alt="">
-      </li>
-      <li class="nav-item d-flex align-items-center">
-          <a class="nav-link text-white" href="{{ url_for('products') }}"> All Product </a>
-          <img src="{{url_for('static', filename='img/Cupcake.svg')}}" class="img-fluid animated " alt="">
-      </li>
-      <li class="nav-item d-flex align-items-center">
-          <a class="nav-link text-white" href="{{ url_for('custome') }}"> Custom Cake </a>
-          <img src="{{url_for('static', filename='img/Pastry Bag.svg')}}" class="img-fluid animated "
-          alt="">
-      </li>
-      <li class="nav-item d-flex align-items-center">
-          <a class="nav-link text-pink" href=""> Cart </a>
-          <img src="{{url_for('static', filename='img/cart-active.svg')}}"
-          class="img-fluid animated " alt="">
-      </li>
-      <li class="nav-item d-flex align-items-center">
-        <a class="nav-link text-white" href="" data-bs-toggle="modal" data-bs-target="#exampleModal" > Login </a>
-          <img src="{{url_for('static', filename='img/Profile.svg')}}" class="img-fluid animated " alt="">
-      </li>
-  </ul>
-</nav>
+<div class="container" id="cart-header">
+    <div class="cart-text mt-5">
+        <h1>
+            Shopping Cart
+        </h1>
+    </div>
+    <hr>
+</div>
 
-{% endblock %}
+<div class="container cart-list mb-5">
+    <div class="row">
+        <div class="col mt-3 d-flex align-items-center gap-5">
+            <div class="col" name="cart-list-picture">
+                <img src="{{url_for('static', filename='img/kue1.png')}}" alt="" style="width: 170px; height: 160px;">
+            </div>
+            <div class="col" name="cart-list-1">
+                <h1>
+                    Nama Kue
+                </h1>
+                <h2>
+                    16cm
+                </h2>
+                <h2>
+                    <i class="fa-solid fa-trash fa-sm me-1"> </i>
+                    Remove
+                </h2>
+            </div>
+            <div class="col" name="cart-list-2">
+                <h3>
+                    Total
+                </h3>
+                <h4>
+                    x 1
+                </h4>
+            </div>
+            <div class="col " name="cart-list-3">
+                <div class="col d-inline-flex gap-3">
+                    <h2>
+                        Harga
+                    </h2>
+                    <h2>
+                        IDR 120.000
+                    </h2>
+                </div>
+            </div>
+        </div>
+        <div class="container pricing-content justify-content-end  d-flex ">
+            <h1 class="me-2"> Total Harga </h1>
+            <h2 class="me-5"> IDR 120.000 </h2>
+
+            <button class="btn btn-primary">
+                Buat Pesanan
+            </button>
+
+
+        </div>
+    </div>
+</div>
 
 {% endblock %}
