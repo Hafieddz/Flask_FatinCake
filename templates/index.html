@@ -2,41 +2,40 @@
 
 {% block tittle %} Home - Fatin Cake {% endblock %}
 
-{% block body %}
-
 {% block active %}
 <nav class="collapse navbar-collapse justify-content-end me-4" id="navbarNav">
   <ul class="navbar-nav gap-4">
     <li class="nav-item d-flex align-items-center page-now ">
       <a class="nav-link text-pink"  href="#" aria-disabled="true" > Home </a>
-      <img src=" {{url_for('static', filename='img/Home.svg')}} " class="img-fluid animated " alt="">
+      <img src=" {{url_for('static', filename='img/Home.svg')}} " class="img-fluid animated ms-2 " alt="">
     </li>
     <li class="nav-item d-flex align-items-center">
       <a class="nav-link text-white" href="{{ url_for('products') }}"> All Product </a>
-      <img src="{{url_for('static', filename='img/Cupcake.svg')}}" class="img-fluid animated " alt="">
+      <img src="{{url_for('static', filename='img/Cupcake.svg')}}" class="img-fluid animated ms-2 " alt="">
     </li>
     <li class="nav-item d-flex align-items-center">
       <a class="nav-link text-white" href="{{ url_for('custome') }}"> Custom Cake </a>
-      <img src="{{url_for('static', filename='img/Pastry Bag.svg')}}" class="img-fluid animated " alt="">
+      <img src="{{url_for('static', filename='img/Pastry Bag.svg')}}" class="img-fluid animated ms-2 " alt="">
     </li>
     <li class="nav-item d-flex align-items-center">
       <a class="nav-link text-white" href="{{ url_for('cart') }}"> Cart </a>
-      <img src="{{url_for('static', filename='img/icn shopping-cart .icn-sm.svg')}}" class="img-fluid animated " alt="">
+      <img src="{{url_for('static', filename='img/icn shopping-cart .icn-sm.svg')}}" class="img-fluid animated ms-2 " alt="">
     </li>
     <li class="nav-item d-flex align-items-center">
       <a class="nav-link text-white" href="" data-bs-toggle="modal" data-bs-target="#exampleModal" > Login </a>
-      <img src="{{url_for('static', filename='img/Profile.svg')}}" class="img-fluid animated " alt="">
+      <img src="{{url_for('static', filename='img/Profile.svg')}}" class="img-fluid animated ms-2 " alt="">
     </li>
   </ul>
 </nav>
 
 {% endblock %}
 
+{% block body %}
 
 <!-- Modal / Login Pop Up-->
 
 <div class="first_img">
-  <img src="{{url_for('static', filename='img/bg.png')}}" class="img-fluid ">
+  <img src="{{url_for('static', filename='img/bg.png')}}" class="img-fluid w-100">
 </div>
 
 <div class="container-fluid bg-second-section pb-5">
@@ -47,7 +46,7 @@
 
   <div class="container py-4">
     <div class="row row-cols-1 row-cols-md-4 g-4">
-      <div class="col">
+      <div class="col-md-6 col-xl-3 ">
         <div class="card card-body-second h-100">
           <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
           <div class="card-body text-center">
@@ -59,7 +58,7 @@
           </div>
         </div>
       </div>
-      <div class="col">
+      <div class="col-md-6 col-xl-3 ">
         <div class="card card-body-second h-100">
           <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
           <div class="card-body text-center">
@@ -71,7 +70,7 @@
           </div>
         </div>
       </div>
-      <div class="col ">
+      <div class="col-md-6 col-xl-3  ">
         <div class="card card-body-second h-100">
           <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
           <div class="card-body text-center">
@@ -83,7 +82,7 @@
           </div>
         </div>
       </div>
-      <div class="col">
+      <div class="col-md-6 col-xl-3 ">
         <div class="card card-body-second h-100">
           <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
           <div class="card-body text-center">
@@ -110,7 +109,7 @@
 
     <div class="container py-4">
       <div class="row row-cols-1 row-cols-md-4 g-4">
-        <div class="col">
+        <div class="col-md-6 col-xl-3">
           <div class="card card-body-third h-100">
             <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
             <div class="card-body text-center">
@@ -122,7 +121,7 @@
             </div>
           </div>
         </div>
-        <div class="col">
+        <div class="col-md-6 col-xl-3">
           <div class="card card-body-third h-100">
             <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
             <div class="card-body text-center">
@@ -134,7 +133,7 @@
             </div>
           </div>
         </div>
-        <div class="col ">
+        <div class="col-md-6 col-xl-3 ">
           <div class="card card-body-third h-100">
             <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
             <div class="card-body text-center">
@@ -146,7 +145,7 @@
             </div>
           </div>
         </div>
-        <div class="col">
+        <div class="col-md-6 col-xl-3">
           <div class="card card-body-third h-100">
             <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
             <div class="card-body text-center">
@@ -165,7 +164,7 @@
 
     <div class="container text-center">
       <button type="button" class="btn button-custom "> Lihat Lebih Banyak
-        <i class="fa-solid fa-arrow-right"> </i>
+        <i class="fa-solid fa-chevron-right "> </i>
       </button>
 
     </div>
@@ -177,7 +176,7 @@
 
   <div class="container py-4">
     <div class="row row-cols-1 row-cols-md-4 g-4">
-      <div class="col">
+      <div class="col-md-6 col-xl-3">
         <div class="card card-body-second h-100">
           <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
           <div class="card-body text-center">
@@ -189,7 +188,7 @@
           </div>
         </div>
       </div>
-      <div class="col">
+      <div class="col-md-6 col-xl-3">
         <div class="card card-body-second h-100">
           <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
           <div class="card-body text-center">
@@ -201,7 +200,7 @@
           </div>
         </div>
       </div>
-      <div class="col ">
+      <div class="col-md-6 col-xl-3 ">
         <div class="card card-body-second h-100">
           <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
           <div class="card-body text-center">
@@ -213,7 +212,7 @@
           </div>
         </div>
       </div>
-      <div class="col">
+      <div class="col-md-6 col-xl-3">
         <div class="card card-body-second h-100">
           <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
           <div class="card-body text-center">
@@ -230,7 +229,7 @@
 
   <div class="container text-center">
     <button type="button" class="btn button-custom "> Lihat Lebih Banyak
-      <i class="fa-solid fa-arrow-right"> </i>
+      <i class="fa-solid fa-chevron-right "> </i>
     </button>
   </div>
 
