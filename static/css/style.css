@@ -15,8 +15,8 @@ h1 {
 
 h5 {
     color: #979797 !important;
-    font-family: 'Poppins';
-    font-weight: 600;
+    font-family: Poppins ;
+    font-weight: 800;
 }
 
 .modal-body h1 {
@@ -117,6 +117,11 @@ h5 {
     background-color: #FFF8DE !important;
 }
 
+
+.card {
+    border-color: black !important;
+}
+
 .bg-third-section {
     background: #FAF3F3;
 }
@@ -130,20 +135,16 @@ h5 {
     color: white;
 }
 
-.footer-logo {
-    width: 392px;
-    height: 314px;
-}
-
 .button-custom {
-    border-radius: 5px !important;
+    border-radius: 10px !important;
     align-items: center !important;
+    padding: 10px 15px;
     border: 1px solid #F3808B !important;
     color: #F3808B !important;
 }
 
 .button-custom:hover {
-    border-radius: 5px !important;
+    border-radius: 10px !important;
     border: 1px solid white !important;
     background-color: #F3808B !important;
     color: white !important;
@@ -156,7 +157,8 @@ h5 {
     border: 1px solid #F3808B !important;
     background-color: #F3808B !important;
     color: white !important;
-    border-radius: 15px !important;
+    padding: 10px 20px;
+    border-radius: 20px !important;
 }
 
 .custom-button-2:hover {
@@ -227,4 +229,115 @@ svg_custome {
 
 textarea {
     resize: none;
+    
+}
+
+.card-body p {
+    font-weight: 500;
+}
+
+.cart-text h1 {
+    text-align: start;
+    font-size: 27px;
+    font-family: 'Poppins';
+    color: var(--text-color-light-grey, #979797);
+    font-weight: 400;
+    font-feature-settings: 'clig' off, 'liga' off;
+}
+
+.cart-text h2 {
+    text-align: end !important;
+    font-size: 18px;
+}
+
+hr {
+    border: 3px solid #4c4c4c;
+    border-radius: 7px;
+}
+
+.cart-list h1 {
+    font-family: 'Poppins';
+    font-size: 25px;
+    text-align: start;
+}
+
+.cart-list h2 {
+    font-family: 'Poppins';
+    font-size: 15px;
+    text-align: start;
+    font-weight: 100;
+}
+
+.cart-list h3 {
+    font-family: 'Poppins';
+    font-size: 16px;
+    text-align: start;
+    color: #979797;
+}
+
+.cart-list h4 {
+    font-family: 'Poppins';
+    font-size: 16px;
+    text-align: start;
+    color: black;
+}
+
+.pricing-content h1 {
+    font-size: 16px;
+    font-family: 'Poppins';
+    font-weight: 500;
+    color: #979797;
+}
+
+.pricing-content h2 {
+    font-size: 16px;
+    font-family: 'Poppins';
+    font-weight: 500;
+    color: #F3808B;
+}
+
+.collapse-button {
+        border-radius: 5px !important;
+        align-items: center !important;
+        border: 3px solid #F3808B !important;
+        background-color: white !important;
+        color: #F3808B !important;
+        padding: 10px 20px;
+        border-radius: 20px !important;
+
+}
+
+.collapse-button:hover {
+    border-radius: 5px !important;
+    align-items: center !important;
+    border: 3px solid white !important;
+    background-color: #F3808B  !important;
+    color: white !important;
+    padding: 10px 20px;
+    border-radius: 20px !important;
+}
+
+.menu-item {
+    text-align: center !important;
+}
+
+.custome-text h1 {
+    color: white;
+    font-size: 37px;
+}
+
+.custome-text h4 {
+    color: white;
+
+}
+
+.custome-text p {
+    color: white;
+    font-size: 14px;
+}
+
+.img-custome {
+    border: 2px solid white;
+    border-radius: 10px;
+    
 }
