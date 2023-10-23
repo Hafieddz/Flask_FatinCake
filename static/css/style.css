@@ -1,15 +1,9 @@
 h1 {
     color: var(--text-color-black, #000000);
-    text-align: center;
     font-size: 40px;
-    font-weight: bolder;
     font-style: normal;
     line-height: normal;
-
-    font-size: 40px;
-    font-style: normal;
     font-weight: 700;
-    line-height: normal;
 
 }
 
@@ -60,20 +54,21 @@ h5 {
     
 }
 
-.modal-body button {
-    height: 57px;
-    border-radius: 12px;
-    background: var(--primary-color-dark-pink, #F3808B);
-    border-color: #F3808B;
-    padding: 12px 16px;
-    font-size: 20px;
+form .btn  {
+    height: 57px !important;
+    border-radius: 12px !important;
+    background: var(--primary-color-dark-pink, #F3808B) !important;
+    border-color: #F3808B !important;
+    padding: 12px 16px !important;
+    font-size: 20px !important;
+    color: white;
 }
 
 
-.modal-body button:hover {
-    background: white;
-    border-color: var(--primary-color-dark-pink, #F3808B);
-    color: var(--primary-color-dark-pink, #F3808B);;
+form .btn:hover {
+    background: white !important;
+    border-color: var(--primary-color-dark-pink, #F3808B) !important;
+    color: var(--primary-color-dark-pink, #F3808B)!important;
 }
 
 .google button, .google button:hover {
@@ -119,7 +114,7 @@ h5 {
 
 
 .card {
-    border-color: black !important;
+    border-color: black ;
 }
 
 .bg-third-section {
@@ -146,10 +141,25 @@ h5 {
 .button-custom:hover {
     border-radius: 10px !important;
     border: 1px solid white !important;
-    background-color: #F3808B !important;
+    background-color: #e7969e !important;
     color: white !important;
 
 }
+
+.pricing-content .button-custom {
+    padding: 10px 15px;
+    border: 1px solid white !important;
+    color: white !important ;
+    background-color: #F3808B;
+    font-weight: 500;
+}
+
+.pricing-content .button-custom:hover {
+    border: 1px solid white !important;
+    background-color: #f5c9cd !important;
+
+}
+
 
 .custom-button-2 {
     border-radius: 5px !important;
@@ -340,4 +350,105 @@ hr {
     border: 2px solid white;
     border-radius: 10px;
     
+}
+
+.details-button {
+    width: 45px !important;
+    height: 45px !important;
+    color: white;
+    border: 2px solid pink;
+    border-radius: 15px;
+
+}
+
+.add-cart-button {
+    color: white;
+    border: 2px solid pink;
+    border-radius: 15px;
+    background: var(--primary-color-dark-pink, #F3808B);
+
+}
+
+.add-cart-button:hover {
+    color: white;
+    border-radius: 15px;
+    background: var(--primary-color-dark-pink, #ffb1b9);
+
+}
+
+p {
+    margin: 0 !important;
+}
+
+.details-description  h1 {
+    font-size: 23px;
+    color: pink;
+    text-align: start;
+
+}
+
+.details-description  h2 {
+    font-size: 23px;
+    color: gray;
+    text-align: start;
+
+}
+
+.details-description  h3 {
+    font-family: 'Poppins';
+    font-size: 16px;
+    color: black;
+    text-align: start;
+
+}
+
+.success-pop  h1{
+    font-size: 25px ;
+    text-align: center;
+    color: black;
+}
+
+.details-content h1 {
+    font-family: 'Poppins';
+    font-size: 30px;
+    font-weight: 100;
+    color: #AFB1B6;
+}
+
+.details-content h2 {
+    font-size: 35px;
+}
+
+.details-content h3 {
+    font-size: 23px;
+    font-family: 'Poppins';
+    font-weight: 600;
+}
+
+.user-profile h1 {
+    font-family: 'Poppins';
+    font-weight: 500;
+}
+
+.user-profile h2 {
+    font-family: 'Poppins';
+  
+}
+
+
+.profile-btn {
+    border-radius: 10px !important;
+    align-items: center !important;
+    padding: 10px 15px;
+    background-color: #e7969e !important;
+    border: 1px solid #F3808B !important;
+    color: white !important;    
+}
+
+.profile-btn:hover {
+    border-radius: 10px !important;
+    border: 2px solid #F3808B !important;
+    background-color: white !important;
+    color: black !important;
+
 }
