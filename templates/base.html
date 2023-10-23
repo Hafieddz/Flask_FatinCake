@@ -17,6 +17,9 @@
     <!-- CSS Link -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
+    <!-- Java Script Links -->
+    <script src="{{ url_for('static', filename='js/script.js') }}" type="module"> </script>
+
 
     <title> {% block tittle %} {% endblock %} </title>
 </head>
@@ -29,9 +32,11 @@
     <nav class="navbar navbar-expand-lg nav-back-color sticky-top ">
         <div class="container-fluid">
             <a class="navbar-brand header-text" href="#"> Fatin Cake </a>
-            <button class="navbar-toggler collapse-button" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler collapse-button" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <i class="fa-solid fa-bars-staggered fa-lg"></i>
-              </button>
+            </button>
             <!-- Active Navbar -->
             {% block active %}
             {% endblock %}
@@ -42,27 +47,46 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
                     <h1 class="mx-4 mt-4"> Log in </h1>
-
                     <div class="content mx-4 my-4">
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label"> Email </label>
-                            <input type="email" class="form-control" id="exampleFormControlInput1"
-                                placeholder=" Ketik di sini">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label"> Kata Sandi </label>
-                            <input type="password" class="form-control" id="exampleFormControlInput1"
-                                placeholder=" Ketik di sini">
-                        </div>
-                        <button type="button" class="btn btn-primary col-12" data-bs-dismiss="modal"> Log in </button>
+
+                        <!-- Form -->
+                        <form method="POST">
+                            <div class="mb-3">
+                                {{ form.hidden_tag() }}
+
+                                {{ form.email.label(class="form-label") }}
+
+                                {{ form.email(class="form-control" ,placeholder="Ketik di sini") }}
+                                <!-- 
+                                    <label for="exampleFormControlInput1" class="form-label"> Email </label>
+                                    <input type="email" class="form-control" id="exampleFormControlInput1"
+                                    placeholder=" Ketik di sini">
+                                -->
+                            </div>
+                            <div class="mb-3">
+                                {{ form.password_hash.label(class="form-label") }}
+                                {{ form.password_hash(class="form-control" , placeholder="Ketik di sini" ) }}
+                                <!-- 
+                                    <label for="exampleFormControlInput1" class="form-label"> Kata Sandi </label>
+                                    <input type="password" class="form-control" id="exampleFormControlInput1"
+                                    placeholder=" Ketik di sini">
+                                -->
+                            </div>
+                            {{ form.submit(class="btn btn-primary col-12") }}
+                            <!-- <button type="button" class="btn btn-primary col-12" data-bs-dismiss="modal"> Log in </button>  -->
+                        </form>
+
+                        <!-- Form -->
+
                         <div class="container-fluid mt-2 d-flex">
                             <h2> Belum punya akun? </h2>
-                            <a class="ms-2" href=""> Yuk, Daftar Sekarang! </a>
+                            <a class="ms-2" href="" data-bs-toggle="modal" data-bs-target="#registerModal"> Yuk, Daftar
+                                Sekarang! </a>
                         </div>
                         <div class="google mt-5">
                             <button type="button" class="btn btn-primary col-12 align-items-center"
@@ -79,6 +103,64 @@
 
     <!-- Modal / Login Pop Up-->
 
+
+    <!-- Modal Register -->
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h1 class="mx-4 mt-4"> Register </h1>
+
+                    <div class="content mx-4 my-4">
+
+                        <!-- Form -->
+                        <form method="POST">
+                            <div class="mb-3">
+                                {{ form.hidden_tag() }}
+
+                                {{ form.email.label(class="form-label") }}
+
+                                {{ form.email(class="form-control" ,placeholder="Ketik di sini") }}
+                                <!-- 
+                                        <label for="exampleFormControlInput1" class="form-label"> Email </label>
+                                        <input type="email" class="form-control" id="exampleFormControlInput1"
+                                        placeholder=" Ketik di sini">
+                                    -->
+                            </div>
+                            <div class="mb-3">
+                                {{ form.password_hash.label(class="form-label") }}
+                                {{ form.password_hash(class="form-control" , placeholder="Ketik di sini" ) }}
+                                <!-- 
+                                        <label for="exampleFormControlInput1" class="form-label"> Kata Sandi </label>
+                                        <input type="password" class="form-control" id="exampleFormControlInput1"
+                                        placeholder=" Ketik di sini">
+                                    -->
+                            </div>
+                            {{ form.submit(class="btn btn-primary col-12") }}
+                            <!-- <button type="button" class="btn btn-primary col-12" data-bs-dismiss="modal"> Log in </button>  -->
+                        </form>
+
+                        <!-- Form -->
+
+                        <div class="container-fluid mt-2 d-flex">
+                            <h2> Sudah punya akun? </h2>
+                            <a class="ms-2" href="" data-bs-toggle="modal" data-bs-target="#loginModal"> Ayo Login! </a>
+                        </div>
+                        <div class="google mt-5">
+                            <button type="button" class="btn btn-primary col-12 align-items-center"
+                                data-bs-dismiss="modal" style="font-weight: bold;">
+                                <i class="fa-brands fa-google fa-lg me-1" style="color: #a2a0a0;"> </i>
+                                Continue with Google
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal / Register -->
+
     {% block body %}
 
     {% endblock %}
@@ -90,27 +172,27 @@
         <div class="container">
             <div class="row  ">
                 <div class="col-xl-4 col-12 col-md-6 col-sm-6 d-flex align-items-center">
-                    <img src="{{url_for('static', filename='img/fatin_cake_logo.png')}}" alt=""
+                    <img src="{{url_for('static', filename='img/footer-logo.png')}}" alt=""
                         class="align-self-center" style="height: 230px; width: 290px;">
                 </div>
 
                 <div class="col-xl-3 col-12 col-md-6 col-sm-6 mb-5 pt-2">
                     <h6 class="mb-3" style="font-size: 28px;"> Hubungi Kami</h6>
                     <ul class="navbar-nav gap-3">
-                        <li class="d-flex align-items-center gap-2">
-                            <img src="{{url_for('static', filename='img/Homefoot.svg')}}" class="img-fluid animated "
+                        <li class="d-flex align-items-center gap-3">
+                            <img src="{{url_for('static', filename='img/footer-home.svg')}}" class="img-fluid animated "
                                 style="width: 20px; height:20px;" alt=""> Tanete Riaja, Barru, Sulawesi Selatan
                         </li>
-                        <li class="d-flex align-items-center gap-2">
-                            <img src="{{url_for('static', filename='img/Instagram Icons.svg')}}"
+                        <li class="d-flex align-items-center gap-3">
+                            <img src="{{url_for('static', filename='img/footer-instagram.svg')}}"
                                 class="img-fluid animated " style="width: 20px; height:20px;" alt=""> fatincake
                         </li>
-                        <li class="d-flex align-items-center gap-2">
-                            <img src="{{url_for('static', filename='img/Facebook Icons.svg')}}"
+                        <li class="d-flex align-items-center gap-3">
+                            <img src="{{url_for('static', filename='img/footer-facebook.svg')}}"
                                 class="img-fluid animated " style="width: 20px; height:20px;" alt=""> fatincake
                         </li>
-                        <li class="d-flex align-items-center gap-2">
-                            <img src="{{url_for('static', filename='img/wa.svg')}}" class="img-fluid animated "
+                        <li class="d-flex align-items-center gap-3">
+                            <img src="{{url_for('static', filename='img/footer-wa.svg')}}" class="img-fluid animated "
                                 style="width: 20px; height:20px;" alt=""> +62 856-5691-6273
                         </li>
                     </ul>
@@ -119,12 +201,12 @@
                 <div class="col-xl-5 col-12 text-center">
                     <h6 class="mb-4" style="font-size: 28px;"> Kami Menerima Pembayaran</h6>
 
-                    <div class="container mt-4">
-                        <img class="me-4" src="{{url_for('static', filename='img/bri.png')}}"
+                    <div class="container">
+                        <img class="me-4" src="{{url_for('static', filename='img/footer-bri.png')}}"
                             style="width: 120px; height: 90px;">
-                        <img class="me-4" src="{{url_for('static', filename='img/dana.png')}}"
+                        <img class="me-4" src="{{url_for('static', filename='img/footer-dana.png')}}"
                             style="width: 180px; height: 60px;">
-                        <img src="{{url_for('static', filename='img/bsi.png')}}" style="width: 120px; height: 70px;">
+                        <img src="{{url_for('static', filename='img/footer-bsi.png')}}" style="width: 120px; height: 70px;">
                     </div>
                 </div>
 
