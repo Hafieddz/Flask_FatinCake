@@ -7,25 +7,34 @@
     <ul class="navbar-nav gap-4">
         <li class="nav-item d-flex align-items-center page-now ">
             <a class="nav-link text-white" aria-current="page" href="{{ url_for('index') }}"> Home </a>
-            <img src=" {{url_for('static', filename='img/home-deac.svg')}} " class="img-fluid animated ms-2 " alt="">
+            <img src=" {{url_for('static', filename='img/navbar-home.svg')}} " class="img-fluid animated ms-2 " alt="">
         </li>
         <li class="nav-item d-flex align-items-center">
-            <a class="nav-link text-white" href="{{ url_for('products') }}"> All Product </a>
-            <img src="{{url_for('static', filename='img/Cupcake.svg')}}" class="img-fluid animated ms-2 " alt="">
+            <a class="nav-link text-white" href=""> All Product </a>
+            <img src="{{url_for('static', filename='img/navbar-product.svg')}}" class="img-fluid animated ms-2 " alt="">
         </li>
         <li class="nav-item d-flex align-items-center">
             <a class="nav-link text-white" href="{{ url_for('custome') }}"> Custom Cake </a>
-            <img src="{{url_for('static', filename='img/Pastry Bag.svg')}}" class="img-fluid animated ms-2 " alt="">
+            <img src="{{url_for('static', filename='img/navbar-custome.svg')}}" class="img-fluid animated ms-2 " alt="">
         </li>
         <li class="nav-item d-flex align-items-center">
             <a class="nav-link text-white" href="{{ url_for('cart') }}"> Cart </a>
-            <img src="{{url_for('static', filename='img/icn shopping-cart .icn-sm.svg')}}" class="img-fluid animated ms-2 "
-                alt="">
+            <img src="{{url_for('static', filename='img/navbar-cart.svg')}}"
+                class="img-fluid animated ms-2 " alt="">
         </li>
+        <!-- Muncul Ketika Sudah Login -->
+        {% if email %}
+        <li class="nav-item d-flex align-items-center ">
+            <div class="nav-link text-white" href=""> {{ email }} </div>
+            <img src="{{url_for('static', filename='img/navbar-user.svg')}}" class="img-fluid animated ms-1 " alt="">
+        </li>
+        <!-- Muncul Ketika Belum Login -->
+        {% else %}
         <li class="nav-item d-flex align-items-center">
-            <a class="nav-link text-white" href="" data-bs-toggle="modal" data-bs-target="#exampleModal" > Login </a>
-            <img src="{{url_for('static', filename='img/Profile.svg')}}" class="img-fluid animated ms-2 " alt="">
+            <a class="nav-link text-white" href="" data-bs-toggle="modal" data-bs-target="#loginModal"> Login </a>
+            <img src="{{url_for('static', filename='img/navbar-user.svg')}}" class="img-fluid animated ms-2 " alt="">
         </li>
+        {% endif %}
     </ul>
 </nav>
 
@@ -36,32 +45,77 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-6">
-            <img src="{{url_for('static', filename='img/kue1.png')}}" class="img-fluid my-5" alt="...">
-        </div>
-        <div class="col mt-5 ms-3">
-            <div class="content">
-                <h2 class="text-start" style="font-size: 23px;"> Fatin Cake </h2>
-                <h2 class="text-start pt-3"> Korean Cake </h2>       
-                <h2 class="text-start text-pink" style="font-size: 30px" > IDR 120.000 </h2> 
-                <h2 class="text-start pt-3" style="font-size: 25px" > Ukuran </h2>       
-                <h2 class="text-start text-pink" style="font-size: 25px" > Diameter 18 cm  </h2> 
-                <h2 class="text-start pt-3" style="font-size: 25px" > Varian Kue </h2>       
-                <h2 class="text-start text-pink" style="font-size: 25px" > Brownies  </h2> 
+        <div class="col-6 mb-5">
+            <img src="{{url_for('static', filename='img/dummy_cake.png')}}" class="img-fluid my-5" alt="...">
+            <div class="container text-start details-description ">
+                <div class="title d-flex gap-5 mb-4">
+                    <div class="detail">
+                        <h1> Detail </h1>
+                    </div>
+                    <div class="penyimpanan">
+                        <h2> Penyimpanan </h2>
+                    </div>
+                </div>
+                <h3> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet non enim deserunt eius fugiat
+                    reprehenderit quam corporis aut! Repellendus, ipsum.</h3>
             </div>
-            <div class="content mt-5">
+        </div>
+
+        <div class="col mt-5 ms-3">
+            <div class="content details-content">
+                <h1 class="text-start"> Fatin Cake </h1>
+                <h2 class="text-start pt-3"> Korean Cake </h2>
+                <h3 class="text-start text-pink" > IDR 130.000 </h3>
+                <h3 class="text-start text-secondary pt-3"> Ukuran </h3>
+                <h3 class="text-start text-pink" > Diameter 18 cm </h3>
+                <h3 class="text-start text-secondary pt-3" > Varian Kue </h3>
+                <h3 class="text-start text-pink" > Brownies </h3>
+            </div>
+            <div class="content mt-3">
                 <h2 class="text-start" style="font-size: 18px;"> Ketikkan ucapan selebrasimu </h2>
 
-                <div class="mb-3 col-7">
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Ketik di sini" style="border-radius: 15px; padding: 10px;"></textarea>
+                <div class="mb-3 col-xl-7">
+                    <textarea class="form-control " id="exampleFormControlTextarea1" rows="3" placeholder="Ketik di sini"
+                        style="border-radius: 15px; padding: 10px;"></textarea>
                 </div>
             </div>
+            <div class="content justify-content-center align-items-center d-flex col-xl-7 mb-3">
+                <button class="btn details-button me-2">
+                    <i class="fa-solid fa-minus fa-xl" style="color: #000000;"> </i>
+                </button>
+                <p class=" "> 100 </p>
+                <button class="btn details-button ms-2">
+                    <i class="fa-solid fa-plus fa-xl" style="color: #000000;"> </i>
+                </button>
+            </div>
+            <button type="button" class="btn add-cart-button col-xl-7 mb-3" data-bs-toggle="modal"
+                data-bs-target="#add_cart"> Tambah ke keranjang 
+            </button>
         </div>
     </div>
 </div>
 
 
+<!-- Modal -->
 
+<div class="modal fade" id="add_cart" tabindex="-1" aria-labelledby="add to cart" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body justify-content-center">
+                <div class="d-flex justify-content-center">
+                    <img src="{{ url_for('static', filename = 'img/success.png') }}" alt="" class="img-fluid" style="width: 150px; height: 150px;" >
+                </div>
+                <div class="content text-center success-pop p-4">
+                    <h1> Produk berhasil ditambahkan ke keranjang</h1>
 
+                    <button type="button" class="btn add-cart-button col-xl-4 col-5 mt-3 text-center"> OK 
+                </button>
+
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

@@ -2,95 +2,84 @@
 
 {% block tittle %} Home - Fatin Cake {% endblock %}
 
-{% block active %}
-<nav class="collapse navbar-collapse justify-content-end me-4" id="navbarNav">
-  <ul class="navbar-nav gap-4">
-    <li class="nav-item d-flex align-items-center page-now ">
-      <a class="nav-link text-pink"  href="#" aria-disabled="true" > Home </a>
-      <img src=" {{url_for('static', filename='img/Home.svg')}} " class="img-fluid animated ms-2 " alt="">
-    </li>
-    <li class="nav-item d-flex align-items-center">
-      <a class="nav-link text-white" href="{{ url_for('products') }}"> All Product </a>
-      <img src="{{url_for('static', filename='img/Cupcake.svg')}}" class="img-fluid animated ms-2 " alt="">
-    </li>
-    <li class="nav-item d-flex align-items-center">
-      <a class="nav-link text-white" href="{{ url_for('custome') }}"> Custom Cake </a>
-      <img src="{{url_for('static', filename='img/Pastry Bag.svg')}}" class="img-fluid animated ms-2 " alt="">
-    </li>
-    <li class="nav-item d-flex align-items-center">
-      <a class="nav-link text-white" href="{{ url_for('cart') }}"> Cart </a>
-      <img src="{{url_for('static', filename='img/icn shopping-cart .icn-sm.svg')}}" class="img-fluid animated ms-2 " alt="">
-    </li>
-    <li class="nav-item d-flex align-items-center">
-      <a class="nav-link text-white" href="" data-bs-toggle="modal" data-bs-target="#exampleModal" > Login </a>
-      <img src="{{url_for('static', filename='img/Profile.svg')}}" class="img-fluid animated ms-2 " alt="">
-    </li>
-  </ul>
-</nav>
-
+{% block navhome %}
+<li class="nav-item d-flex align-items-center page-now ">
+    <a class="nav-link text-pink" aria-current="page" href="{{ url_for('index') }}"> Home </a>
+    <img src=" {{url_for('static', filename='img/navbar-home-active.svg')}} "
+        class="img-fluid animated ms-2 " alt="">
+</li>
 {% endblock %}
-
+  
 {% block body %}
+
 
 <!-- Modal / Login Pop Up-->
 
 <div class="first_img">
-  <img src="{{url_for('static', filename='img/bg.png')}}" class="img-fluid w-100">
+  <img src="{{url_for('static', filename='img/index-jumbotron.png')}}" class="img-fluid" alt="big_cake">
 </div>
 
 <div class="container-fluid bg-second-section pb-5">
-  <h1 class="pt-4 "> NIKMATI KUE TERLARIS DARI FATIN CAKE </h1>
+  <h1 class="pt-4 text-center fs-1"> NIKMATI KUE TERLARIS DARI FATIN CAKE </h1>
 
 
   <!-- Card 1-->
 
   <div class="container py-4">
     <div class="row row-cols-1 row-cols-md-4 g-4">
-      <div class="col-md-6 col-xl-3 ">
-        <div class="card card-body-second h-100">
-          <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
+      <div class="col-md-6 col-xl-3 d-flex justify-content-center">
+        <div class="card card-body-second h-100 col-10 col-md-12 ">
+          <img src="{{url_for('static', filename='img/dummy_cake.png')}}" class="card-img-top" alt="..." >
           <div class="card-body text-center">
             <h5 class="card-title ">Nama Kue </h5>
             <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.</p>
           </div>
           <div class="text-center mb-3">
-            <button type="button" class="btn custom-button-2" href="{{ url_for('index') }}">Lihat Detail</button>
+            <a href="{{ url_for('details') }}">
+              <button type="button" class="btn custom-button-2">Lihat Detail</button>
+            </a>
           </div>
         </div>
       </div>
-      <div class="col-md-6 col-xl-3 ">
-        <div class="card card-body-second h-100">
-          <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
+      <div class="col-md-6 col-xl-3 d-flex justify-content-center ">
+        <div class="card card-body-second h-100 col-10 col-md-12">
+          <img src="{{url_for('static', filename='img/dummy_cake.png')}}" class="card-img-top" alt="...">
           <div class="card-body text-center">
             <h5 class="card-title">Nama Kue </h5>
             <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.</p>
           </div>
           <div class="text-center mb-3">
-            <button type="button" class="btn custom-button-2 ">Lihat Detail</button>
+            <a href="{{ url_for('details') }}">
+              <button type="button" class="btn custom-button-2">Lihat Detail</button>
+            </a>
           </div>
         </div>
       </div>
-      <div class="col-md-6 col-xl-3  ">
-        <div class="card card-body-second h-100">
-          <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
+      <div class="col-md-6 col-xl-3 d-flex justify-content-center  ">
+        <div class="card card-body-second h-100 col-10 col-md-12">
+          <img src="{{url_for('static', filename='img/dummy_cake.png')}}" class="card-img-top" alt="...">
           <div class="card-body text-center">
             <h5 class="card-title">Nama Kue </h5>
             <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.</p>
           </div>
           <div class="text-center mb-3">
-            <button type="button" class="btn custom-button-2 ">Lihat Detail</button>
+            <a href="{{ url_for('details') }}">
+              <button type="button" class="btn custom-button-2">Lihat Detail</button>
+            </a>
           </div>
         </div>
       </div>
-      <div class="col-md-6 col-xl-3 ">
-        <div class="card card-body-second h-100">
-          <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
+      <div class="col-md-6 col-xl-3 d-flex justify-content-center ">
+        <div class="card card-body-second h-100 col-10 col-md-12">
+          <img src="{{url_for('static', filename='img/dummy_cake.png')}}" class="card-img-top" alt="...">
           <div class="card-body text-center">
             <h5 class="card-title">Nama Kue </h5>
             <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.</p>
           </div>
           <div class="text-center mb-3">
-            <button type="button" class="btn custom-button-2 ">Lihat Detail</button>
+            <a href="{{ url_for('details') }}">
+              <button type="button" class="btn custom-button-2">Lihat Detail</button>
+            </a>
           </div>
         </div>
       </div>
@@ -102,58 +91,66 @@
 </div>
 
 <div class="container-fluid bg-third-section pb-5">
-  <h2 class="pt-4 "> MANISNYA COKLAT DALAM SETIAP GIGITAN </h1>
+  <h2 class="pt-4 fs-1"> MANISNYA COKLAT DALAM SETIAP GIGITAN </h1>
 
 
     <!-- Card 2-->
 
     <div class="container py-4">
       <div class="row row-cols-1 row-cols-md-4 g-4">
-        <div class="col-md-6 col-xl-3">
-          <div class="card card-body-third h-100">
-            <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
+        <div class="col-md-6 col-xl-3 d-flex justify-content-center">
+          <div class="card card-body-third h-100 col-10 col-md-12">
+            <img src="{{url_for('static', filename='img/dummy_cake.png')}}" class="card-img-top" alt="...">
             <div class="card-body text-center">
               <h5 class="card-title ">Nama Kue </h5>
               <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.</p>
             </div>
             <div class="text-center mb-3">
-              <button type="button" class="btn btn custom-button-2 ">Lihat Detail</button>
+              <a href="{{ url_for('details') }}">
+                <button type="button" class="btn custom-button-2">Lihat Detail</button>
+              </a>
             </div>
           </div>
         </div>
-        <div class="col-md-6 col-xl-3">
-          <div class="card card-body-third h-100">
-            <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
+        <div class="col-md-6 col-xl-3 d-flex justify-content-center">
+          <div class="card card-body-third h-100 col-10 col-md-12">
+            <img src="{{url_for('static', filename='img/dummy_cake.png')}}" class="card-img-top" alt="...">
             <div class="card-body text-center">
               <h5 class="card-title">Nama Kue </h5>
               <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.</p>
             </div>
             <div class="text-center mb-3">
-              <button type="button" class="btn btn custom-button-2 ">Lihat Detail</button>
+              <a href="{{ url_for('details') }}">
+                <button type="button" class="btn custom-button-2">Lihat Detail</button>
+              </a>
             </div>
           </div>
         </div>
-        <div class="col-md-6 col-xl-3 ">
-          <div class="card card-body-third h-100">
-            <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
+        <div class="col-md-6 col-xl-3 d-flex justify-content-center ">
+          <div class="card card-body-third h-100 col-10 col-md-12">
+            <img src="{{url_for('static', filename='img/dummy_cake.png')}}" class="card-img-top" alt="...">
             <div class="card-body text-center">
               <h5 class="card-title">Nama Kue </h5>
               <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.</p>
             </div>
             <div class="text-center mb-3">
-              <button type="button" class="btn btn custom-button-2 ">Lihat Detail</button>
+              <a href="{{ url_for('details') }}">
+                <button type="button" class="btn custom-button-2">Lihat Detail</button>
+              </a>
             </div>
           </div>
         </div>
-        <div class="col-md-6 col-xl-3">
-          <div class="card card-body-third h-100">
-            <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
+        <div class="col-md-6 col-xl-3 d-flex justify-content-center">
+          <div class="card card-body-third h-100 col-10 col-md-12">
+            <img src="{{url_for('static', filename='img/dummy_cake.png')}}" class="card-img-top" alt="...">
             <div class="card-body text-center">
               <h5 class="card-title">Nama Kue </h5>
               <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.</p>
             </div>
             <div class="text-center mb-3">
-              <button type="button" class="btn btn custom-button-2 ">Lihat Detail</button>
+              <a href="{{ url_for('details') }}">
+                <button type="button" class="btn custom-button-2">Lihat Detail</button>
+              </a>
             </div>
           </div>
         </div>
@@ -172,55 +169,63 @@
 </div>
 
 <div class="container-fluid bg-second-section pb-5">
-  <h1 class="pt-4 "> KUE LUCU, KENANGAN MANIS </h1>
+  <h1 class="pt-4 text-center ps-1"> KUE LUCU, KENANGAN MANIS </h1>
 
   <div class="container py-4">
     <div class="row row-cols-1 row-cols-md-4 g-4">
-      <div class="col-md-6 col-xl-3">
-        <div class="card card-body-second h-100">
-          <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
+      <div class="col-md-6 col-xl-3 d-flex justify-content-center">
+        <div class="card card-body-second h-100 col-10 col-md-12">
+          <img src="{{url_for('static', filename='img/dummy_cake.png')}}" class="card-img-top" alt="...">
           <div class="card-body text-center">
             <h5 class="card-title ">Nama Kue </h5>
             <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.</p>
           </div>
           <div class="text-center mb-3">
-            <button type="button" class="btn btn custom-button-2 ">Lihat Detail</button>
+            <a href="{{ url_for('details') }}">
+              <button type="button" class="btn custom-button-2">Lihat Detail</button>
+            </a>
           </div>
         </div>
       </div>
-      <div class="col-md-6 col-xl-3">
-        <div class="card card-body-second h-100">
-          <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
+      <div class="col-md-6 col-xl-3 d-flex justify-content-center">
+        <div class="card card-body-second h-100 col-10 col-md-12">
+          <img src="{{url_for('static', filename='img/dummy_cake.png')}}" class="card-img-top" alt="...">
           <div class="card-body text-center">
             <h5 class="card-title">Nama Kue </h5>
             <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.</p>
           </div>
           <div class="text-center mb-3">
-            <button type="button" class="btn btn custom-button-2 ">Lihat Detail</button>
+            <a href="{{ url_for('details') }}">
+              <button type="button" class="btn custom-button-2">Lihat Detail</button>
+            </a>
           </div>
         </div>
       </div>
-      <div class="col-md-6 col-xl-3 ">
-        <div class="card card-body-second h-100">
-          <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
+      <div class="col-md-6 col-xl-3 d-flex justify-content-center ">
+        <div class="card card-body-second h-100 col-10 col-md-12">
+          <img src="{{url_for('static', filename='img/dummy_cake.png')}}" class="card-img-top" alt="...">
           <div class="card-body text-center">
             <h5 class="card-title">Nama Kue </h5>
             <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.</p>
           </div>
           <div class="text-center mb-3">
-            <button type="button" class="btn btn custom-button-2 ">Lihat Detail</button>
+            <a href="{{ url_for('details') }}">
+              <button type="button" class="btn custom-button-2">Lihat Detail</button>
+            </a>
           </div>
         </div>
       </div>
-      <div class="col-md-6 col-xl-3">
-        <div class="card card-body-second h-100">
-          <img src="{{url_for('static', filename='img/kue1.png')}}" class="card-img-top" alt="...">
+      <div class="col-md-6 col-xl-3 d-flex justify-content-center">
+        <div class="card card-body-second h-100 col-10 col-md-12">
+          <img src="{{url_for('static', filename='img/dummy_cake.png')}}" class="card-img-top" alt="...">
           <div class="card-body text-center">
             <h5 class="card-title">Nama Kue </h5>
             <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.</p>
           </div>
           <div class="text-center mb-3">
-            <button type="button" class="btn btn custom-button-2 ">Lihat Detail</button>
+            <a href="{{ url_for('details') }}">
+              <button type="button" class="btn custom-button-2">Lihat Detail</button>
+            </a>
           </div>
         </div>
       </div>
