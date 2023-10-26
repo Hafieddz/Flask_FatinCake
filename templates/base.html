@@ -97,7 +97,8 @@
     <!-- Navbar -->
 
 
-    <!-- Modal -->
+    <!-- Modal Login -->
+    {% block modal %}
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -106,30 +107,19 @@
                     <div class="content mx-4 my-4">
 
                         <!-- Form -->
-                        <form method="POST">
+                        <form method="POST" action="{{ url_for('login') }}">
                             <div class="mb-3">
-                                {{ form.hidden_tag() }}
+                                {{ login_form.hidden_tag() }}
 
-                                {{ form.email.label(class="form-label") }}
+                                {{ login_form.email.label(class="form-label") }}
 
-                                {{ form.email(class="form-control" ,placeholder="Ketik di sini") }}
-                                <!-- 
-                                    <label for="exampleFormControlInput1" class="form-label"> Email </label>
-                                    <input type="email" class="form-control" id="exampleFormControlInput1"
-                                    placeholder=" Ketik di sini">
-                                -->
+                                {{ login_form.email(class="form-control" ,placeholder="Ketik di sini") }}
                             </div>
                             <div class="mb-3">
-                                {{ form.password_hash.label(class="form-label") }}
-                                {{ form.password_hash(class="form-control" , placeholder="Ketik di sini" ) }}
-                                <!-- 
-                                    <label for="exampleFormControlInput1" class="form-label"> Kata Sandi </label>
-                                    <input type="password" class="form-control" id="exampleFormControlInput1"
-                                    placeholder=" Ketik di sini">
-                                -->
+                                {{ login_form.password_hash.label(class="form-label") }}
+                                {{ login_form.password_hash(class="form-control" , placeholder="Ketik di sini" ) }}
                             </div>
-                            {{ form.submit(class="btn btn-primary col-12") }}
-                            <!-- <button type="button" class="btn btn-primary col-12" data-bs-dismiss="modal"> Log in </button>  -->
+                            {{ login_form.submit_login(class="btn btn-primary col-12") }}
                         </form>
 
                         <!-- Form -->
@@ -158,37 +148,26 @@
     <!-- Modal Register -->
     <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
+            <div class="modal-content"> 
                 <div class="modal-body">
                     <h1 class="mx-4 mt-4"> Register </h1>
 
                     <div class="content mx-4 my-4">
 
                         <!-- Form -->
-                        <form method="POST">
+                        <form method="POST" action="{{ url_for('register') }}">
                             <div class="mb-3">
-                                {{ form.hidden_tag() }}
+                                {{ register_form.hidden_tag() }}
 
-                                {{ form.email.label(class="form-label") }}
+                                {{ register_form.email.label(class="form-label") }}
 
-                                {{ form.email(class="form-control" ,placeholder="Ketik di sini") }}
-                                <!-- 
-                                        <label for="exampleFormControlInput1" class="form-label"> Email </label>
-                                        <input type="email" class="form-control" id="exampleFormControlInput1"
-                                        placeholder=" Ketik di sini">
-                                    -->
+                                {{ register_form.email(class="form-control" ,placeholder="Ketik di sini") }}
                             </div>
                             <div class="mb-3">
-                                {{ form.password_hash.label(class="form-label") }}
-                                {{ form.password_hash(class="form-control" , placeholder="Ketik di sini" ) }}
-                                <!-- 
-                                        <label for="exampleFormControlInput1" class="form-label"> Kata Sandi </label>
-                                        <input type="password" class="form-control" id="exampleFormControlInput1"
-                                        placeholder=" Ketik di sini">
-                                    -->
+                                {{ register_form.password_hash.label(class="form-label") }}
+                                {{ register_form.password_hash(class="form-control" , placeholder="Ketik di sini" ) }}
                             </div>
-                            {{ form.submit(class="btn btn-primary col-12") }}
-                            <!-- <button type="button" class="btn btn-primary col-12" data-bs-dismiss="modal"> Log in </button>  -->
+                            {{ register_form.submit_register(class="btn btn-primary col-12") }}
                         </form>
 
                         <!-- Form -->
@@ -210,12 +189,20 @@
         </div>
     </div>
     <!-- Modal / Register -->
+    {% endblock %}
 
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-success m-0" role="alert">
+      {{ message  }}
+    </div>
+    {% endfor %}
+    
     {% block body %}
 
 
 
     {% endblock %}
+
 
 
     <!-- Footer -->
