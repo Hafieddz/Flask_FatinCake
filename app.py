@@ -1,10 +1,15 @@
-from flask import Flask, render_template, request, url_for, flash
+from flask import Flask, redirect, render_template, request, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
+from sqlalchemy import log
+from sqlalchemy.engine import url
+from sqlalchemy.sql.functions import user
 from wtforms import StringField, SubmitField, PasswordField, ValidationError
 from wtforms.validators import DataRequired, email
 from flask_migrate import Migrate
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin, login_user, logout_user, LoginManager, login_required, current_user
+
 
 app = Flask(__name__)
 
@@ -15,80 +20,173 @@ migrate = Migrate(app, db)
 
 app.app_context().push() 
 
+# Login Manager - Autentikasi Untuk Login 
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'index'
+
+@login_manager.user_loader
+def load_user(user_id):
+    return Users.query.get(int(user_id))
+
+
+# Register Form 
+class RegisterForm(FlaskForm):
+    email = StringField("Email", validators=[DataRequired()])
+    password_hash = PasswordField("Password", validators=[DataRequired()])
+    submit_register = SubmitField("Register")
+
+# Login Form 
 class LoginForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired()])
     password_hash = PasswordField("Password", validators=[DataRequired()])
-    submit = SubmitField("Log In")
+    submit_login = SubmitField("Log In")
     
+# Login Route 
+@app.route('/login', methods=['POST'])
+def login():
+    login_form = LoginForm()
+    register_form = RegisterForm()
 
-# Home Page
+    if login_form.validate_on_submit():
+        user = Users.query.filter_by(email = login_form.email.data).first()
+        if user:
+            if check_password_hash(user.password_hash, login_form.password_hash.data):
+                flash('Login Success!!')
+                login_user(user)
+                return redirect(url_for('index'))
+            else :
+                flash('Password is wrong!')
+                return redirect(url_for('index'))
+        else :
+            flash('Login Failed!!')
+            return redirect(url_for('index'))
+
+    return render_template('index.html', register_form = register_form, login_form = login_form)
+
+# Register Route
+@app.route('/register', methods=['POST'])
+def register():
+    register_form = RegisterForm()
+    login_form = LoginForm()
+
+    if register_form.validate_on_submit():
+        # Cek apakah ada email yang sama
+        is_email = Users.query.filter_by(email = register_form.email.data).first()
+        if is_email is None:
+            # Hash Password 
+            hashed_password = generate_password_hash(register_form.password_hash.data) 
+            is_email = Users(email = register_form.email.data, password_hash = hashed_password)
+            # Add User ke database
+            db.session.add(is_email)
+            db.session.commit()
+            flash('User Registered!')
+            return redirect(url_for('index'))
+        else:
+            flash('we cant register ur email')
+            return redirect(url_for('index'))
+        
+    return render_template('index.html', register_form = register_form, login_form = login_form)
+
+# Home Page / Index
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    form = LoginForm()
+    register_form = RegisterForm()
+    login_form = LoginForm()
     email = None
-    if form.validate_on_submit():
-        user = Users.query.filter_by(email = form.email.data).first()
-        if user is None:
-            # Hash Password 
-            hashed_password = generate_password_hash(form.password_hash.data) 
-            user = Users(email = form.email.data, password_hash = hashed_password)
-            db.session.add(user)
-            db.session.commit()
 
-        else:
-            return render_template('index.html', email = email, form = form)
-        
-        email = form.email.data
-        form.email.data = ''
-        form.password_hash.data = ''
-        
-    return render_template('index.html',email = email, form = form)
+    if current_user.is_authenticated:
+        flash("Halo Teman!")
+        email = 'Yes'
+    else:
+        flash("Akun Belum Login, Silahkan Login Terlebih Dahulu!")
 
+    return render_template("index.html", email = email, register_form = register_form, login_form = login_form)
+        
 # Product Page
 @app.route('/products')
 def products():
-    form = LoginForm()
-    email = None
-    
-    return render_template('all_products.html', form = form, email = email)
+    register_form = RegisterForm()
+    login_form = LoginForm()
 
+    if current_user.is_authenticated:
+        flash("Halo Teman!")
+        email = 'Yes'
+    else:
+         flash("Akun Belum Login, Silahkan Login Terlebih Dahulu!")
+
+    return render_template("all_products.html", register_form = register_form, login_form = login_form)
 # Base HTML
 @app.route('/base')
 def base():
+    register_form = RegisterForm()
+    login_form = LoginForm()
 
-    return render_template('base.html' )
+    if current_user.is_authenticated:
+        flash("Halo Teman!")
+        email = 'Yes'
+    else:
+        flash("Akun Belum Login, Silahkan Login Terlebih Dahulu!")
 
+    return render_template("index.html", email = email, register_form = register_form, login_form = login_form)
+        
 # Custome Cake
 @app.route('/custome', methods=['GET', 'POST'])
 def custome():
-    form = LoginForm()
-    email = None
+    register_form = RegisterForm()
+    login_form = LoginForm()
 
-    return render_template('custome_cake.html', form = form, email = email)
+    if current_user.is_authenticated:
+        flash("Halo Teman!")
+        email = 'Yes'
+        return render_template("custome_cake.html", email = email, register_form = register_form, login_form = login_form)
+    else:
+        flash("Akun Belum Login, Silahkan Login Terlebih Dahulu!")
+        return render_template("custome_cake.html", register_form = register_form, login_form = login_form)
+        
 
 # Cart Page
 @app.route('/cart', methods=['GET', 'POST'])
+@login_required
 def cart():
-    form = LoginForm()
-    email = None
+    register_form = RegisterForm()
+    login_form = LoginForm()
 
-    return render_template('cart.html', form = form, email = email)
+    return render_template('cart.html')
+        
 
 # Detail Page
 @app.route('/details', methods=['GET', 'POST']  )
 def details():
-    form = LoginForm()
-    email = None
+    register_form = RegisterForm()
+    login_form = LoginForm()
 
-    return render_template('detail_product.html', form = form, email = email)
+    if current_user.is_authenticated:
+        flash("Halo Teman!")
+        email = 'Yes'
+        return render_template("detail_product.html", email = email, register_form = register_form, login_form = login_form)
+    else:
+        flash("Akun Belum Login, Silahkan Login Terlebih Dahulu!")
+        return render_template("detail_product.html", register_form = register_form, login_form = login_form)
+        
 
 # Account Page
-@app.route('/profile', methods=['GET', 'POST']  )
+@app.route('/profile', methods=['GET', 'POST'])
+@login_required
 def profile():
-    form = LoginForm()
-    email = None
 
-    return render_template('profile.html', form = form, email = email)
+    return render_template('profile.html')
+
+
+# Logout 
+@app.route('/logout')
+def logout():
+    logout_user()
+    login_form = LoginForm()
+    register_form = RegisterForm()
+    flash("Berhasil Logout")
+
+    return redirect(url_for('index', register_form = register_form, login_form = login_form ))
 
 # Empty Cart (Delete After Ready!)
 @app.route('/carts')
@@ -98,7 +196,7 @@ def carts():
 
 
 # DATABASE MODEL 
-class Users(db.Model):
+class Users(db.Model, UserMixin):
     id = db.Column(db.Integer,primary_key=True)
     email = db.Column(db.String(100), nullable=False, unique=True)
     password_hash = db.Column(db.String(220), nullable=False)
