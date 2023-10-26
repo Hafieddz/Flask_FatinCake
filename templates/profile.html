@@ -2,6 +2,14 @@
 
 {% block tittle %} Profile - Fatin Cake {% endblock %}
 
+{% block modal %} 
+
+<div>
+
+</div>
+
+{% endblock %}
+
 
 {% block body %}
 
@@ -21,9 +29,11 @@
     
                     <h2 class="fs-5  text-start"> 085255311529 </h2>
         
-                    <button class="btn profile-btn mt-3 col-xl-5 col-5 col-sm-4 col-md-4 text-center">
-                        Log Out
-                    </button>
+                    <a href="{{ url_for('logout') }}">
+                        <button class="btn profile-btn mt-3 col-xl-5 col-5 col-sm-4 col-md-4 text-center"  >
+                            Log Out
+                        </button>
+                    </a>
                 </div>
 
             </div>
