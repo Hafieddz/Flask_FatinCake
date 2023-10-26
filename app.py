@@ -1,11 +1,11 @@
 from flask import Flask, redirect, render_template, request, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
-from sqlalchemy import log
+from sqlalchemy import Nullable, String, log
 from sqlalchemy.engine import url
 from sqlalchemy.sql.functions import user
-from wtforms import StringField, SubmitField, PasswordField, ValidationError
-from wtforms.validators import DataRequired, email
+from wtforms import StringField, SubmitField, PasswordField, ValidationError, BooleanField
+from wtforms.validators import DataRequired, EqualTo, Length
 from flask_migrate import Migrate
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, login_user, logout_user, LoginManager, login_required, current_user
@@ -33,7 +33,11 @@ def load_user(user_id):
 # Register Form 
 class RegisterForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired()])
-    password_hash = PasswordField("Password", validators=[DataRequired()])
+    password_hash = PasswordField("Password", validators=[DataRequired(), EqualTo('confirm_password', message='password harus sama!')])
+    confirm_password = PasswordField("Konfirmasi Password", validators=[DataRequired()])
+    first_name = StringField("Nama Depan", validators=[DataRequired()])
+    last_name = StringField("Nama Belakang")
+    phone_number = StringField("No Telepon", validators=[DataRequired()])
     submit_register = SubmitField("Register")
 
 # Login Form 
@@ -61,8 +65,9 @@ def login():
         else :
             flash('Login Failed!!')
             return redirect(url_for('index'))
-
-    return render_template('index.html', register_form = register_form, login_form = login_form)
+    else:
+        flash("Oopss!!")
+        return redirect(url_for('index'))
 
 # Register Route
 @app.route('/register', methods=['POST'])
@@ -76,7 +81,11 @@ def register():
         if is_email is None:
             # Hash Password 
             hashed_password = generate_password_hash(register_form.password_hash.data) 
-            is_email = Users(email = register_form.email.data, password_hash = hashed_password)
+            is_email = Users(email = register_form.email.data, 
+                             password_hash = hashed_password, 
+                             nama_depan = register_form.first_name.data, 
+                             nama_belakang = register_form.last_name.data, 
+                             no_telp = register_form.phone_number.data)
             # Add User ke database
             db.session.add(is_email)
             db.session.commit()
@@ -85,8 +94,10 @@ def register():
         else:
             flash('we cant register ur email')
             return redirect(url_for('index'))
+    else:
+        flash('oops!!')
+        return redirect(url_for('index'))
         
-    return render_template('index.html', register_form = register_form, login_form = login_form)
 
 # Home Page / Index
 @app.route('/', methods=['GET', 'POST'])
@@ -200,6 +211,9 @@ class Users(db.Model, UserMixin):
     id = db.Column(db.Integer,primary_key=True)
     email = db.Column(db.String(100), nullable=False, unique=True)
     password_hash = db.Column(db.String(220), nullable=False)
+    nama_depan = db.Column(db.String(30), nullable=False)
+    nama_belakang = db.Column(db.String(30))
+    no_telp = db.Column(db.String(20), nullable=False)
 
     @property
     def password(self):

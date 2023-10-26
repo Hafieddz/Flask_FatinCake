@@ -97,13 +97,13 @@ form .btn:hover {
 
 .google button,
 .google button:hover {
-    background: var(--gray-04, #E4E7EB);
-    height: 55px;
-    font-size: 18px;
-    border-color: var(--gray-04, #E4E7EB);
-    color: var(--gray-02, #4B5768);
-    border-radius: 32px;
-    text-align: center;
+    background: var(--gray-04, #E4E7EB) !important;
+    height: 55px !important;
+    font-size: 18px !important;
+    border-color: var(--gray-04, #E4E7EB) !important;
+    color: var(--gray-02, #4B5768) !important;
+    border-radius: 32px !important;
+    text-align: center !important;
 }
 
 .header-text {
