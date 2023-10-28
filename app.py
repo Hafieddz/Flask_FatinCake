@@ -56,14 +56,14 @@ def login():
         user = Users.query.filter_by(email = login_form.email.data).first()
         if user:
             if check_password_hash(user.password_hash, login_form.password_hash.data):
-                flash('Login Success!!')
+                flash('Login Sukses!!')
                 login_user(user)
                 return redirect(url_for('index'))
             else :
-                flash('Password is wrong!')
+                flash('Password salah!')
                 return redirect(url_for('index'))
         else :
-            flash('Login Failed!!')
+            flash('Email tidak ada!')
             return redirect(url_for('index'))
     else:
         flash("Oopss!!")
@@ -89,10 +89,10 @@ def register():
             # Add User ke database
             db.session.add(is_email)
             db.session.commit()
-            flash('User Registered!')
+            flash('Registrasi Berhasil!')
             return redirect(url_for('index'))
         else:
-            flash('we cant register ur email')
+            flash('Email sudah terdaftar!')
             return redirect(url_for('index'))
     else:
         flash('oops!!')
@@ -104,53 +104,44 @@ def register():
 def index():
     register_form = RegisterForm()
     login_form = LoginForm()
-    email = None
+    login = None
 
     if current_user.is_authenticated:
-        flash("Halo Teman!")
-        email = 'Yes'
+        login = 'Yes'
     else:
         flash("Akun Belum Login, Silahkan Login Terlebih Dahulu!")
 
-    return render_template("index.html", email = email, register_form = register_form, login_form = login_form)
+    return render_template("index.html", login = login, register_form = register_form, login_form = login_form)
         
 # Product Page
 @app.route('/products')
 def products():
     register_form = RegisterForm()
     login_form = LoginForm()
+    login = None
 
     if current_user.is_authenticated:
-        flash("Halo Teman!")
-        email = 'Yes'
+        login = 'Yes'
     else:
          flash("Akun Belum Login, Silahkan Login Terlebih Dahulu!")
 
-    return render_template("all_products.html", register_form = register_form, login_form = login_form)
+    return render_template("all_products.html", login = login, register_form = register_form, login_form = login_form)
 # Base HTML
 @app.route('/base')
 def base():
-    register_form = RegisterForm()
-    login_form = LoginForm()
 
-    if current_user.is_authenticated:
-        flash("Halo Teman!")
-        email = 'Yes'
-    else:
-        flash("Akun Belum Login, Silahkan Login Terlebih Dahulu!")
-
-    return render_template("index.html", email = email, register_form = register_form, login_form = login_form)
+    return render_template("base.html")
         
 # Custome Cake
 @app.route('/custome', methods=['GET', 'POST'])
 def custome():
     register_form = RegisterForm()
     login_form = LoginForm()
+    login = None
 
     if current_user.is_authenticated:
-        flash("Halo Teman!")
-        email = 'Yes'
-        return render_template("custome_cake.html", email = email, register_form = register_form, login_form = login_form)
+        login = 'Yes'
+        return render_template("custome_cake.html", login = login, register_form = register_form, login_form = login_form)
     else:
         flash("Akun Belum Login, Silahkan Login Terlebih Dahulu!")
         return render_template("custome_cake.html", register_form = register_form, login_form = login_form)
@@ -162,8 +153,9 @@ def custome():
 def cart():
     register_form = RegisterForm()
     login_form = LoginForm()
+    login = 'Yes'
 
-    return render_template('cart.html')
+    return render_template('cart.html', login = login, register_form = register_form, login_form = login_form)
         
 
 # Detail Page
@@ -171,11 +163,11 @@ def cart():
 def details():
     register_form = RegisterForm()
     login_form = LoginForm()
+    login = None
 
     if current_user.is_authenticated:
-        flash("Halo Teman!")
-        email = 'Yes'
-        return render_template("detail_product.html", email = email, register_form = register_form, login_form = login_form)
+        login = 'Yes'
+        return render_template("detail_product.html", login = login, register_form = register_form, login_form = login_form)
     else:
         flash("Akun Belum Login, Silahkan Login Terlebih Dahulu!")
         return render_template("detail_product.html", register_form = register_form, login_form = login_form)
@@ -185,9 +177,10 @@ def details():
 @app.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
+    login_form = LoginForm()
+    register_form = RegisterForm()
 
-    return render_template('profile.html')
-
+    return render_template('profile.html', register_form = register_form, login_form = login_form )
 
 # Logout 
 @app.route('/logout')

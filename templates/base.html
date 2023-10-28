@@ -71,7 +71,7 @@
 
                     {% block navlogin %}
                     <!-- Muncul Ketika Sudah Login -->
-                    {% if email %}
+                    {% if login %}
                     <li class="nav-item d-flex align-items-center ">
                         <a class="nav-link text-white" href="{{ url_for('profile') }}"> Akun </a>
                         <img src="{{url_for('static', filename='img/navbar-user.svg')}}"
@@ -96,7 +96,8 @@
 
     <!-- Navbar -->
 
-    <!-- Modal Contoh  -->
+    {% block modal %}
+    <!-- Modal Register  -->
     <div class="modal modal-lg fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -171,11 +172,9 @@
             </div>
         </div>
     </div>
-    <!-- Modal Contoh -->
-
+    <!-- Modal Register -->
 
     <!-- Modal Login -->
-    {% block modal %}
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -218,8 +217,8 @@
             </div>
         </div>
     </div>
-
     <!-- Modal / Login Pop Up-->
+    {% endblock %}
 
     <!--Old Register Layout
     
@@ -265,8 +264,6 @@
 
     Old Register Layout -->
 
-    {% endblock %}
-
     {% for message in get_flashed_messages() %}
     <div class="alert alert-success m-0" role="alert">
         {{ message }}
@@ -275,11 +272,7 @@
 
     {% block body %}
 
-
-
     {% endblock %}
-
-
 
     <!-- Footer -->
 
