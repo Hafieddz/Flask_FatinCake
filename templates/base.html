@@ -17,13 +17,44 @@
     <!-- CSS Link -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
+    <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <title> {% block tittle %} {% endblock %} </title>
 </head>
 
 <body>
+
+    <!-- Loader -->
     <div class="loader">
 
     </div>
+
+    <!-- Begin alerts -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <script>
+
+        Swal.fire({
+
+            title: "{{ category.title() }}!",
+            // success , error , warning ,info
+
+            text: "{{ message }}",
+            // Custom message flashed from your flask routes
+
+            icon: "{{ category }}" == "danger" ? "error" : "{{ category }}"
+            // success , error , warning ,info
+
+        })
+
+    </script>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <!-- End alerts -->
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg nav-back-color sticky-top ">
@@ -86,7 +117,13 @@
                             class="img-fluid animated ms-2 " alt="">
                     </li>
                     {% endif %}
-
+                    {% if current_user.role == 'admin' %}
+                    <li class="nav-item d-flex align-items-center ">
+                        <a class="nav-link text-white" href="{{ url_for('admin') }}"> Admin Section </a>
+                        <img src="{{url_for('static', filename='img/navbar-user.svg')}}"
+                            class="img-fluid animated ms-1 " alt="">
+                    </li>
+                    {% endif %}
                     {% endblock %}
 
                 </ul>
@@ -263,12 +300,6 @@
 </div>
 
     Old Register Layout -->
-
-    {% for message in get_flashed_messages() %}
-    <div class="alert alert-success m-0" role="alert">
-        {{ message }}
-    </div>
-    {% endfor %}
 
     {% block body %}
 

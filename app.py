@@ -1,9 +1,10 @@
 from flask import Flask, redirect, render_template, request, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
-from sqlalchemy import Nullable, String, log
+from sqlalchemy import Nullable, String, false, log
 from sqlalchemy.engine import url
 from sqlalchemy.sql.functions import user
+from sqlalchemy.util import methods_equivalent
 from wtforms import StringField, SubmitField, PasswordField, ValidationError, BooleanField
 from wtforms.validators import DataRequired, EqualTo, Length
 from flask_migrate import Migrate
@@ -29,7 +30,6 @@ login_manager.login_view = 'index'
 def load_user(user_id):
     return Users.query.get(int(user_id))
 
-
 # Register Form 
 class RegisterForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired()])
@@ -50,20 +50,23 @@ class LoginForm(FlaskForm):
 @app.route('/login', methods=['POST'])
 def login():
     login_form = LoginForm()
-    register_form = RegisterForm()
-
     if login_form.validate_on_submit():
         user = Users.query.filter_by(email = login_form.email.data).first()
         if user:
             if check_password_hash(user.password_hash, login_form.password_hash.data):
-                flash('Login Sukses!!')
+                flash(f"Login Sukses!!", "success")
                 login_user(user)
-                return redirect(url_for('index'))
+                if current_user.role == 'admin':
+                    flash(f"Login Berhasil", "success")
+                    return redirect(url_for('admin'))
+                else :
+                    flash(f"Login Berhasil", "success")
+                    return redirect(url_for('index'))
             else :
-                flash('Password salah!')
+                flash(f'Password salah, silahkan coba lagi', "danger")
                 return redirect(url_for('index'))
         else :
-            flash('Email tidak ada!')
+            flash(f"Email tidak ada, silahkan coba lagi!", "danger")
             return redirect(url_for('index'))
     else:
         flash("Oopss!!")
@@ -73,32 +76,32 @@ def login():
 @app.route('/register', methods=['POST'])
 def register():
     register_form = RegisterForm()
-    login_form = LoginForm()
 
     if register_form.validate_on_submit():
         # Cek apakah ada email yang sama
         is_email = Users.query.filter_by(email = register_form.email.data).first()
         if is_email is None:
             # Hash Password 
+            role = 'user'
             hashed_password = generate_password_hash(register_form.password_hash.data) 
             is_email = Users(email = register_form.email.data, 
                              password_hash = hashed_password, 
                              nama_depan = register_form.first_name.data, 
                              nama_belakang = register_form.last_name.data, 
-                             no_telp = register_form.phone_number.data)
+                             no_telp = register_form.phone_number.data,
+                             role = role)
             # Add User ke database
             db.session.add(is_email)
             db.session.commit()
-            flash('Registrasi Berhasil!')
+            flash(f'Registrasi Berhasil!', "success")
             return redirect(url_for('index'))
         else:
-            flash('Email sudah terdaftar!')
+            flash(f'Email sudah terdaftar!', "danger")
             return redirect(url_for('index'))
     else:
-        flash('oops!!')
+        flash('oops!!', "danger")
         return redirect(url_for('index'))
         
-
 # Home Page / Index
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -108,11 +111,23 @@ def index():
 
     if current_user.is_authenticated:
         login = 'Yes'
-    else:
-        flash("Akun Belum Login, Silahkan Login Terlebih Dahulu!")
-
+    
     return render_template("index.html", login = login, register_form = register_form, login_form = login_form)
         
+# Admin Page
+@login_required
+@app.route('/admin', methods=['GET', 'POST'])
+def admin():
+    register_form = RegisterForm()
+    login_form = LoginForm()
+    login = None
+
+    if current_user.is_authenticated:
+        login = 'Yes'
+
+    return render_template("admin.html", login = login, register_form = register_form, login_form = login_form)
+
+
 # Product Page
 @app.route('/products')
 def products():
@@ -123,7 +138,7 @@ def products():
     if current_user.is_authenticated:
         login = 'Yes'
     else:
-         flash("Akun Belum Login, Silahkan Login Terlebih Dahulu!")
+         flash(f"Akun Belum Login, Silahkan Login Terlebih Dahulu!", "error")
 
     return render_template("all_products.html", login = login, register_form = register_form, login_form = login_form)
 # Base HTML
@@ -143,7 +158,7 @@ def custome():
         login = 'Yes'
         return render_template("custome_cake.html", login = login, register_form = register_form, login_form = login_form)
     else:
-        flash("Akun Belum Login, Silahkan Login Terlebih Dahulu!")
+        flash(f"Akun Belum Login, Silahkan Login Terlebih Dahulu!", "danger")
         return render_template("custome_cake.html", register_form = register_form, login_form = login_form)
         
 
@@ -169,7 +184,7 @@ def details():
         login = 'Yes'
         return render_template("detail_product.html", login = login, register_form = register_form, login_form = login_form)
     else:
-        flash("Akun Belum Login, Silahkan Login Terlebih Dahulu!")
+        flash(f"Akun Belum Login, Silahkan Login Terlebih Dahulu!", "danger")
         return render_template("detail_product.html", register_form = register_form, login_form = login_form)
         
 
@@ -177,20 +192,29 @@ def details():
 @app.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
+    login = 'Yes'
     login_form = LoginForm()
     register_form = RegisterForm()
 
-    return render_template('profile.html', register_form = register_form, login_form = login_form )
+    email = current_user.email
+    number = current_user.no_telp
+    first = current_user.nama_depan
+    last = current_user.nama_belakang
+    role = current_user.role
+
+    if current_user.role == '':
+        role = 'User'
+        
+    return render_template('profile.html', register_form = register_form, login_form = login_form, email = email, number = number, first= first, last = last, role = role, login = login)
 
 # Logout 
 @app.route('/logout')
 def logout():
     logout_user()
-    login_form = LoginForm()
-    register_form = RegisterForm()
-    flash("Berhasil Logout")
 
-    return redirect(url_for('index', register_form = register_form, login_form = login_form ))
+    flash("Berhasil logout", "success")
+
+    return redirect(url_for('index')) 
 
 # Empty Cart (Delete After Ready!)
 @app.route('/carts')
@@ -207,6 +231,7 @@ class Users(db.Model, UserMixin):
     nama_depan = db.Column(db.String(30), nullable=False)
     nama_belakang = db.Column(db.String(30))
     no_telp = db.Column(db.String(20), nullable=False)
+    role = db.Column(db.String(20),server_default = 'user' )
 
     @property
     def password(self):
