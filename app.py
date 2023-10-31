@@ -58,7 +58,7 @@ def login():
                 login_user(user)
                 if current_user.role == 'admin':
                     flash(f"Login Berhasil", "success")
-                    return redirect(url_for('admin'))
+                    return redirect(url_for('admin_dashboard'))
                 else :
                     flash(f"Login Berhasil", "success")
                     return redirect(url_for('index'))
@@ -116,8 +116,8 @@ def index():
         
 # Admin Page
 @login_required
-@app.route('/admin', methods=['GET', 'POST'])
-def admin():
+@app.route('/admin_example', methods=['GET', 'POST'])
+def base_admin():
     register_form = RegisterForm()
     login_form = LoginForm()
     login = None
@@ -125,8 +125,61 @@ def admin():
     if current_user.is_authenticated:
         login = 'Yes'
 
-    return render_template("admin.html", login = login, register_form = register_form, login_form = login_form)
+    if current_user.role == 'admin':
+        return render_template("admin/admin_base.html", login = login, register_form = register_form, login_form = login_form)
+    else :
+        flash("Anda tidak bisa mengakses halaman ini!", "error")
+        return redirect(url_for('index'))
+    
+@login_required
+@app.route('/admin/dashboard', methods=['GET', 'POST'])
+def admin_dashboard():
+    register_form = RegisterForm()
+    login_form = LoginForm()
+    login = None
 
+    if current_user.is_authenticated:
+        login = 'Yes'
+
+    if current_user.role == 'admin':
+        return render_template("admin/admin.html", login = login, register_form = register_form, login_form = login_form)
+    else :
+        flash("Anda tidak bisa mengakses halaman ini!", "error")
+        return redirect(url_for('index'))
+
+@login_required
+@app.route('/admin/product', methods=['GET', 'POST'])
+def admin_product():
+    register_form = RegisterForm()
+    login_form = LoginForm()
+    login = None
+
+    if current_user.is_authenticated:
+        login = 'Yes'
+
+    if current_user.role == 'admin':
+        return render_template("admin/admin_product.html", login = login, register_form = register_form, login_form = login_form)
+    else :
+        flash("Anda tidak bisa mengakses halaman ini!", "error")
+        return redirect(url_for('index'))
+
+@login_required
+@app.route('/admin/order', methods=['GET', 'POST'])
+def admin_order():
+    register_form = RegisterForm()
+    login_form = LoginForm()
+    login = None
+
+    if current_user.is_authenticated:
+        login = 'Yes'
+
+    if current_user.role == 'admin':
+        return render_template("admin/admin_order.html", login = login, register_form = register_form, login_form = login_form)
+    else :
+        flash("Anda tidak bisa mengakses halaman ini!", "error")
+        return redirect(url_for('index'))
+
+# End Of Admin Section
 
 # Product Page
 @app.route('/products')
