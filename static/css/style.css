@@ -507,3 +507,19 @@ p {
 .profile-img {
     border-radius: 50%;
 }
+
+.offcanvas {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: var(--color-dark-pink);
+}
+
+.list-offcanvas a{
+    text-decoration: none ;
+    color: black;
+}
+
+.main-page{
+    text-underline-offset: 8px;
+    text-decoration: underline !important;
+}

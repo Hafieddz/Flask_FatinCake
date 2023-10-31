@@ -59,7 +59,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg nav-back-color sticky-top ">
         <div class="container-fluid">
-            <a class="navbar-brand header-text" href="#"> Fatin Cake </a>
+            <a class="navbar-brand header-text" href="{{ url_for('index') }}"> Fatin Cake </a>
             <button class="navbar-toggler collapse-button" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -119,7 +119,7 @@
                     {% endif %}
                     {% if current_user.role == 'admin' %}
                     <li class="nav-item d-flex align-items-center ">
-                        <a class="nav-link text-white" href="{{ url_for('admin') }}"> Admin Section </a>
+                        <a class="nav-link text-white" href="{{ url_for('admin_dashboard') }}"> Admin Section </a>
                         <img src="{{url_for('static', filename='img/navbar-user.svg')}}"
                             class="img-fluid animated ms-1 " alt="">
                     </li>
