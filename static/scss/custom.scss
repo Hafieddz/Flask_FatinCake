@@ -7,14 +7,13 @@
 
 // Then add additional custom code here
 
+$color-dark-pink: #F3808B;
+$subtle-2: #AFB1B6;
+$color-background: #FAF3F3;
+$table-1-backgroud : #F69EA5;
+$table-2-backgroud : #FFF;
+
 // Old CSS Style 
-:root {
-    --color-dark-pink: #F3808B;
-    --subtle-2: #AFB1B6;
-    --color-background: #FAF3F3;
-    --table-1-backgroud : #F69EA5;
-    --table-2-backgroud : #FFF;
-}
 
 html {
     height: 100%;
@@ -24,7 +23,7 @@ body {
     min-height: 100%;
     display: flex;
     flex-direction: column;
-    background: var(--color-background);
+    background: $color-background;
 }
 
 footer {
@@ -47,7 +46,7 @@ h5 {
 }
 
 .modal-body h1 {
-    color: var(--color-dark-pink);
+    color: $color-dark-pink;
     font-feature-settings: 'clig' off, 'liga' off;
     font-family: Poppins;
     font-size: 35px;
@@ -69,7 +68,7 @@ h5 {
 }
 
 .modal-body a {
-    color: var(--color-dark-pink);
+    color: $color-dark-pink;
     font-feature-settings: 'clig' off, 'liga' off;
     font-family: Poppins;
     font-size: 14px;
@@ -82,7 +81,7 @@ h5 {
 
 .modal-body input,
 label {
-    color: var(--subtle-2);
+    color: $subtle-2;
     font-family: Poppins;
     font-size: 15px;
 
@@ -91,8 +90,8 @@ label {
 form .btn {
     height: 57px ;
     border-radius: 12px ;
-    background: var(--color-dark-pink) ;
-    border-color: var(--color-dark-pink) ;
+    background: $color-dark-pink ;
+    border-color: $color-dark-pink ;
     padding: 12px 16px ;
     font-size: 20px ;
     color: white;
@@ -101,8 +100,8 @@ form .btn {
 
 form .btn:hover {
     background: white ;
-    border-color: var(--color-dark-pink) ;
-    color: var(--color-dark-pink) ;
+    border-color: $color-dark-pink ;
+    color: $color-dark-pink;
 }
 
 .google button,
@@ -117,7 +116,7 @@ form .btn:hover {
 }
 
 .header-text {
-    color: var(--color-dark-pink) ;
+    color: $color-dark-pink ;
     font-family: 'Pacifico';
     font-size: 30px;
     font-style: normal;
@@ -132,7 +131,7 @@ form .btn:hover {
 }
 
 .text-pink {
-    color: var(--color-dark-pink) ;
+    color: $color-dark-pink ;
 }
 
 .nav-back-color {
@@ -169,8 +168,8 @@ form .btn:hover {
     border-radius: 10px ;
     align-items: center ;
     padding: 10px 15px;
-    border: 1px solid var(--color-dark-pink) ;
-    color: var(--color-dark-pink) ;
+    border: 1px solid $color-dark-pink ;
+    color: $color-dark-pink ;
 }
 
 .button-custom:hover {
@@ -185,7 +184,7 @@ form .btn:hover {
     padding: 10px 15px;
     border: 1px solid white ;
     color: white ;
-    background-color: var(--color-dark-pink);
+    background-color: $color-dark-pink;
     font-weight: 500;
 }
 
@@ -199,8 +198,8 @@ form .btn:hover {
 .custom-button-2 {
     border-radius: 5px ;
     align-items: center ;
-    border: 1px solid var(--color-dark-pink) ;
-    background-color: var(--color-dark-pink) ;
+    border: 1px solid $color-dark-pink ;
+    background-color: $color-dark-pink ;
     color: white ;
     padding: 10px 20px;
     border-radius: 20px ;
@@ -323,15 +322,15 @@ hr {
     font-size: 16px;
     font-family: 'Poppins';
     font-weight: 500;
-    color: var(--color-dark-pink);
+    color: $color-dark-pink;
 }
 
 .collapse-button {
     border-radius: 5px ;
     align-items: center ;
-    border: 3px solid var(--color-dark-pink) ;
+    border: 3px solid $color-dark-pink ;
     background-color: white ;
-    color: var(--color-dark-pink) ;
+    color: $color-dark-pink ;
     padding: 10px 20px;
     border-radius: 20px ;
 
@@ -341,7 +340,7 @@ hr {
     border-radius: 5px ;
     align-items: center ;
     border: 3px solid white ;
-    background-color: var(--color-dark-pink) ;
+    background-color: $color-dark-pink ;
     color: white ;
     padding: 10px 20px;
     border-radius: 20px ;
@@ -385,7 +384,7 @@ hr {
     color: white;
     border: 2px solid pink;
     border-radius: 15px;
-    background: var(--color-dark-pink);
+    background: $color-dark-pink;
 
 }
 
@@ -432,7 +431,7 @@ p {
     font-family: 'Poppins';
     font-size: 30px;
     font-weight: 100;
-    color: var(--subtle-2);
+    color: $subtle-2;
 }
 
 .details-content h2 {
@@ -460,15 +459,15 @@ p {
     border-radius: 20px;
     align-items: center;
     padding: 10px 15px;
-    background-color: var(--color-dark-pink);
-    border: 1px solid var(--color-dark-pink);
+    background-color: $color-dark-pink;
+    border: 1px solid $color-dark-pink;
     color: white;
 }
 
 .profile-btn:hover {
     border-radius: 20px;
     background-color: white;
-    border: 1px solid var(--color-dark-pink);
+    border: 1px solid $color-dark-pink;
     color: black;
 }
 
@@ -485,7 +484,7 @@ p {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: var(--color-background);
+    background: $color-background;
     transition: opacity 0.75s, visibility 0.75s;
 }
 
@@ -499,7 +498,7 @@ p {
     width: 75px;
     height: 75px;
     border: 15px solid #dddddd;
-    border-top-color: var(--color-dark-pink);
+    border-top-color: $color-dark-pink;
     border-radius: 50%;
     animation: loading 0.75s ease infinite;
 }
@@ -521,7 +520,7 @@ p {
 .offcanvas {
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
-    background-color: var(--color-dark-pink);
+    background-color: $color-dark-pink;
 }
 
 .list-offcanvas a{
