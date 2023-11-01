@@ -80,7 +80,7 @@
                     <li class="nav-item d-flex align-items-center">
                         <a class="nav-link text-white" href="{{ url_for('products') }}"> All Product </a>
                         <img src="{{url_for('static', filename='img/navbar-product.svg')}}"
-                            class="img-fluid animated ms-2 " alt="">
+                            class="img-fluid animated ms-2  " alt="">
                     </li>
                     {% endblock %}
 
@@ -88,7 +88,7 @@
                     <li class="nav-item d-flex align-items-center">
                         <a class="nav-link text-white" href="{{ url_for('custome') }}"> Custom Cake </a>
                         <img src="{{url_for('static', filename='img/navbar-custome.svg')}}"
-                            class="img-fluid animated ms-2 " alt="">
+                            class="img-fluid animated ms-2  " alt="">
                     </li>
                     {% endblock %}
 
@@ -96,7 +96,7 @@
                     <li class="nav-item d-flex align-items-center">
                         <a class="nav-link text-white" href="{{ url_for('cart') }}"> Cart </a>
                         <img src="{{url_for('static', filename='img/navbar-cart.svg')}}"
-                            class="img-fluid animated ms-2 " alt="">
+                            class="img-fluid animated ms-2  " alt="">
                     </li>
                     {% endblock %}
 
@@ -114,7 +114,7 @@
                         <a class="nav-link text-white" href="" data-bs-toggle="modal" data-bs-target="#loginModal">
                             Login </a>
                         <img src="{{url_for('static', filename='img/navbar-user.svg')}}"
-                            class="img-fluid animated ms-2 " alt="">
+                            class="img-fluid animated ms-2  " alt="">
                     </li>
                     {% endif %}
                     {% if current_user.role == 'admin' %}
