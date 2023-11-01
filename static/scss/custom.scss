@@ -1,3 +1,13 @@
+// Custom.scss
+// Option A: Include all of Bootstrap
+
+// Include any default variable overrides here (though functions won't be available)
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+// Then add additional custom code here
+
+// Old CSS Style 
 :root {
     --color-dark-pink: #F3808B;
     --subtle-2: #AFB1B6;
@@ -31,7 +41,7 @@ h1 {
 }
 
 h5 {
-    color: #979797 !important;
+    color: #979797 ;
     font-family: Poppins;
     font-weight: 800;
 }
@@ -79,35 +89,35 @@ label {
 }
 
 form .btn {
-    height: 57px !important;
-    border-radius: 12px !important;
-    background: var(--color-dark-pink) !important;
-    border-color: var(--color-dark-pink) !important;
-    padding: 12px 16px !important;
-    font-size: 20px !important;
+    height: 57px ;
+    border-radius: 12px ;
+    background: var(--color-dark-pink) ;
+    border-color: var(--color-dark-pink) ;
+    padding: 12px 16px ;
+    font-size: 20px ;
     color: white;
 }
 
 
 form .btn:hover {
-    background: white !important;
-    border-color: var(--color-dark-pink) !important;
-    color: var(--color-dark-pink) !important;
+    background: white ;
+    border-color: var(--color-dark-pink) ;
+    color: var(--color-dark-pink) ;
 }
 
 .google button,
 .google button:hover {
-    background: var(--gray-04, #E4E7EB) !important;
-    height: 55px !important;
-    font-size: 18px !important;
-    border-color: var(--gray-04, #E4E7EB) !important;
-    color: var(--gray-02, #4B5768) !important;
-    border-radius: 32px !important;
-    text-align: center !important;
+    background: var(--gray-04, #E4E7EB) ;
+    height: 55px ;
+    font-size: 18px ;
+    border-color: var(--gray-04, #E4E7EB) ;
+    color: var(--gray-02, #4B5768) ;
+    border-radius: 32px ;
+    text-align: center ;
 }
 
 .header-text {
-    color: var(--color-dark-pink) !important;
+    color: var(--color-dark-pink) ;
     font-family: 'Pacifico';
     font-size: 30px;
     font-style: normal;
@@ -122,7 +132,7 @@ form .btn:hover {
 }
 
 .text-pink {
-    color: var(--color-dark-pink) !important;
+    color: var(--color-dark-pink) ;
 }
 
 .nav-back-color {
@@ -130,11 +140,11 @@ form .btn:hover {
 }
 
 .bg-second-section {
-    background: #FFF8DE !important;
+    background: #FFF8DE ;
 }
 
 .card-body-second {
-    background-color: #FFF8DE !important;
+    background-color: #FFF8DE ;
 }
 
 
@@ -147,7 +157,7 @@ form .btn:hover {
 }
 
 .card-body-third {
-    background-color: #FAF3F3 !important;
+    background-color: #FAF3F3 ;
 }
 
 .footer-bg {
@@ -156,49 +166,49 @@ form .btn:hover {
 }
 
 .button-custom {
-    border-radius: 10px !important;
-    align-items: center !important;
+    border-radius: 10px ;
+    align-items: center ;
     padding: 10px 15px;
-    border: 1px solid var(--color-dark-pink) !important;
-    color: var(--color-dark-pink) !important;
+    border: 1px solid var(--color-dark-pink) ;
+    color: var(--color-dark-pink) ;
 }
 
 .button-custom:hover {
-    border-radius: 10px !important;
-    border: 1px solid white !important;
-    background-color: #e7969e !important;
-    color: white !important;
+    border-radius: 10px ;
+    border: 1px solid white ;
+    background-color: #e7969e ;
+    color: white ;
 
 }
 
 .pricing-content .button-custom {
     padding: 10px 15px;
-    border: 1px solid white !important;
-    color: white !important;
+    border: 1px solid white ;
+    color: white ;
     background-color: var(--color-dark-pink);
     font-weight: 500;
 }
 
 .pricing-content .button-custom:hover {
-    border: 1px solid white !important;
-    background-color: #f5c9cd !important;
+    border: 1px solid white ;
+    background-color: #f5c9cd ;
 
 }
 
 
 .custom-button-2 {
-    border-radius: 5px !important;
-    align-items: center !important;
-    border: 1px solid var(--color-dark-pink) !important;
-    background-color: var(--color-dark-pink) !important;
-    color: white !important;
+    border-radius: 5px ;
+    align-items: center ;
+    border: 1px solid var(--color-dark-pink) ;
+    background-color: var(--color-dark-pink) ;
+    color: white ;
     padding: 10px 20px;
-    border-radius: 20px !important;
+    border-radius: 20px ;
 }
 
 .custom-button-2:hover {
-    background-color: #e95362 !important;
-    color: #ffffff !important;
+    background-color: #e95362 ;
+    color: #ffffff ;
 
 }
 
@@ -266,7 +276,7 @@ textarea {
 }
 
 .cart-text h2 {
-    text-align: end !important;
+    text-align: end ;
     font-size: 18px;
 }
 
@@ -317,28 +327,28 @@ hr {
 }
 
 .collapse-button {
-    border-radius: 5px !important;
-    align-items: center !important;
-    border: 3px solid var(--color-dark-pink) !important;
-    background-color: white !important;
-    color: var(--color-dark-pink) !important;
+    border-radius: 5px ;
+    align-items: center ;
+    border: 3px solid var(--color-dark-pink) ;
+    background-color: white ;
+    color: var(--color-dark-pink) ;
     padding: 10px 20px;
-    border-radius: 20px !important;
+    border-radius: 20px ;
 
 }
 
 .collapse-button:hover {
-    border-radius: 5px !important;
-    align-items: center !important;
-    border: 3px solid white !important;
-    background-color: var(--color-dark-pink) !important;
-    color: white !important;
+    border-radius: 5px ;
+    align-items: center ;
+    border: 3px solid white ;
+    background-color: var(--color-dark-pink) ;
+    color: white ;
     padding: 10px 20px;
-    border-radius: 20px !important;
+    border-radius: 20px ;
 }
 
 .menu-item {
-    text-align: center !important;
+    text-align: center ;
 }
 
 .custome-text h1 {
@@ -363,8 +373,8 @@ hr {
 }
 
 .details-button {
-    width: 45px !important;
-    height: 45px !important;
+    width: 45px ;
+    height: 45px ;
     color: white;
     border: 2px solid pink;
     border-radius: 15px;
@@ -387,7 +397,7 @@ hr {
 }
 
 p {
-    margin: 0 !important;
+    margin: 0 ;
 }
 
 .details-description h1 {
@@ -523,7 +533,7 @@ p {
 
 .main-page{
     text-underline-offset: 8px;
-    text-decoration: underline !important;
+    text-decoration: underline ;
 }
 
 table, th, td, tr {
@@ -536,3 +546,5 @@ table, th, td, tr {
     font-family: Poppins;
     font-weight: 500;
 }
+
+// End of Old CSS Style 
