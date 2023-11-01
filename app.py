@@ -300,6 +300,17 @@ class Users(db.Model, UserMixin):
     def __repr__(self):
         return '<Email %r>' %self.email 
 
+
+class Cake(db.Model):
+    id_kue = db.Column(db.Integer, primary_key=True)
+    nama = db.Column(db.String(100), nullable=False)
+    foto = db.Column(db.String(30), nullable=False)
+    harga = db.Column(db.Integer, nullable=False)
+    detail = db.Column(db.Text)
+    varian = db.Column(db.String(30), nullable=False)
+    ukuran = db.Column(db.String(30), nullable=False)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
 
