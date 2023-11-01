@@ -2,9 +2,9 @@
     --color-dark-pink: #F3808B;
     --subtle-2: #AFB1B6;
     --color-background: #FAF3F3;
+    --table-1-backgroud : #F69EA5;
+    --table-2-backgroud : #FFF;
 }
-
-
 
 html {
     height: 100%;
@@ -517,9 +517,22 @@ p {
 .list-offcanvas a{
     text-decoration: none ;
     color: black;
+    font-family: Poppins;
+    font-weight:500;
 }
 
 .main-page{
     text-underline-offset: 8px;
     text-decoration: underline !important;
+}
+
+table, th, td, tr {
+    font-family: Poppins;
+    font-weight: 200;
+
+}
+
+.product-page h1, button{
+    font-family: Poppins;
+    font-weight: 500;
 }
