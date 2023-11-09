@@ -2,67 +2,161 @@
 
 {% block canvas_product %}
 <div class="d-flex gap-3 align-items-center mt-4">
-    <img width="43" height="43" src="https://img.icons8.com/ios/50/product--v1.png" alt="product--v1" class="mx-2" />
-    <a class="fs-2 col-5 main-page" href=""> Produk </a>
+  <img width="43" height="43" src="https://img.icons8.com/ios/50/product--v1.png" alt="product--v1" class="mx-2" />
+  <a class="col-5 main-page" href=""> Produk </a>
 </div>
+
+
+
 {% endblock %}
 
 {% block body %}
 
-<div class="container-fluid px-5 table-responsive-sm">
+<!-- Modal Add Product  -->
+<div class="modal modal-lg fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h1 class="mx-4 mt-4"> Update Produk </h1>
 
-    <div class="row product-page">
-        <div class="col d-flex justify-content-start align-items-center p-3 ">
-            <h1> Product </h1>
+        <div class="content p-2 m-4">
+          <form method="POST" action="">
+            <div class="row">
+              <div class="col-6">
+                <!-- Form -->
+                <div class="mb-3">
+                  <!-- 
+                    {{ register_form.first_name.label(class="form-label") }}
+                    {{ register_form.first_name(class="form-control" ,placeholder="Ketik di sini")}}
+                  -->  
+                </div>
+                <div class="mb-3">
+                  <!-- 
+                    {{ register_form.last_name.label(class="form-label") }}
+                    {{ register_form.last_name(class="form-control" ,placeholder="Ketik di sini") }}
+                  -->
+                </div>
+                <div class="mb-3">
+                  <!-- 
+                    {{ register_form.email.label(class="form-label") }}
+                    {{ register_form.email(class="form-control" ,placeholder="Ketik di sini") }}
+                  -->
+                </div>
+                <!-- Form -->
+              </div>
+              <div class="col-6">
+                <!-- Form -->
+                <div class="mb-3">
+                  <!-- 
+                    {{ register_form.phone_number.label(class="form-label") }}
+                    {{ register_form.phone_number(class="form-control" ,placeholder="Ketik di sini")}}
+                -->
+                </div>
+                <div class="mb-3">
+                     <!-- 
+                  {{ register_form.password_hash.label(class="form-label") }}
+                  {{ register_form.password_hash(class="form-control" ,placeholder="Ketik di sini") }}
+                      -->
+                </div>
+                <div class="mb-3">
+                     <!-- 
+                  {{ register_form.confirm_password.label(class="form-label") }}
+                  {{ register_form.confirm_password(class="form-control" ,placeholder="Ketik di sini") }}
+                      -->
+                </div>
+                <!-- Form -->
+              </div>
+            </div>
+            <!-- End Row -->
+            <div class="row mt-3 align-items-center">
+              <div class="col-6">
+              <!--
+                {{ register_form.submit_register(class="btn btn-primary col-12") }}
+              -->
+              </div>
+            </div>
+          </form>
         </div>
-        <div class="col d-flex justify-content-end align-items-center text-end">
-            <button type="button" class="btn btn-primary col-3"> Tambah Produk </button>
-        </div>
+      </div>
     </div>
+  </div>
+</div>
+<!-- Modal Add Product -->
 
-    <table class="table table-bordered table-hover table-striped table-danger text-center border-dark fs-5 p-5">
-        <thead>
-            <tr>
-                <th scope="row" class="text-center"> No </th>
-                <th scope="col"> Nama Kue </th>
-                <th scope="col"> Detail Kue </th>
-                <th scope="col"> Harga Kue </th>
-                <th scope="col"> Varian Kue </th>
-                <th scope="col"> Ukuran Kue </th>
-                <th scope="col"> Activities </th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Ini yang di looping -->
-            <tr>
-                <th scope="row" class="text-center"> id </th>
-                <td> Coklat </td>
-                <td> Panas </td>
-                <td> 300.000</td>
-                <td> Brownies</td>
-                <td> 30cm </td>
-                <td>
-                    <button type="button" class="btn btn-success">Edit</button>
-                    <button type="button" class="btn btn-danger">Hapus</button>
-                </td>
-            </tr>
-            <!-- Ini yang di looping -->
-            <!-- Ini yang di looping -->
-            <tr>
-                <th scope="row" class="text-center"> id </th>
-                <td> Coklat </td>
-                <td> Panas </td>
-                <td> 300.000</td>
-                <td> Brownies</td>
-                <td> 30cm </td>
-                <td>
-                    <button type="button" class="btn btn-success">Edit</button>
-                    <button type="button" class="btn btn-danger">Hapus</button>
-                </td>
-            </tr>
-            <!-- Ini yang di looping -->
-        </tbody>
-    </table>
+<div class="container-fluid px-5">
+  <div class="row product-page">
+    <div class="col d-flex justify-content-start align-items-center p-3 da ">
+      <h1> Product </h1>
+    </div>
+    <div class="col d-flex justify-content-end align-items-center text-end">
+      <button type="button" class="btn btn-primary col-3" data-bs-toggle="modal" data-bs-target="#addProductModal">
+        Tambah Produk </button>
+    </div>
+  </div>
+
+  <table class="table border-black  text-center table-hover custom-table text-white ">
+    <thead>
+      <tr>
+        <th class="p-3" scope="col"> No. </t`h>
+        <th class="p-3" scope="col"> Nama Kue </th>
+        <th class="p-3" scope="col"> Detail Kue</th>
+        <th class="p-3" scope="col"> Harga Kue</th>
+        <th class="p-3" scope="col"> Varian Kue</th>
+        <th class="p-3" scope="col"> Ukuran Kue</th>
+        <th class="p-3" scope="col"> Aksi </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="p-3" scope="row">1</td>
+        <td class="p-3">Mark</td>
+        <td class="p-3">Otto</td>
+        <td class="p-3">@mdo</td>
+        <td class="p-3"> Something </td>
+        <td class="p-3"> Something </td>
+        <td class="p-3">
+          <button type="button" class="btn btn-success">Edit</button>
+          <button type="button" class="btn btn-danger">Hapus</button>
+        </td>
+      </tr>
+      <tr>
+        <td class="p-3" scope="row">2</td>
+        <td class="p-3">Jacob</td>
+        <td class="p-3">Thornton</td>
+        <td class="p-3">@fat</td>
+        <td class="p-3"> Something </td>
+        <td class="p-3"> Something </td>
+        <td class="p-3">
+          <button type="button" class="btn btn-success">Edit</button>
+          <button type="button" class="btn btn-danger">Hapus</button>
+        </td>
+      </tr>
+      <tr>
+        <td class="p-3" scope="row">3</td>
+        <td class="p-3"> Something </td>
+        <td class="p-3"> Something </td>
+        <td class="p-3">@twitter</td>
+        <td class="p-3"> Something </td>
+        <td class="p-3"> Something </td>
+        <td class="p-3">
+          <button type="button" class="btn btn-success">Edit</button>
+          <button type="button" class="btn btn-danger">Hapus</button>
+        </td>
+      </tr>
+      <tr>
+        <td class="p-3" scope="row">3</td>
+        <td class="p-3"> Something </td>
+        <td class="p-3"> Something </td>
+        <td class="p-3">@twitter</td>
+        <td class="p-3"> Something </td>
+        <td class="p-3"> Something </td>
+        <td class="p-3">
+          <button type="button" class="btn btn-success">Edit</button>
+          <button type="button" class="btn btn-danger">Hapus</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 {% endblock %}
