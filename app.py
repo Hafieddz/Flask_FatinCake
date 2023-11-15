@@ -3,11 +3,13 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from sqlalchemy import Nullable, String, false, log
 from sqlalchemy.engine import url
+from sqlalchemy.sql.expression import Update
 from sqlalchemy.sql.functions import user
 from sqlalchemy.util import methods_equivalent
-from wtforms import StringField, SubmitField, PasswordField, ValidationError, BooleanField
+from wtforms import StringField, SubmitField, PasswordField, ValidationError, BooleanField, TextAreaField
+from flask_wtf.file import FileField
 from wtforms.validators import DataRequired, EqualTo, Length
-from flask_migrate import Migrate
+from flask_migrate import Migrate, current
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, login_user, logout_user, LoginManager, login_required, current_user
 
@@ -45,7 +47,74 @@ class LoginForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired()])
     password_hash = PasswordField("Password", validators=[DataRequired()])
     submit_login = SubmitField("Log In")
+
+# User Form (Untuk updata data user)
+class UserForm(FlaskForm):
+    first_name = StringField("Nama Depan", validators=[DataRequired()])
+    last_name = StringField("Nama Belakang")
+    phone_number = StringField("No Telepon", validators=[DataRequired()])
+    profile_pic = FileField("Profile Picture")
+    submit_form = SubmitField("Update Data")
+
+# Update Product Form
+class UpdateForm(FlaskForm):
+    nama = StringField("Nama Kue", validators=[DataRequired()])
+    harga = StringField("Harga Kue", validators=[DataRequired()])
+    varian = StringField("Varian", validators=[DataRequired()])
+    foto = FileField("Foto Produk", validators=[DataRequired()])
+    ukuran = StringField("Ukuran", validators=[DataRequired()])
+    detail = TextAreaField("Detail", validators=[DataRequired()])
+    submit_update = SubmitField("Update")
+
+# Add Product Form
+class AddForm(FlaskForm):
+    nama = StringField("Nama Kue", validators=[DataRequired()])
+    harga = StringField("Harga Kue", validators=[DataRequired()])
+    varian = StringField("Varian", validators=[DataRequired()])
+    foto = FileField("Foto Produk")
+    ukuran = StringField("Ukuran", validators=[DataRequired()])
+    detail = TextAreaField("Detail", validators=[DataRequired()])
+    submit_add = SubmitField("Tambah") 
+
+# Update Product Route
+@app.route('/updateproduct', methods=['POST', 'GET'])
+def update():
+    if current_user.role == 'admin':
+        update = UpdateForm()
+
+        if update.validate_on_submit():
+
+            return redirect(url_for('admin_product'))
+        else:
+            flash(f'Data gagal di update!', "danger")
+            return redirect(url_for('admin_product'))
+            
+
     
+@app.route('/addproduct', methods=['POST'])
+def add_product():
+    if current_user.role == 'admin':
+        add = AddForm()
+        if add.validate_on_submit():
+            foto_kue = ''
+            add = Cake(nama = add.nama.data, 
+                        harga = add.harga.data,
+                        varian = add.varian.data, 
+                        foto = foto_kue,
+                        ukuran = add.ukuran.data,
+                        detail = add.detail.data)
+            # Add User ke database
+            db.session.add(add)
+            db.session.commit()
+            flash(f'Data berhasil di tambahkan!', "success")
+            return redirect(url_for('admin_product'))
+        else:
+            flash(f'Data gagal di tambahkan!', "danger")
+            return redirect(url_for('admin_product'))
+    else:
+        flash(f'Anda tidak bisa masuk di halaman ini!', "danger")
+        return redirect(url_for('index'))
+
 # Login Route 
 @app.route('/login', methods=['POST'])
 def login():
@@ -150,15 +219,18 @@ def admin_dashboard():
 @login_required
 @app.route('/admin/product', methods=['GET', 'POST'])
 def admin_product():
+    # Form 
     register_form = RegisterForm()
     login_form = LoginForm()
-    login = None
-
-    if current_user.is_authenticated:
-        login = 'Yes'
-
+    update_product = UpdateForm()
+    add_product = AddForm()
+    
     if current_user.role == 'admin':
-        return render_template("admin/admin_product.html", login = login, register_form = register_form, login_form = login_form)
+        cake_product = Cake.query.order_by(Cake.id_kue)
+        format_cake = [{'id_kue': cake.id_kue, 'nama': cake.nama, 'foto': cake.foto,
+                         'harga': cake.harga, 'detail': cake.detail[:20], 'varian': cake.varian, 'ukuran': cake.ukuran}
+                        for cake in cake_product]
+        return render_template("admin/admin_product.html", register_form = register_form, login_form = login_form, update_product = update_product, add_product = add_product, cake_product = cake_product, cakes = format_cake)
     else :
         flash("Anda tidak bisa mengakses halaman ini!", "error")
         return redirect(url_for('index'))
@@ -248,6 +320,7 @@ def profile():
     login = 'Yes'
     login_form = LoginForm()
     register_form = RegisterForm()
+    user_form = UserForm()
 
     email = current_user.email
     number = current_user.no_telp
@@ -255,8 +328,10 @@ def profile():
     last = current_user.nama_belakang
     role = current_user.role
 
-    if current_user.role == '':
-        role = 'User'
+    user_to_update = Users.query(id)
+
+    if request.method == 'POST':
+        user_to_update.foto = request.files['profile_pic']
         
     return render_template('profile.html', register_form = register_form, login_form = login_form, email = email, number = number, first= first, last = last, role = role, login = login)
 
@@ -304,9 +379,9 @@ class Users(db.Model, UserMixin):
 class Cake(db.Model):
     id_kue = db.Column(db.Integer, primary_key=True)
     nama = db.Column(db.String(100), nullable=False)
-    foto = db.Column(db.String(30), nullable=False)
+    foto = db.Column(db.Text, nullable=False)
     harga = db.Column(db.Integer, nullable=False)
-    detail = db.Column(db.Text)
+    detail = db.Column(db.Text, nullable=False)
     varian = db.Column(db.String(30), nullable=False)
     ukuran = db.Column(db.String(30), nullable=False)
 
