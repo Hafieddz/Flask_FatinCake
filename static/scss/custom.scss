@@ -8,6 +8,7 @@
 $custom-theme-colors : ("pinky" : #F69EA5,
 );
 
+
 $theme-colors : map-merge($custom-theme-colors, $theme-colors);
 
 // Include any default variable overrides here (though functions won't be available)
@@ -22,8 +23,6 @@ $table-2-backgroud : #FFF;
 $text-color-light-grey : #979797;
 
 // sass --watch ./scss/custom.scss ./css/custom.css
-
-// Old CSS Style 
 
 html {
     height: 100%;
@@ -139,7 +138,7 @@ form {
 
 }
 
-.header-text {
+.header-text, .header-text:hover {
     color: $color-dark-pink ;
     font-family: 'Pacifico';
     font-size: 30px;
@@ -153,7 +152,7 @@ form {
     text-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.text-pink {
+.text-pink, .text-pink:hover {
     color: $color-dark-pink ;
 }
 
@@ -287,14 +286,6 @@ h6 {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-
-}
-
-svg_custome {
-    width: 969.352px;
-    height: 591.005px;
-    transform: rotate(9.326deg);
-    flex-shrink: 0;
 
 }
 
@@ -481,7 +472,7 @@ p {
 .details-content h1 {
     font-family: 'Poppins', sans-serif;
     font-size: 30px;
-    font-weight: 100;
+    font-weight: 300;
     color: $subtle-2;
 }
 

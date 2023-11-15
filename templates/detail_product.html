@@ -71,9 +71,9 @@
                 <h3 class="text-start text-secondary pt-3" > Varian Kue </h3>
                 <h3 class="text-start text-pink" > Brownies </h3>
             </div>
+            {% if login %}
             <div class="content mt-3">
                 <h2 class="text-start" style="font-size: 18px;"> Ketikkan ucapan selebrasimu </h2>
-
                 <div class="mb-3 col-xl-7">
                     <textarea class="form-control " id="exampleFormControlTextarea1" rows="3" placeholder="Ketik di sini"
                         style="border-radius: 15px; padding: 10px;"></textarea>
@@ -83,7 +83,7 @@
                 <button class="btn details-button me-2">
                     <i class="fa-solid fa-minus fa-xl" style="color: #000000;"> </i>
                 </button>
-                <p class=" "> 100 </p>
+                <p class=" "> 1 </p>
                 <button class="btn details-button ms-2">
                     <i class="fa-solid fa-plus fa-xl" style="color: #000000;"> </i>
                 </button>
@@ -91,6 +91,28 @@
             <button type="button" class="btn add-cart-button col-xl-7 mb-3" data-bs-toggle="modal"
                 data-bs-target="#add_cart"> Tambah ke keranjang 
             </button>
+            {% else %}
+            <!-- User Belum Login -->
+            <div class="content mt-3">
+                <h2 class="text-start" style="font-size: 18px;"> Ketikkan ucapan selebrasimu </h2>
+                <div class="mb-3 col-xl-7">
+                    <textarea disabled class="form-control " id="exampleFormControlTextarea1" rows="3" placeholder="Ketik di sini"
+                        style="border-radius: 15px; padding: 10px;"></textarea>
+                </div>
+            </div>
+            <div class="content justify-content-center align-items-center d-flex col-xl-7 mb-3">
+                <button class="btn details-button me-2" disabled>
+                    <i class="fa-solid fa-minus fa-xl" style="color: #000000;"> </i>
+                </button>
+                <p class=" "> 0 </p>
+                <button class="btn details-button ms-2" disabled>
+                    <i class="fa-solid fa-plus fa-xl" style="color: #000000;"> </i>
+                </button>
+            </div>
+            <button type="button" class="btn add-cart-button col-xl-7 mb-3" data-bs-toggle="modal"
+            data-bs-target="#add_cart" disabled> Tambah ke keranjang 
+            </button>
+            {% endif %}
         </div>
     </div>
 </div>
