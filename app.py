@@ -122,6 +122,7 @@ def delete(id_kue):
         flash(f'Anda tidak bisa masuk di halaman ini!', "danger")
         return redirect(url_for('index'))
 
+# Tambah Produk
 @app.route('/addproduct', methods=['POST'])
 def add_product():
     if current_user.role == 'admin':
@@ -358,11 +359,6 @@ def profile():
     first = current_user.nama_depan
     last = current_user.nama_belakang
     role = current_user.role
-
-    user_to_update = Users.query(id)
-
-    if request.method == 'POST':
-        user_to_update.foto = request.files['profile_pic']
         
     return render_template('profile.html', register_form = register_form, login_form = login_form, email = email, number = number, first= first, last = last, role = role, login = login)
 
