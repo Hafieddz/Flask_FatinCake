@@ -97,7 +97,7 @@
       <!-- Loop Sini -->
       {% for cake_product in cakes %}
       <tr>
-        <td class="p-3" scope="row"> {{ cake_product.id_kue }} </td>
+        <td class="p-3" scope="row"> {{ loop.index }} </td>
         <td class="p-3">{{ cake_product.nama }} </td>
         <td class="p-3">{{ cake_product.detail }} </td>
         <td class="p-3">{{ cake_product.harga }} </td>
@@ -121,7 +121,7 @@
               <h1 class="mx-4 mt-4"> Update Produk </h1>
 
               <div class="content p-2 m-4">
-                <form method="POST" action="{{ url_for('update') }}">
+                <form method="POST" action="{{ url_for('update', id_kue = cake_product.id_kue) }}">
                   <div class="row">
                     <div class="col-6">
                       <!-- Form -->

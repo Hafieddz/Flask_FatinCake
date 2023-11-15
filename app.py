@@ -1,3 +1,4 @@
+from functools import reduce
 from flask import Flask, redirect, render_template, request, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
@@ -77,25 +78,49 @@ class AddForm(FlaskForm):
     submit_add = SubmitField("Tambah") 
 
 # Update Product Route
-@app.route('/updateproduct/', methods=['POST', 'GET'])
-def update():
+@app.route('/update_product/<int:id_kue>', methods=['POST', 'GET'])
+def update(id_kue):
     if current_user.role == 'admin':
-        update = UpdateForm()
-        return (f'Id kue =', 'Cake.id_kue')
+        update_form = UpdateForm()
+        product_to_update = Cake.query.get_or_404(id_kue)
+        if request.method == 'POST':
+            product_to_update.nama = request.form['nama'] 
+            product_to_update.harga = request.form['harga'] 
+            product_to_update.varian = request.form['varian'] 
+            product_to_update.ukuran = request.form['ukuran'] 
+            product_to_update.detail = request.form['detail'] 
+            product_to_update.foto = 'contoh'
+
+            try:
+                db.session.commit()
+                flash(f'Produk berhasil di update!', "success")
+                return redirect(url_for('admin_product'))
+            
+            except:
+                flash(f'Data gagal di update!', "danger")
+                return redirect(url_for('admin_product'))
+        else:
+            return redirect(url_for('admin_product'))
+        
+
     
 # Delete Product Route
 @app.route('/delete_product/<int:id_kue>', methods=['POST', 'GET'])
 def delete(id_kue):
-    product_to_delete = Cake.query.get_or_404(id_kue)
-    try :
-        db.session.delete(product_to_delete)
-        db.session.commit()
-        flash(f'Produk berhasil di hapus!', "success")
-        return redirect(url_for('admin_product'))
+    if current_user.role == 'admin':
+        product_to_delete = Cake.query.get_or_404(id_kue)
+        try :
+            db.session.delete(product_to_delete)
+            db.session.commit()
+            flash(f'Produk berhasil di hapus!', "success")
+            return redirect(url_for('admin_product'))
     
-    except:
-        flash(f'Data gagal di hapus!', "danger")
-        return redirect(url_for('admin_product'))
+        except:
+            flash(f'Data gagal di hapus!', "danger")
+            return redirect(url_for('admin_product'))
+    else :
+        flash(f'Anda tidak bisa masuk di halaman ini!', "danger")
+        return redirect(url_for('index'))
 
 @app.route('/addproduct', methods=['POST'])
 def add_product():
