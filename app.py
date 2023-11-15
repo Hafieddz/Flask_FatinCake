@@ -61,7 +61,7 @@ class UpdateForm(FlaskForm):
     nama = StringField("Nama Kue", validators=[DataRequired()])
     harga = StringField("Harga Kue", validators=[DataRequired()])
     varian = StringField("Varian", validators=[DataRequired()])
-    foto = FileField("Foto Produk", validators=[DataRequired()])
+    foto = FileField("Foto Produk")
     ukuran = StringField("Ukuran", validators=[DataRequired()])
     detail = TextAreaField("Detail", validators=[DataRequired()])
     submit_update = SubmitField("Update")
@@ -77,20 +77,26 @@ class AddForm(FlaskForm):
     submit_add = SubmitField("Tambah") 
 
 # Update Product Route
-@app.route('/updateproduct', methods=['POST', 'GET'])
+@app.route('/updateproduct/', methods=['POST', 'GET'])
 def update():
     if current_user.role == 'admin':
         update = UpdateForm()
-
-        if update.validate_on_submit():
-
-            return redirect(url_for('admin_product'))
-        else:
-            flash(f'Data gagal di update!', "danger")
-            return redirect(url_for('admin_product'))
-            
-
+        return (f'Id kue =', 'Cake.id_kue')
     
+# Delete Product Route
+@app.route('/delete_product/<int:id_kue>', methods=['POST', 'GET'])
+def delete(id_kue):
+    product_to_delete = Cake.query.get_or_404(id_kue)
+    try :
+        db.session.delete(product_to_delete)
+        db.session.commit()
+        flash(f'Produk berhasil di hapus!', "success")
+        return redirect(url_for('admin_product'))
+    
+    except:
+        flash(f'Data gagal di hapus!', "danger")
+        return redirect(url_for('admin_product'))
+
 @app.route('/addproduct', methods=['POST'])
 def add_product():
     if current_user.role == 'admin':

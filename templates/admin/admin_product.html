@@ -106,7 +106,9 @@
         <td class="p-3">
           <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#updateProductModal{{ cake_product.id_kue }}">
             Edit </button>
-          <button type="button" class="btn btn-danger">Hapus</button>
+          <a href="{{ url_for('delete', id_kue = cake_product.id_kue) }}">
+            <button type="button" class="btn btn-danger">Hapus</button>
+          </a>
         </td>
       </tr>
 
@@ -119,7 +121,7 @@
               <h1 class="mx-4 mt-4"> Update Produk </h1>
 
               <div class="content p-2 m-4">
-                <form method="POST" action="">
+                <form method="POST" action="{{ url_for('update') }}">
                   <div class="row">
                     <div class="col-6">
                       <!-- Form -->
