@@ -12018,6 +12018,22 @@ label {
   font-size: 15px;
 }
 
+.modal-button {
+  height: 57px !important;
+  border-radius: 12px !important;
+  background: #F3808B !important;
+  border-color: #F3808B !important;
+  padding: 12px 16px !important;
+  font-size: 20px !important;
+  color: white !important;
+}
+
+.modal-button:hover {
+  background: white !important;
+  border-color: #F3808B !important;
+  color: #F3808B !important;
+}
+
 form .btn {
   height: 57px;
   border-radius: 12px;
@@ -12027,22 +12043,15 @@ form .btn {
   font-size: 20px;
   color: white;
 }
-
 form .btn:hover {
   background: white;
   border-color: #F3808B;
   color: #F3808B;
 }
-
-.google button,
-.google button:hover {
-  background: var(--gray-04, #E4E7EB);
-  height: 55px;
-  font-size: 18px;
-  border-color: var(--gray-04, #E4E7EB);
-  color: var(--gray-02, #4B5768);
-  border-radius: 32px;
-  text-align: center;
+form .btn:active {
+  background: white;
+  border-color: #F3808B;
+  color: #F3808B;
 }
 
 .header-text {
@@ -12073,11 +12082,10 @@ form .btn:hover {
 .card-body-second {
   background-color: #FFF8DE;
 }
-.card-body-second img {
-  min-height: 300px;
-  min-width: 250px;
-  max-height: fit-content;
-  max-width: fit-content;
+.card-body-second .card-img-top {
+  width: 100%;
+  height: 22vw;
+  object-fit: cover;
 }
 
 .card {
@@ -12091,13 +12099,19 @@ form .btn:hover {
 .card-body-third {
   background-color: #FAF3F3;
 }
-.card-body-third img {
-  min-height: 300px;
-  min-width: 250px;
-  max-height: fit-content;
-  max-width: fit-content;
+.card-body-third .card-img-top {
+  width: 100%;
+  height: 22vw;
+  object-fit: cover;
 }
 
+@media only screen and (max-width: 810px) {
+  .card-img-top {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+}
 .footer-bg {
   background: #2C1800;
   color: white;
@@ -12153,7 +12167,6 @@ h2, .h2 {
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  text-align: center;
 }
 
 h4, .h4 {
@@ -12434,6 +12447,9 @@ p {
 }
 .profile-img {
   border-radius: 50%;
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
 }
 
 .offcanvas {
