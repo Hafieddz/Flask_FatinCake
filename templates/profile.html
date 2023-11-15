@@ -19,17 +19,17 @@
     <div class="row gap-5 my-4 user-profile justify-content-center">
         <div class="col-10 col-xl-4 ">
             <div class="profile-content shadow-lg rounded p-5 ">
-                <div class="col-xl-12 col-12 d-flex justify-content-center mb-3 ">
+                <div class="col-xl-12 col-12 d-flex justify-content-md-center mb-3 justify-content-start ">
                     <img src="{{url_for('static', filename='img/kanan_profile.jpeg')}}" class="img-fluid animated ms-1 profile-img" alt="">
                 </div>
-                <div class="content">
+                <div class="content px-md-5 text-sm-start text-md-center text-xl-start">
                     <h1 class="fs-3"> {{ first }} {{ last }}</h1>
         
-                    <h2 class="fs-5 text-start"> {{ email }} </h2>
+                    <h2 class="fs-5"> {{ email }} </h2>
     
-                    <h2 class="fs-5  text-start"> {{ number }} </h2>
+                    <h2 class="fs-5"> {{ number }} </h2>
 
-                    <h2 class="fs-5  text-start"> (Role) = {{ role }}  </h2>
+                    <h2 class="fs-5"> (Role) = {{ role }}  </h2>
         
                     <a href="{{ url_for('logout') }}">
                         <button class="btn profile-btn mt-3 col-xl-5 col-5 col-sm-4 col-md-4 text-center"  >
