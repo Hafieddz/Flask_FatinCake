@@ -13,68 +13,55 @@
 {% block body %}
 
 <!-- Modal Add Product  -->
-<div class="modal modal-lg fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductLabel" aria-hidden="true">
+<div class="modal modal-lg fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-body">
-        <h1 class="mx-4 mt-4"> Update Produk </h1>
+        <h1 class="mx-4 mt-4"> Tambah produk </h1>
 
         <div class="content p-2 m-4">
-          <form method="POST" action="">
+          <form method="POST" action="{{ url_for('add_product') }}">
             <div class="row">
               <div class="col-6">
                 <!-- Form -->
+                {{ add_product.hidden_tag() }}
                 <div class="mb-3">
-                  <!-- 
-                    {{ register_form.first_name.label(class="form-label") }}
-                    {{ register_form.first_name(class="form-control" ,placeholder="Ketik di sini")}}
-                  -->  
+                  {{ add_product.nama.label(class="form-label") }}
+                  {{ add_product.nama(class="form-control" ,placeholder="Ketik di sini")}}
                 </div>
                 <div class="mb-3">
-                  <!-- 
-                    {{ register_form.last_name.label(class="form-label") }}
-                    {{ register_form.last_name(class="form-control" ,placeholder="Ketik di sini") }}
-                  -->
+                  {{ add_product.harga.label(class="form-label") }}
+                  {{ add_product.harga(class="form-control" ,placeholder="Ketik di sini")}}
                 </div>
                 <div class="mb-3">
-                  <!-- 
-                    {{ register_form.email.label(class="form-label") }}
-                    {{ register_form.email(class="form-control" ,placeholder="Ketik di sini") }}
-                  -->
+                  {{ add_product.varian.label(class="form-label") }}
+                  {{ add_product.varian(class="form-control" ,placeholder="Ketik di sini")}}
+                </div>
+                <div class="mb-3">
+                  {{ add_product.foto.label(class="form-label") }}
+                  {{ add_product.foto(class="form-control", type="file" ,placeholder="Ketik di sini")}}
                 </div>
                 <!-- Form -->
               </div>
               <div class="col-6">
                 <!-- Form -->
                 <div class="mb-3">
-                  <!-- 
-                    {{ register_form.phone_number.label(class="form-label") }}
-                    {{ register_form.phone_number(class="form-control" ,placeholder="Ketik di sini")}}
-                -->
+                  {{ add_product.ukuran.label(class="form-label") }}
+                  {{ add_product.ukuran(class="form-control" ,placeholder="Ketik di sini")}}
                 </div>
                 <div class="mb-3">
-                     <!-- 
-                  {{ register_form.password_hash.label(class="form-label") }}
-                  {{ register_form.password_hash(class="form-control" ,placeholder="Ketik di sini") }}
-                      -->
+                  {{ add_product.detail.label(class="form-label") }}
+                  {{ add_product.detail(class="form-control", id="exampleFormControlTextarea1", rows="5",
+                  placeholder="Ketik di sini", style="border-radius: 15px; padding: 10px;")}}
                 </div>
-                <div class="mb-3">
-                     <!-- 
-                  {{ register_form.confirm_password.label(class="form-label") }}
-                  {{ register_form.confirm_password(class="form-control" ,placeholder="Ketik di sini") }}
-                      -->
+                <div class="mb-3 ">
+                  {{ add_product.submit_add(class="btn col-12") }}
                 </div>
                 <!-- Form -->
               </div>
             </div>
             <!-- End Row -->
-            <div class="row mt-3 align-items-center">
-              <div class="col-6">
-              <!--
-                {{ register_form.submit_register(class="btn btn-primary col-12") }}
-              -->
-              </div>
-            </div>
           </form>
         </div>
       </div>
@@ -89,7 +76,7 @@
       <h1> Product </h1>
     </div>
     <div class="col d-flex justify-content-end align-items-center text-end">
-      <button type="button" class="btn btn-primary col-3" data-bs-toggle="modal" data-bs-target="#addProductModal">
+      <button type="button" class="btn btn-primary col-3 " data-bs-toggle="modal" data-bs-target="#addProductModal">
         Tambah Produk </button>
     </div>
   </div>
@@ -107,54 +94,79 @@
       </tr>
     </thead>
     <tbody>
+      <!-- Loop Sini -->
+      {% for cake_product in cakes %}
       <tr>
-        <td class="p-3" scope="row">1</td>
-        <td class="p-3">Mark</td>
-        <td class="p-3">Otto</td>
-        <td class="p-3">@mdo</td>
-        <td class="p-3"> Something </td>
-        <td class="p-3"> Something </td>
+        <td class="p-3" scope="row"> {{ cake_product.id_kue }} </td>
+        <td class="p-3">{{ cake_product.nama }} </td>
+        <td class="p-3">{{ cake_product.detail }} </td>
+        <td class="p-3">{{ cake_product.harga }} </td>
+        <td class="p-3">{{ cake_product.varian }} </td>
+        <td class="p-3">{{ cake_product.ukuran }} </td>
         <td class="p-3">
-          <button type="button" class="btn btn-success">Edit</button>
+          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#updateProductModal{{ cake_product.id_kue }}">
+            Edit </button>
           <button type="button" class="btn btn-danger">Hapus</button>
         </td>
       </tr>
-      <tr>
-        <td class="p-3" scope="row">2</td>
-        <td class="p-3">Jacob</td>
-        <td class="p-3">Thornton</td>
-        <td class="p-3">@fat</td>
-        <td class="p-3"> Something </td>
-        <td class="p-3"> Something </td>
-        <td class="p-3">
-          <button type="button" class="btn btn-success">Edit</button>
-          <button type="button" class="btn btn-danger">Hapus</button>
-        </td>
-      </tr>
-      <tr>
-        <td class="p-3" scope="row">3</td>
-        <td class="p-3"> Something </td>
-        <td class="p-3"> Something </td>
-        <td class="p-3">@twitter</td>
-        <td class="p-3"> Something </td>
-        <td class="p-3"> Something </td>
-        <td class="p-3">
-          <button type="button" class="btn btn-success">Edit</button>
-          <button type="button" class="btn btn-danger">Hapus</button>
-        </td>
-      </tr>
-      <tr>
-        <td class="p-3" scope="row">3</td>
-        <td class="p-3"> Something </td>
-        <td class="p-3"> Something </td>
-        <td class="p-3">@twitter</td>
-        <td class="p-3"> Something </td>
-        <td class="p-3"> Something </td>
-        <td class="p-3">
-          <button type="button" class="btn btn-success">Edit</button>
-          <button type="button" class="btn btn-danger">Hapus</button>
-        </td>
-      </tr>
+
+      <!-- Modal Update Product  -->
+      <div class="modal modal-lg fade" id="updateProductModal{{ cake_product.id_kue }}" tabindex="-1" aria-labelledby="updateProductLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-body">
+              <h1 class="mx-4 mt-4"> Update Produk </h1>
+
+              <div class="content p-2 m-4">
+                <form method="POST" action="">
+                  <div class="row">
+                    <div class="col-6">
+                      <!-- Form -->
+                      {{ update_product.hidden_tag() }}
+                      <div class="mb-3">
+                        {{ update_product.nama.label(class="form-label") }}
+                        {{ update_product.nama(class="form-control" , value = cake_product.nama )}}
+                      </div>
+                      <div class="mb-3">
+                        {{ update_product.harga.label(class="form-label") }}
+                        {{ update_product.harga(class="form-control" , value = cake_product.harga)}}
+                      </div>
+                      <div class="mb-3">
+                        {{ update_product.varian.label(class="form-label") }}
+                        {{ update_product.varian(class="form-control" , value = cake_product.varian)}}
+                      </div>
+                      <div class="mb-3">
+                        {{ update_product.foto.label(class="form-label") }}
+                        {{ update_product.foto(class="form-control", type="file" , value = cake_product.foto)}}
+                      </div>
+                      <!-- Form -->
+                    </div>
+                    <div class="col-6">
+                      <!-- Form -->
+                      <div class="mb-3">
+                        {{ update_product.ukuran.label(class="form-label") }}
+                        {{ update_product.ukuran(class="form-control" , value = cake_product.ukuran )}}
+                      </div>
+                      <div class="mb-3">
+                        {{ update_product.detail.label(class="form-label") }}                        
+                        {{ update_product.detail(class="form-control", id="exampleFormControlTextarea1", rows="5", placeholder = cake_product.detail , style="border-radius: 15px; padding: 10px;")}}
+                      </div>
+                      <div class="mb-3 ">
+                        {{ update_product.submit_update(class="btn col-12 modal-button") }}
+                      </div>
+                      <!-- Form -->
+                    </div>
+                  </div>
+                  <!-- End Row -->
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal Update Product -->
+      {% endfor %}
     </tbody>
   </table>
 </div>
