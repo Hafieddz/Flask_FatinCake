@@ -294,8 +294,6 @@ def products():
 
     if current_user.is_authenticated:
         login = 'Yes'
-    else:
-         flash(f"Akun Belum Login, Silahkan Login Terlebih Dahulu!", "error")
 
     return render_template("all_products.html", login = login, register_form = register_form, login_form = login_form)
 # Base HTML
@@ -313,10 +311,8 @@ def custome():
 
     if current_user.is_authenticated:
         login = 'Yes'
-        return render_template("custome_cake.html", login = login, register_form = register_form, login_form = login_form)
-    else:
-        flash(f"Akun Belum Login, Silahkan Login Terlebih Dahulu!", "danger")
-        return render_template("custome_cake.html", register_form = register_form, login_form = login_form)
+
+    return render_template("custome_cake.html", register_form = register_form, login_form = login_form)
         
 
 # Cart Page

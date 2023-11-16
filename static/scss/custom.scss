@@ -417,10 +417,30 @@ hr {
     width: 45px;
     height: 45px;
     color: white;
+    background-color: white;
     border: 2px solid pink;
     border-radius: 15px;
 
 }
+
+
+.details-button:hover {
+    color: white ;
+    opacity: 0.5 ;
+    border: 2px solid pink ;
+    border-radius: 15px;
+
+}
+
+.details-button:active {
+    color: white ;
+    opacity: 0.5 ;
+    border: 2px solid pink ;
+    border-radius: 15px;
+
+}
+
+
 
 .add-cart-button {
     color: white;
