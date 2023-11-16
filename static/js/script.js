@@ -1,4 +1,3 @@
-
 // Loader 
 
 window.addEventListener("load", () => {
@@ -33,12 +32,28 @@ function addCart() {
 function minCart() {
   if(value > 0) {
     value--;
-    document.querySelector('.cart-value span').textContent = value
+    document.querySelector('.cart-value span').textContent = value;
   } else {
     // Nothing happen
   }
 }
 
 // End of Cart
+
+// Detail dan Penyimpanan
+
+let detail = document.querySelector('.detail');
+detail.addEventListener('click', details);
+
+let penyimpanan = document.querySelector('.penyimpanan');
+penyimpanan.addEventListener('click', penyimpanan_);
+
+function penyimpanan_() {
+  document.querySelector('.details span').textContent = 'Ini adalah bagian penyimpanan!';
+}
   
-  
+function details() {
+  document.querySelector('.details span').textContent = 'Ini adalah bagian detail';
+}
+
+// End of Detail dan Penyimpanan
