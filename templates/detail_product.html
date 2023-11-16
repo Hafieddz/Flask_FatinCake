@@ -102,27 +102,28 @@
             <div class="content mt-3">
                 <h2 class="text-start" style="font-size: 18px;"> Ketikkan ucapan selebrasimu </h2>
                 <div class="mb-3 col-xl-7">
-                    <textarea disabled class="form-control " id="exampleFormControlTextarea1" rows="3" placeholder="Ketik di sini"
+                    <textarea class="form-control " id="exampleFormControlTextarea1" rows="3" placeholder="Ketik di sini"
                         style="border-radius: 15px; padding: 10px;"></textarea>
                 </div>
             </div>
             <div class="content justify-content-center align-items-center d-flex col-xl-7 mb-3">
-                <button class="btn details-button me-2" disabled>
+                <button class="details-button me-2 decrease-cart" type="button">
                     <i class="fa-solid fa-minus fa-xl" style="color: #000000;"> </i>
                 </button>
-                <p class=" "> 0 </p>
-                <button class="btn details-button ms-2" disabled>
+                <p class="cart-value"> 
+                    <span> 0 </span>    
+                </p>
+                <button class="details-button ms-2 increase-cart" type="button">
                     <i class="fa-solid fa-plus fa-xl" style="color: #000000;"> </i>
                 </button>
             </div>
-            <button type="button" class="btn add-cart-button col-xl-7 mb-3" data-bs-toggle="modal"
-            data-bs-target="#add_cart" disabled> Tambah ke keranjang 
-            </button>
+            <a href="{{ url_for('details') }}">
+                <button type="button" class="btn add-cart-button col-xl-7 mb-3" > Tambah ke keranjang </button>
+            </a>
             {% endif %}
         </div>
     </div>
 </div>
-
 
 <!-- Modal -->
 
@@ -135,11 +136,9 @@
                 </div>
                 <div class="content text-center success-pop p-4">
                     <h1> Produk berhasil ditambahkan ke keranjang</h1>
-
-                    <button type="button" class="btn add-cart-button col-xl-4 col-5 mt-3 text-center"> OK 
-                </button>
-
-                    
+<!-- 
+    <button type="button" class="btn add-cart-button col-xl-4 col-5 mt-3 text-center"> OK </button>  
+-->
                 </div>
             </div>
         </div>

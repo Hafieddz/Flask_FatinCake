@@ -452,9 +452,14 @@ hr {
 
 .add-cart-button:hover {
     color: white;
-    border-radius: 15px;
-    background: var(--primary-color-dark-pink, #ffb1b9);
+    border-color: white;
+    background: var(--primary-color-dark-pink, #ffb1b9) ;
+}
 
+.add-cart-button:active {
+    color: white !important;
+    opacity: 0.50 !important;
+    background: var(--primary-color-dark-pink, #ffb1b9) !important;
 }
 
 p {
