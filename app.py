@@ -101,6 +101,9 @@ def update(id_kue):
                 return redirect(url_for('admin_product'))
         else:
             return redirect(url_for('admin_product'))
+    else:
+        flash(f'Anda tidak bisa masuk ke halaman ini!', "error")
+        return redirect(url_for('index'))
         
 
     
