@@ -18,7 +18,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
 
     <!-- Sweet Alert -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css" rel="stylesheet">
 
     <title> {% block tittle %} {% endblock %} </title>
 </head>
@@ -184,9 +186,8 @@
                             <!-- End Row -->
                             <div class="row mt-3 align-items-center">
                                 <div class="col-12 px-5 text-center">
-                                    {{ register_form.submit_register(class="btn btn-primary col-6") }}
+                                    {{ register_form.submit_register(class="modal-button col-6") }}
                                 </div>
-
                             </div>
                             <div class="container-fluid mt-4 d-flex text-center justify-content-center">
                                 <h2> Sudah punya akun? </h2>
@@ -223,7 +224,7 @@
                                 {{ login_form.password_hash.label(class="form-label") }}
                                 {{ login_form.password_hash(class="form-control" , placeholder="Ketik di sini" ) }}
                             </div>
-                            {{ login_form.submit_login(class="btn btn-primary col-12") }}
+                            {{ login_form.submit_login(class="modal-button col-12") }}
                         </form>
 
                         <!-- Form -->
@@ -300,7 +301,7 @@
 
     <!-- Footer -->
 
-
+    <!-- Bootstrap-->
     <script src="{{ url_for('static', filename='node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <!-- Java Script Links -->
     <script src="{{ url_for('static', filename='js/script.js') }}" type="module"> </script>

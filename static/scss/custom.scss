@@ -114,28 +114,49 @@ label {
 }
 
 form {
+    .modal-button {
+        height: 57px;
+        border-radius: 12px;
+        background: $color-dark-pink ;
+        border: 1px solid $color-dark-pink;
+        padding: 12px 16px;
+        font-size: 20px;
+        color: white;
+        transition: 0.25s ease-in-out;
+    }
+
+    .modal-button:hover {
+        background: white;
+        color: $color-dark-pink;
+        transition: 0.25s ease-in-out ;
+    }
+
+    .modal-button:active {
+        background: white;
+        color: $color-dark-pink;
+    }
+
     .btn {
         height: 57px;
         border-radius: 12px;
         background: $color-dark-pink ;
-        border-color: $color-dark-pink ;
+        border: 1px solid $color-dark-pink;
         padding: 12px 16px;
         font-size: 20px;
         color: white;
+        transition: 0.25s ease-in-out;
     }
 
     .btn:hover {
         background: white;
-        border-color: $color-dark-pink ;
         color: $color-dark-pink;
+        transition: 0.25s ease-in-out ;
     }
 
     .btn:active {
         background: white;
-        border-color: $color-dark-pink ;
         color: $color-dark-pink;
     }
-
 }
 
 .header-text, .header-text:hover {
@@ -211,15 +232,16 @@ form {
     border-radius: 10px;
     align-items: center;
     padding: 10px 15px;
+    background-color: white;
     border: 1px solid $color-dark-pink ;
     color: $color-dark-pink ;
+    transition: 0.25s ease-in-out ;
 }
 
 .button-custom:hover {
-    border-radius: 10px;
-    border: 1px solid white;
-    background-color: #e7969e;
+    background-color: $color-dark-pink;
     color: white;
+    transition: 0.25s ease-in-out ;
 
 }
 
@@ -229,11 +251,13 @@ form {
     color: white;
     background-color: $color-dark-pink;
     font-weight: 500;
+    transition: 0.2s;
 }
 
 .pricing-content .button-custom:hover {
     border: 1px solid white;
     background-color: #f5c9cd;
+    transition: 0.25s ease-in-out ;
 
 }
 
@@ -246,11 +270,13 @@ form {
     color: white;
     padding: 10px 20px;
     border-radius: 20px;
+    transition: 0.2s;
 }
 
 .custom-button-2:hover {
     background-color: #e95362;
     color: #ffffff;
+    transition: 0.25s ease-in-out ;
 
 }
 
@@ -375,6 +401,7 @@ hr {
     color: $color-dark-pink ;
     padding: 10px 20px;
     border-radius: 20px;
+    transition: 0.2s;
 
 }
 
@@ -386,6 +413,7 @@ hr {
     color: white;
     padding: 10px 20px;
     border-radius: 20px;
+    transition: 0.25s ease-in-out ;
 }
 
 .menu-item {
@@ -420,6 +448,7 @@ hr {
     background-color: white;
     border: 2px solid pink;
     border-radius: 15px;
+    transition: 0.25s ease-in-out ;
 
 }
 
@@ -428,6 +457,7 @@ hr {
     color: white ;
     opacity: 0.5 ;
     border: 2px solid pink ;
+    transition: 0.25s ease-in-out ;
     border-radius: 15px;
 
 }
