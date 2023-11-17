@@ -21,7 +21,6 @@ btn_plus.addEventListener('click', addCart);
 let btn_minus = document.querySelector('.decrease-cart');
 btn_minus.addEventListener('click', minCart);
 
-// variable outside all functions, retains value until page is reloaded / left
 let value = 0;
 
 function addCart() {
@@ -57,3 +56,13 @@ function details() {
 }
 
 // End of Detail dan Penyimpanan
+
+// User not login and pressing add to cart button 
+
+$('#add-to-cart').click(function(){
+  Swal.fire({
+    title: "Belum Login",
+    text: "Anda harus login terlebih dahulu!",
+    icon: "error"
+  });
+})

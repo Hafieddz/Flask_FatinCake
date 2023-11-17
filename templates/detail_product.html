@@ -19,8 +19,7 @@
         </li>
         <li class="nav-item d-flex align-items-center">
             <a class="nav-link text-white" href="{{ url_for('cart') }}"> Cart </a>
-            <img src="{{url_for('static', filename='img/navbar-cart.svg')}}"
-                class="img-fluid animated ms-2 " alt="">
+            <img src="{{url_for('static', filename='img/navbar-cart.svg')}}" class="img-fluid animated ms-2 " alt="">
         </li>
         <!-- Muncul Ketika Sudah Login -->
         {% if email %}
@@ -56,7 +55,7 @@
                         <h2> Penyimpanan </h2>
                     </div>
                 </div>
-                <h3 class="details"> 
+                <h3 class="details">
                     <span>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet non enim deserunt eius fugiat
                         reprehenderit quam corporis aut! Repellendus, ipsum.
@@ -69,57 +68,55 @@
             <div class="content details-content">
                 <h1 class="text-start"> Fatin Cake </h1>
                 <h2 class="text-start pt-3"> Korean Cake </h2>
-                <h3 class="text-start text-pink" > IDR 130.000 </h3>
+                <h3 class="text-start text-pink"> IDR 130.000 </h3>
                 <h3 class="text-start text-secondary pt-3"> Ukuran </h3>
-                <h3 class="text-start text-pink" > Diameter 18 cm </h3>
-                <h3 class="text-start text-secondary pt-3" > Varian Kue </h3>
-                <h3 class="text-start text-pink" > Brownies </h3>
+                <h3 class="text-start text-pink"> Diameter 18 cm </h3>
+                <h3 class="text-start text-secondary pt-3"> Varian Kue </h3>
+                <h3 class="text-start text-pink"> Brownies </h3>
             </div>
             {% if login %}
             <div class="content mt-3">
                 <h2 class="text-start" style="font-size: 18px;"> Ketikkan ucapan selebrasimu </h2>
                 <div class="mb-3 col-xl-7">
-                    <textarea class="form-control " id="exampleFormControlTextarea1" rows="3" placeholder="Ketik di sini"
-                        style="border-radius: 15px; padding: 10px;"></textarea>
+                    <textarea class="form-control " id="exampleFormControlTextarea1" rows="3"
+                        placeholder="Ketik di sini" style="border-radius: 15px; padding: 10px;"></textarea>
                 </div>
             </div>
             <div class="content justify-content-center align-items-center d-flex col-xl-7 mb-3">
                 <button class="details-button me-2 decrease-cart" type="button">
                     <i class="fa-solid fa-minus fa-xl" style="color: #000000;"> </i>
                 </button>
-                <p class="cart-value"> 
-                    <span> 0 </span>    
+                <p class="cart-value">
+                    <span> 0 </span>
                 </p>
                 <button class="details-button ms-2 increase-cart" type="button">
                     <i class="fa-solid fa-plus fa-xl" style="color: #000000;"> </i>
                 </button>
             </div>
             <button type="button" class="btn add-cart-button col-xl-7 mb-3" data-bs-toggle="modal"
-                data-bs-target="#add_cart"> Tambah ke keranjang 
+                data-bs-target="#add_cart"> Tambah ke keranjang
             </button>
             {% else %}
             <!-- User Belum Login -->
             <div class="content mt-3">
                 <h2 class="text-start" style="font-size: 18px;"> Ketikkan ucapan selebrasimu </h2>
                 <div class="mb-3 col-xl-7">
-                    <textarea class="form-control " id="exampleFormControlTextarea1" rows="3" placeholder="Ketik di sini"
-                        style="border-radius: 15px; padding: 10px;"></textarea>
+                    <textarea class="form-control " id="exampleFormControlTextarea1" rows="3"
+                        placeholder="Ketik di sini" style="border-radius: 15px; padding: 10px;"></textarea>
                 </div>
             </div>
             <div class="content justify-content-center align-items-center d-flex col-xl-7 mb-3">
                 <button class="details-button me-2 decrease-cart" type="button">
                     <i class="fa-solid fa-minus fa-xl" style="color: #000000;"> </i>
                 </button>
-                <p class="cart-value"> 
-                    <span> 0 </span>    
+                <p class="cart-value">
+                    <span> 0 </span>
                 </p>
                 <button class="details-button ms-2 increase-cart" type="button">
                     <i class="fa-solid fa-plus fa-xl" style="color: #000000;"> </i>
                 </button>
             </div>
-            <a href="{{ url_for('details') }}">
-                <button type="button" class="btn add-cart-button col-xl-7 mb-3" > Tambah ke keranjang </button>
-            </a>
+            <button type="button" class="btn add-cart-button col-xl-7 mb-3" id="add-to-cart"> Tambah ke keranjang </button>
             {% endif %}
         </div>
     </div>
@@ -132,11 +129,12 @@
         <div class="modal-content">
             <div class="modal-body justify-content-center">
                 <div class="d-flex justify-content-center">
-                    <img src="{{ url_for('static', filename = 'img/success.png') }}" alt="" class="img-fluid" style="width: 150px; height: 150px;" >
+                    <img src="{{ url_for('static', filename = 'img/success.png') }}" alt="" class="img-fluid"
+                        style="width: 150px; height: 150px;">
                 </div>
                 <div class="content text-center success-pop p-4">
                     <h1> Produk berhasil ditambahkan ke keranjang</h1>
-<!-- 
+                    <!-- 
     <button type="button" class="btn add-cart-button col-xl-4 col-5 mt-3 text-center"> OK </button>  
 -->
                 </div>
