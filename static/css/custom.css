@@ -12022,16 +12022,17 @@ label {
   height: 57px !important;
   border-radius: 12px !important;
   background: #F3808B !important;
-  border-color: #F3808B !important;
+  border: 1px solid #F3808B;
   padding: 12px 16px !important;
   font-size: 20px !important;
   color: white !important;
+  transition: 0.25s ease-in-out;
 }
 
 .modal-button:hover {
   background: white !important;
-  border-color: #F3808B !important;
   color: #F3808B !important;
+  transition: 0.25s ease-in-out;
 }
 
 form .modal-button {
@@ -12050,25 +12051,6 @@ form .modal-button:hover {
   transition: 0.25s ease-in-out;
 }
 form .modal-button:active {
-  background: white;
-  color: #F3808B;
-}
-form .btn {
-  height: 57px;
-  border-radius: 12px;
-  background: #F3808B;
-  border: 1px solid #F3808B;
-  padding: 12px 16px;
-  font-size: 20px;
-  color: white;
-  transition: 0.25s ease-in-out;
-}
-form .btn:hover {
-  background: white;
-  color: #F3808B;
-  transition: 0.25s ease-in-out;
-}
-form .btn:active {
   background: white;
   color: #F3808B;
 }
@@ -12179,8 +12161,8 @@ form .btn:active {
 }
 
 .custom-button-2:hover {
-  background-color: #e95362;
-  color: #ffffff;
+  background-color: white;
+  color: #F3808B;
   transition: 0.25s ease-in-out;
 }
 
@@ -12254,7 +12236,7 @@ hr {
   font-family: "Poppins", sans-serif;
   font-size: 15px;
   text-align: start;
-  font-weight: 100;
+  font-weight: 400;
 }
 
 .cart-list h3, .cart-list .h3 {
@@ -12438,13 +12420,14 @@ p {
   background-color: #F3808B;
   border: 1px solid #F3808B;
   color: white;
+  transition: 0.25s ease-in-out;
 }
 
-.profile-btn:hover {
-  border-radius: 20px;
+.profile-btn:hover, .profile-btn:active {
   background-color: white;
   border: 1px solid #F3808B;
-  color: black;
+  color: #F3808B;
+  transition: 0.25s ease-in-out;
 }
 
 .loader {
