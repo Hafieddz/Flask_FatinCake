@@ -24,7 +24,7 @@ class UserForm(FlaskForm):
     first_name = StringField("Nama Depan", validators=[DataRequired()])
     last_name = StringField("Nama Belakang")
     phone_number = StringField("No Telepon", validators=[DataRequired()])
-    profile_pic = FileField("Profile Picture")
+    profile_pic = FileField("Profile Picture", validators=[DataRequired()])
     submit_form = SubmitField("Update Data")
 
 # Update Product Form

@@ -8,6 +8,9 @@ from sqlalchemy.util import methods_equivalent
 from flask_migrate import Migrate, current
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, login_user, logout_user, LoginManager, login_required, current_user
+from werkzeug.utils import secure_filename
+import uuid as uuid
+import os
 
 from forms import *
 
@@ -15,6 +18,10 @@ app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://fatincake:fatin2cake_@localhost/fatin_db'
 app.config['SECRET_KEY'] = "this is very secret"
+
+UPLOAD_FOLDER = 'static/img/profile'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 db = SQLAlchemy(app) 
 migrate = Migrate(app, db)
 
@@ -28,50 +35,6 @@ login_manager.login_view = 'index'
 @login_manager.user_loader
 def load_user(user_id):
     return Users.query.get(int(user_id))
-
-# Register Form 
-class RegisterForm(FlaskForm):
-    email = StringField("Email", validators=[DataRequired()])
-    password_hash = PasswordField("Password", validators=[DataRequired(), EqualTo('confirm_password', message='password harus sama!')])
-    confirm_password = PasswordField("Konfirmasi Password", validators=[DataRequired()])
-    first_name = StringField("Nama Depan", validators=[DataRequired()])
-    last_name = StringField("Nama Belakang")
-    phone_number = StringField("No Telepon", validators=[DataRequired()])
-    submit_register = SubmitField("Register")
-
-# Login Form 
-class LoginForm(FlaskForm):
-    email = StringField("Email", validators=[DataRequired()])
-    password_hash = PasswordField("Password", validators=[DataRequired()])
-    submit_login = SubmitField("Log In")
-
-# User Form (Untuk updata data user)
-class UserForm(FlaskForm):
-    first_name = StringField("Nama Depan", validators=[DataRequired()])
-    last_name = StringField("Nama Belakang")
-    phone_number = StringField("No Telepon", validators=[DataRequired()])
-    profile_pic = FileField("Profile Picture")
-    submit_form = SubmitField("Update Data")
-
-# Update Product Form
-class UpdateForm(FlaskForm):
-    nama = StringField("Nama Kue", validators=[DataRequired()])
-    harga = StringField("Harga Kue", validators=[DataRequired()])
-    varian = StringField("Varian", validators=[DataRequired()])
-    foto = FileField("Foto Produk")
-    ukuran = StringField("Ukuran", validators=[DataRequired()])
-    detail = TextAreaField("Detail", validators=[DataRequired()])
-    submit_update = SubmitField("Update")
-
-# Add Product Form
-class AddForm(FlaskForm):
-    nama = StringField("Nama Kue", validators=[DataRequired()])
-    harga = StringField("Harga Kue", validators=[DataRequired()])
-    varian = StringField("Varian", validators=[DataRequired()])
-    foto = FileField("Foto Produk")
-    ukuran = StringField("Ukuran", validators=[DataRequired()])
-    detail = TextAreaField("Detail", validators=[DataRequired()])
-    submit_add = SubmitField("Tambah") 
 
 # Update Product Route
 @app.route('/update_product/<int:id_kue>', methods=['POST', 'GET'])
@@ -178,18 +141,19 @@ def register():
     register_form = RegisterForm()
 
     if register_form.validate_on_submit():
-        # Cek apakah ada email yang sama
+        # Cek apakah ada email yang sama``
         is_email = Users.query.filter_by(email = register_form.email.data).first()
         if is_email is None:
             # Hash Password 
             role = 'user'
+            foto_profile = 'kanan_profile.jpeg'
             hashed_password = generate_password_hash(register_form.password_hash.data) 
             is_email = Users(email = register_form.email.data, 
                              password_hash = hashed_password, 
                              nama_depan = register_form.first_name.data, 
                              nama_belakang = register_form.last_name.data, 
                              no_telp = register_form.phone_number.data,
-                             role = role)
+                             role = role, foto_profile = foto_profile)
             # Add User ke database
             db.session.add(is_email)
             db.session.commit()
@@ -345,17 +309,44 @@ def details():
 @login_required
 def profile():
     login = 'Yes'
-    login_form = LoginForm()
-    register_form = RegisterForm()
     user_form = UserForm()
-
-    email = current_user.email
-    number = current_user.no_telp
-    first = current_user.nama_depan
-    last = current_user.nama_belakang
-    role = current_user.role
+    id = current_user.id
+    user_profile = Users.query.get_or_404(id)
         
-    return render_template('profile.html', register_form = register_form, login_form = login_form, email = email, number = number, first= first, last = last, role = role, login = login)
+    return render_template('profile.html', user_profile = user_profile, user_form = user_form, login = login)
+
+@app.route('/update_profile', methods=['GET', 'POST'])
+@login_required
+def update_profile():
+    user_form = UserForm()
+    id = current_user.id
+    user_profile = Users.query.get_or_404(id)
+
+    if request.method == 'POST':
+            user_profile.nama_depan = request.form['first_name'] 
+            user_profile.nama_belakang = request.form['last_name'] 
+            user_profile.no_telp = request.form['phone_number'] 
+            user_profile.foto_profile = request.files['profile_pic']
+
+            # Ambil nama gambar
+            pic_filename = secure_filename(user_profile.foto_profile.filename)
+            # Set UUID (Buat nama gambar jadi unique)
+            pic_name = str(uuid.uuid1()) + "_" + pic_filename
+            #Save gambar
+            saver = request.files['profile_pic'] 
+            #Save nama file ke database
+            user_profile.foto_profile = pic_name
+            try:
+                db.session.commit()
+                saver.save(os.path.join(app.config['UPLOAD_FOLDER'], pic_name))
+                flash(f'Data berhasil di update!', "success")
+                return redirect(url_for('profile'))
+            
+            except:
+                flash(f'Data gagal di update!', "danger")
+                return redirect(url_for('profile'))
+        
+    return render_template('profile.html', user_profile = user_profile, user_form = user_form)
 
 # Logout 
 @app.route('/logout')
@@ -381,7 +372,8 @@ class Users(db.Model, UserMixin):
     nama_depan = db.Column(db.String(30), nullable=False)
     nama_belakang = db.Column(db.String(30))
     no_telp = db.Column(db.String(20), nullable=False)
-    role = db.Column(db.String(20),server_default = 'user' )
+    role = db.Column(db.String(20),server_default = 'user')
+    foto_profile = db.Column(db.Text, nullable=False)
 
     @property
     def password(self):
