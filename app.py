@@ -1,19 +1,15 @@
-from functools import reduce
 from flask import Flask, redirect, render_template, request, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
-from flask_wtf import FlaskForm
 from sqlalchemy import Nullable, String, false, log
 from sqlalchemy.engine import url
 from sqlalchemy.sql.expression import Update
 from sqlalchemy.sql.functions import user
 from sqlalchemy.util import methods_equivalent
-from wtforms import StringField, SubmitField, PasswordField, ValidationError, BooleanField, TextAreaField
-from flask_wtf.file import FileField
-from wtforms.validators import DataRequired, EqualTo, Length
 from flask_migrate import Migrate, current
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, login_user, logout_user, LoginManager, login_required, current_user
 
+from forms import *
 
 app = Flask(__name__)
 
@@ -410,6 +406,9 @@ class Cake(db.Model):
     detail = db.Column(db.Text, nullable=False)
     varian = db.Column(db.String(30), nullable=False)
     ukuran = db.Column(db.String(30), nullable=False)
+
+    def __repr__(self):
+        return '<nama %r>' %self.nama 
 
 
 if __name__ == "__main__":
