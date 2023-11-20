@@ -99,16 +99,18 @@
       <tr>
         <td class="p-3" scope="row"> {{ loop.index }} </td>
         <td class="p-3">{{ cake_product.nama }} </td>
-        <td class="p-3">{{ cake_product.detail }} </td>
+        <td class="p-3 col-2"> {{ cake_product.detail }} </td>
         <td class="p-3">{{ cake_product.harga }} </td>
         <td class="p-3">{{ cake_product.varian }} </td>
         <td class="p-3">{{ cake_product.ukuran }} </td>
         <td class="p-3">
-          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#updateProductModal{{ cake_product.id_kue }}">
-            Edit </button>
-          <a href="{{ url_for('delete', id_kue = cake_product.id_kue) }}">
-            <button type="button" class="btn btn-danger">Hapus</button>
-          </a>
+          <div class="d-flex align-self-center gap-2 justify-content-center align-items-center py-3">
+            <button type="button" class="btn btn-success " data-bs-toggle="modal" data-bs-target="#updateProductModal{{ cake_product.id_kue }}">
+              Edit </button>
+            <a href="{{ url_for('delete', id_kue = cake_product.id_kue) }}">
+              <button type="button" class="btn btn-danger">Hapus</button>
+            </a>
+          </div>
         </td>
       </tr>
 
@@ -152,7 +154,7 @@
                       </div>
                       <div class="mb-3">
                         {{ update_product.detail.label(class="form-label") }}                        
-                        {{ update_product.detail(class="form-control", id="exampleFormControlTextarea1", rows="5", placeholder = cake_product.detail , style="border-radius: 15px; padding: 10px;")}}
+                        {{ update_product.detail(class="form-control", id="exampleFormControlTextarea1", rows="5", placeholder = "Update data ini..." , style="border-radius: 15px; padding: 10px;")}}
                       </div>
                       <div class="mb-3">
                         {{ update_product.submit_update(class="modal-button col-12") }}

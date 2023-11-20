@@ -53,10 +53,15 @@ def update(id_kue):
             product_to_update.varian = request.form['varian'] 
             product_to_update.ukuran = request.form['ukuran'] 
             product_to_update.detail = request.form['detail'] 
-            product_to_update.foto = 'contoh'
+            product_to_update.foto = request.files['foto']
+
+            pic_filename = secure_filename(product_to_update.foto.filename)
+            saver = request.files['foto']
+            product_to_update.foto = pic_filename
 
             try:
                 db.session.commit()
+                saver.save(os.path.join(app.config['UPLOAD_FOLDER_2'], pic_filename))
                 flash(f'Produk berhasil di update!', "success")
                 return redirect(url_for('admin_product'))
             
@@ -233,7 +238,7 @@ def admin_product():
     if current_user.role == 'admin':
         cake_product = Cake.query.order_by(Cake.id_kue)
         format_cake = [{'id_kue': cake.id_kue, 'nama': cake.nama, 'foto': cake.foto,
-                         'harga': cake.harga, 'detail': cake.detail[:20], 'varian': cake.varian, 'ukuran': cake.ukuran}
+                         'harga': cake.harga, 'detail': cake.detail[:50], 'varian': cake.varian, 'ukuran': cake.ukuran}
                         for cake in cake_product]
         return render_template("admin/admin_product.html", register_form = register_form, login_form = login_form, update_product = update_product, add_product = add_product, cake_product = cake_product, cakes = format_cake)
     else :

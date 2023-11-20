@@ -32,7 +32,7 @@ class UpdateForm(FlaskForm):
     nama = StringField("Nama Kue", validators=[DataRequired()])
     harga = StringField("Harga Kue", validators=[DataRequired()])
     varian = StringField("Varian", validators=[DataRequired()])
-    foto = FileField("Foto Produk")
+    foto = FileField("Foto Produk", validators=[DataRequired()])
     ukuran = StringField("Ukuran", validators=[DataRequired()])
     detail = TextAreaField("Detail", validators=[DataRequired()])
     submit_update = SubmitField("Update")
