@@ -19,8 +19,13 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://fatincake:fatin2cake_@localhost/fatin_db'
 app.config['SECRET_KEY'] = "this is very secret"
 
-UPLOAD_FOLDER = 'static/img/profile'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+# Upload Folder Untuk User (Foto Profile)
+UPLOAD_FOLDER_1 = 'static/img/profile'
+app.config['UPLOAD_FOLDER_1'] = UPLOAD_FOLDER_1
+
+# Upload Folder Untuk Produk (Foto Produk)
+UPLOAD_FOLDER_2 = 'static/img/foto_produk'
+app.config['UPLOAD_FOLDER_2'] = UPLOAD_FOLDER_2
 
 db = SQLAlchemy(app) 
 migrate = Migrate(app, db)
@@ -90,7 +95,11 @@ def add_product():
     if current_user.role == 'admin':
         add = AddForm()
         if add.validate_on_submit():
-            foto_kue = ''
+            foto_kue = add.foto.data
+            pic_filename = secure_filename(foto_kue.filename)
+            saver = add.foto.data
+            foto_kue = pic_filename
+
             add = Cake(nama = add.nama.data, 
                         harga = add.harga.data,
                         varian = add.varian.data, 
@@ -100,6 +109,7 @@ def add_product():
             # Add User ke database
             db.session.add(add)
             db.session.commit()
+            saver.save(os.path.join(app.config['UPLOAD_FOLDER_2'], pic_filename))
             flash(f'Data berhasil di tambahkan!', "success")
             return redirect(url_for('admin_product'))
         else:
@@ -254,11 +264,17 @@ def products():
     register_form = RegisterForm()
     login_form = LoginForm()
     login = None
-
+    
     if current_user.is_authenticated:
         login = 'Yes'
 
-    return render_template("all_products.html", login = login, register_form = register_form, login_form = login_form)
+    cake_product = Cake.query.order_by(Cake.id_kue)
+    format_cake = [{'id_kue': cake.id_kue, 'nama': cake.nama, 'foto': cake.foto,
+                    'harga': cake.harga, 'detail': cake.detail[:50], 'varian': cake.varian, 'ukuran': cake.ukuran}
+                    for cake in cake_product]
+
+    return render_template("all_products.html", login = login, register_form = register_form, login_form = login_form, cakes = format_cake, cake_product = cake_product)
+
 # Base HTML
 @app.route('/base')
 def base():
@@ -338,7 +354,7 @@ def update_profile():
             user_profile.foto_profile = pic_name
             try:
                 db.session.commit()
-                saver.save(os.path.join(app.config['UPLOAD_FOLDER'], pic_name))
+                saver.save(os.path.join(app.config['UPLOAD_FOLDER_1'], pic_name))
                 flash(f'Data berhasil di update!', "success")
                 return redirect(url_for('profile'))
             

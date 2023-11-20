@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField, ValidationError, BooleanField, TextAreaField
 from flask_wtf.file import FileField
-from wtforms.validators import DataRequired, EqualTo, Length
+from wtforms.validators import DataRequired, EqualTo, Length, data_required
 
 # Register Form 
 class RegisterForm(FlaskForm):
@@ -42,7 +42,7 @@ class AddForm(FlaskForm):
     nama = StringField("Nama Kue", validators=[DataRequired()])
     harga = StringField("Harga Kue", validators=[DataRequired()])
     varian = StringField("Varian", validators=[DataRequired()])
-    foto = FileField("Foto Produk")
+    foto = FileField("Foto Produk", validators=[DataRequired()])
     ukuran = StringField("Ukuran", validators=[DataRequired()])
     detail = TextAreaField("Detail", validators=[DataRequired()])
     submit_add = SubmitField("Tambah") 

@@ -21,7 +21,7 @@
         <h1 class="mx-4 mt-4"> Tambah produk </h1>
 
         <div class="content p-2 m-4">
-          <form method="POST" action="{{ url_for('add_product') }}">
+          <form method="POST" action="{{ url_for('add_product') }}" enctype="multipart/form-data">
             <div class="row">
               <div class="col-6">
                 <!-- Form -->
@@ -40,7 +40,7 @@
                 </div>
                 <div class="mb-3">
                   {{ add_product.foto.label(class="form-label") }}
-                  {{ add_product.foto(class="form-control", type="file" ,placeholder="Ketik di sini")}}
+                  {{ add_product.foto(class="form-control", type="file")}}
                 </div>
                 <!-- Form -->
               </div>
@@ -121,7 +121,7 @@
               <h1 class="mx-4 mt-4"> Update Produk </h1>
 
               <div class="content p-2 m-4">
-                <form method="POST" action="{{ url_for('update', id_kue = cake_product.id_kue) }}">
+                <form method="POST" action="{{ url_for('update', id_kue = cake_product.id_kue) }}" enctype="multipart/form-data">
                   <div class="row">
                     <div class="col-6">
                       <!-- Form -->
@@ -140,7 +140,7 @@
                       </div>
                       <div class="mb-3">
                         {{ update_product.foto.label(class="form-label") }}
-                        {{ update_product.foto(class="form-control", type="file" , value = cake_product.foto)}}
+                        {{ update_product.foto(class="form-control", type="file")}}
                       </div>
                       <!-- Form -->
                     </div>
