@@ -24,62 +24,28 @@
 
   <div class="container py-4">
     <div class="row row-cols-1 row-cols-md-4 g-4">
+      {% for cake_product in cake_product %}
+      <!-- Looping start disini !! -->
       <div class="col-md-6 col-xl-3 d-flex justify-content-center">
-        <div class="card card-body-second h-100 col-10 col-md-12 ">
-          <img src="{{url_for('static', filename='img/dummy_cake.png')}}" class="card-img-top" alt="..." >
-          <div class="card-body text-center">
-            <h5 class="card-title ">Nama Kue </h5>
-            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.</p>
+          <div class="card card-body-second h-100 col-10 col-md-12">
+              <!-- Source Gambar -->
+              <img src="{{url_for('static', filename='img/foto_produk/' + cake_product.foto )}}"
+                  class="card-img-top  img-fluid" alt="...">
+              <div class="card-body text-center">
+                  <!-- Nama Kue  -->
+                  <h5 class="card-title "> {{ cake_product.nama }} </h5>
+                  <!-- Detail Singkat  -->
+                  <p class="card-text"> {{ cake_product.detail }} </p>
+              </div>
+              <div class="text-center mb-3">
+                  <a href="{{ url_for('details', id_kue = cake_product.id_kue) }}">
+                      <button type="button" class="custom-button-2">Lihat Detail</button>
+                  </a>
+              </div>
           </div>
-          <div class="text-center mb-3">
-            <a href="{{ url_for('details') }}">
-              <button type="button" class="custom-button-2">Lihat Detail</button>
-            </a>
-          </div>
-        </div>
       </div>
-      <div class="col-md-6 col-xl-3 d-flex justify-content-center ">
-        <div class="card card-body-second h-100 col-10 col-md-12">
-          <img src="{{url_for('static', filename='img/dummy_cake.png')}}" class="card-img-top" alt="...">
-          <div class="card-body text-center">
-            <h5 class="card-title">Nama Kue </h5>
-            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.</p>
-          </div>
-          <div class="text-center mb-3">
-            <a href="{{ url_for('details') }}">
-              <button type="button" class="custom-button-2">Lihat Detail</button>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 col-xl-3 d-flex justify-content-center  ">
-        <div class="card card-body-second h-100 col-10 col-md-12">
-          <img src="{{url_for('static', filename='img/dummy_cake.png')}}" class="card-img-top" alt="...">
-          <div class="card-body text-center">
-            <h5 class="card-title">Nama Kue </h5>
-            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.</p>
-          </div>
-          <div class="text-center mb-3">
-            <a href="{{ url_for('details') }}">
-              <button type="button" class="custom-button-2">Lihat Detail</button>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 col-xl-3 d-flex justify-content-center ">
-        <div class="card card-body-second h-100 col-10 col-md-12">
-          <img src="{{url_for('static', filename='img/dummy_cake.png')}}" class="card-img-top" alt="...">
-          <div class="card-body text-center">
-            <h5 class="card-title">Nama Kue </h5>
-            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.</p>
-          </div>
-          <div class="text-center mb-3">
-            <a href="{{ url_for('details') }}">
-              <button type="button" class="custom-button-2">Lihat Detail</button>
-            </a>
-          </div>
-        </div>
-      </div>
+      <!-- Looping end disini !! -->
+      {% endfor %}
     </div>
   </div>
 
@@ -91,70 +57,36 @@
   <h2 class="pt-4 fs-1 text-center"> MANISNYA COKLAT DALAM SETIAP GIGITAN </h1>
 
 
-    <!-- Card 2-->
+   <!-- Card 1-->
 
-    <div class="container py-4">
-      <div class="row row-cols-1 row-cols-md-4 g-4">
-        <div class="col-md-6 col-xl-3 d-flex justify-content-center">
+   <div class="container py-4">
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+      {% for cake_product in cake_product %}
+      <!-- Looping start disini !! -->
+      <div class="col-md-6 col-xl-3 d-flex justify-content-center">
           <div class="card card-body-third h-100 col-10 col-md-12">
-            <img src="{{url_for('static', filename='img/dummy_cake.png')}}" class="card-img-top" alt="...">
-            <div class="card-body text-center">
-              <h5 class="card-title ">Nama Kue </h5>
-              <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.</p>
-            </div>
-            <div class="text-center mb-3">
-              <a href="{{ url_for('details') }}">
-                <button type="button" class="custom-button-2">Lihat Detail</button>
-              </a>
-            </div>
+              <!-- Source Gambar -->
+              <img src="{{url_for('static', filename='img/foto_produk/' + cake_product.foto )}}"
+                  class="card-img-top  img-fluid" alt="...">
+              <div class="card-body text-center">
+                  <!-- Nama Kue  -->
+                  <h5 class="card-title "> {{ cake_product.nama }} </h5>
+                  <!-- Detail Singkat  -->
+                  <p class="card-text"> {{ cake_product.detail }} </p>
+              </div>
+              <div class="text-center mb-3">
+                  <a href="{{ url_for('details', id_kue = cake_product.id_kue) }}">
+                      <button type="button" class="custom-button-2">Lihat Detail</button>
+                  </a>
+              </div>
           </div>
-        </div>
-        <div class="col-md-6 col-xl-3 d-flex justify-content-center">
-          <div class="card card-body-third h-100 col-10 col-md-12">
-            <img src="{{url_for('static', filename='img/dummy_cake.png')}}" class="card-img-top" alt="...">
-            <div class="card-body text-center">
-              <h5 class="card-title">Nama Kue </h5>
-              <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.</p>
-            </div>
-            <div class="text-center mb-3">
-              <a href="{{ url_for('details') }}">
-                <button type="button" class="custom-button-2">Lihat Detail</button>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-xl-3 d-flex justify-content-center ">
-          <div class="card card-body-third h-100 col-10 col-md-12">
-            <img src="{{url_for('static', filename='img/dummy_cake.png')}}" class="card-img-top" alt="...">
-            <div class="card-body text-center">
-              <h5 class="card-title">Nama Kue </h5>
-              <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.</p>
-            </div>
-            <div class="text-center mb-3">
-              <a href="{{ url_for('details') }}">
-                <button type="button" class="custom-button-2">Lihat Detail</button>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-xl-3 d-flex justify-content-center">
-          <div class="card card-body-third h-100 col-10 col-md-12">
-            <img src="{{url_for('static', filename='img/dummy_cake.png')}}" class="card-img-top" alt="...">
-            <div class="card-body text-center">
-              <h5 class="card-title">Nama Kue </h5>
-              <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.</p>
-            </div>
-            <div class="text-center mb-3">
-              <a href="{{ url_for('details') }}">
-                <button type="button" class="custom-button-2">Lihat Detail</button>
-              </a>
-            </div>
-          </div>
-        </div>
       </div>
+      <!-- Looping end disini !! -->
+      {% endfor %}
     </div>
+  </div>
 
-    <!-- Card 2-->
+  <!-- Card 1-->
 
     <div class="container text-center">
       <button type="button" class="button-custom "> Lihat Lebih Banyak
@@ -168,66 +100,36 @@
 <div class="container-fluid bg-second-section pb-5">
   <h1 class="pt-4 text-center ps-1"> KUE LUCU, KENANGAN MANIS </h1>
 
+  <!-- Card 1-->
+
   <div class="container py-4">
     <div class="row row-cols-1 row-cols-md-4 g-4">
+      {% for cake_product in cake_product %}
+      <!-- Looping start disini !! -->
       <div class="col-md-6 col-xl-3 d-flex justify-content-center">
-        <div class="card card-body-second h-100 col-10 col-md-12">
-          <img src="{{url_for('static', filename='img/dummy_cake.png')}}" class="card-img-top" alt="...">
-          <div class="card-body text-center">
-            <h5 class="card-title ">Nama Kue </h5>
-            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.</p>
+          <div class="card card-body-second h-100 col-10 col-md-12">
+              <!-- Source Gambar -->
+              <img src="{{url_for('static', filename='img/foto_produk/' + cake_product.foto )}}"
+                  class="card-img-top  img-fluid" alt="...">
+              <div class="card-body text-center">
+                  <!-- Nama Kue  -->
+                  <h5 class="card-title "> {{ cake_product.nama }} </h5>
+                  <!-- Detail Singkat  -->
+                  <p class="card-text"> {{ cake_product.detail }} </p>
+              </div>
+              <div class="text-center mb-3">
+                  <a href="{{ url_for('details', id_kue = cake_product.id_kue) }}">
+                      <button type="button" class="custom-button-2">Lihat Detail</button>
+                  </a>
+              </div>
           </div>
-          <div class="text-center mb-3">
-            <a href="{{ url_for('details') }}">
-              <button type="button" class="custom-button-2">Lihat Detail</button>
-            </a>
-          </div>
-        </div>
       </div>
-      <div class="col-md-6 col-xl-3 d-flex justify-content-center">
-        <div class="card card-body-second h-100 col-10 col-md-12">
-          <img src="{{url_for('static', filename='img/dummy_cake.png')}}" class="card-img-top" alt="...">
-          <div class="card-body text-center">
-            <h5 class="card-title">Nama Kue </h5>
-            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.</p>
-          </div>
-          <div class="text-center mb-3">
-            <a href="{{ url_for('details') }}">
-              <button type="button" class="custom-button-2">Lihat Detail</button>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 col-xl-3 d-flex justify-content-center ">
-        <div class="card card-body-second h-100 col-10 col-md-12">
-          <img src="{{url_for('static', filename='img/dummy_cake.png')}}" class="card-img-top" alt="...">
-          <div class="card-body text-center">
-            <h5 class="card-title">Nama Kue </h5>
-            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.</p>
-          </div>
-          <div class="text-center mb-3">
-            <a href="{{ url_for('details') }}">
-              <button type="button" class="custom-button-2">Lihat Detail</button>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 col-xl-3 d-flex justify-content-center">
-        <div class="card card-body-second h-100 col-10 col-md-12">
-          <img src="{{url_for('static', filename='img/dummy_cake.png')}}" class="card-img-top" alt="...">
-          <div class="card-body text-center">
-            <h5 class="card-title">Nama Kue </h5>
-            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.</p>
-          </div>
-          <div class="text-center mb-3">
-            <a href="{{ url_for('details') }}">
-              <button type="button" class="custom-button-2">Lihat Detail</button>
-            </a>
-          </div>
-        </div>
-      </div>
+      <!-- Looping end disini !! -->
+      {% endfor %}
     </div>
   </div>
+
+  <!-- Card 1-->
 
   <div class="container text-center">
     <button type="button" class="button-custom "> Lihat Lebih Banyak

@@ -187,11 +187,12 @@ def index():
     register_form = RegisterForm()
     login_form = LoginForm()
     login = None
+    cake_product = Cake.query.order_by(Cake.id_kue).limit(5)
 
     if current_user.is_authenticated:
         login = 'Yes'
     
-    return render_template("index.html", login = login, register_form = register_form, login_form = login_form)
+    return render_template("index.html", login = login, register_form = register_form, login_form = login_form, cake_product = cake_product)
         
 # Admin Page
 @login_required
@@ -230,7 +231,7 @@ def admin_dashboard():
 @app.route('/admin/product', methods=['GET', 'POST'])
 def admin_product():
     # Form 
-    register_form = RegisterForm()
+    register_form = RegisterForm()  
     login_form = LoginForm()
     update_product = UpdateForm()
     add_product = AddForm()
@@ -311,18 +312,21 @@ def cart():
         
 
 # Detail Page
-@app.route('/details', methods=['GET', 'POST']  )
-def details():
+@app.route('/details/<int:id_kue>', methods=['GET', 'POST']  )
+def details(id_kue):
     register_form = RegisterForm()
     login_form = LoginForm()
     login = None
 
+    cake = Cake.query.get_or_404(id_kue)
+    
+
     if current_user.is_authenticated:
         login = 'Yes'
-        return render_template("detail_product.html", login = login, register_form = register_form, login_form = login_form)
+        return render_template("detail_product.html", login = login, register_form = register_form, login_form = login_form, cake = cake)
     else:
         flash(f"Akun Belum Login, Silahkan Login Terlebih Dahulu!", "danger")
-        return render_template("detail_product.html", register_form = register_form, login_form = login_form)
+        return render_template("detail_product.html", register_form = register_form, login_form = login_form, cake = cake)
         
 
 # Account Page

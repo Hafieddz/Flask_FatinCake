@@ -45,7 +45,7 @@
 <div class="container">
     <div class="row">
         <div class="col-6 mb-5">
-            <img src="{{url_for('static', filename='img/dummy_cake.png')}}" class="img-fluid my-5" alt="...">
+            <img src="{{url_for('static', filename='img/foto_produk/' + cake.foto )}}" class="img-fluid my-5" alt="...">
             <div class="container text-start details-description ">
                 <div class="title d-flex gap-5 mb-4">
                     <div class="detail">
@@ -67,12 +67,12 @@
         <div class="col mt-5 ms-3">
             <div class="content details-content">
                 <h1 class="text-start"> Fatin Cake </h1>
-                <h2 class="text-start pt-3"> Korean Cake </h2>
-                <h3 class="text-start text-pink"> IDR 130.000 </h3>
+                <h2 class="text-start pt-3"> {{ cake.nama }} </h2>
+                <h3 class="text-start text-pink"> IDR {{ cake.harga }} </h3>
                 <h3 class="text-start text-secondary pt-3"> Ukuran </h3>
-                <h3 class="text-start text-pink"> Diameter 18 cm </h3>
+                <h3 class="text-start text-pink"> {{ cake.ukuran }} </h3>
                 <h3 class="text-start text-secondary pt-3"> Varian Kue </h3>
-                <h3 class="text-start text-pink"> Brownies </h3>
+                <h3 class="text-start text-pink"> {{ cake.varian }} </h3>
             </div>
             {% if login %}
             <div class="content mt-3">

@@ -22,73 +22,13 @@
 
     <div class="container py-4">
         <div class="row row-cols-1 row-cols-md-4 g-4">
-            <!-- Looping start disini !! -->
-            <div class="col-md-6 col-xl-3 d-flex justify-content-center">
-                <div class="card card-body-third h-100 col-10 col-md-12">
-                    <!-- Source Gambar -->
-                    <img src="{{url_for('static', filename='img/dummy_cake.png')}}" class="card-img-top  img-fluid"
-                        alt="...">
-                    <div class="card-body text-center">
-                        <!-- Nama Kue  -->
-                        <h5 class="card-title ">Nama Kue </h5>
-                        <!-- Detail Singkat  -->
-                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.
-                        </p>
-                    </div>
-                    <div class="text-center mb-3">
-                        <button type="button" class="custom-button-2 ">Lihat Detail</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Looping end disini !! -->
-            <div class="col-md-6 col-xl-3 d-flex justify-content-center">
-                <div class="card card-body-third h-100 col-10 col-md-12">
-                    <img src="{{url_for('static', filename='img/custom_1.png')}}" class="card-img-top  img-fluid"
-                        alt="...">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Nama Kue </h5>
-                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.
-                        </p>
-                    </div>
-                    <div class="text-center mb-3">
-                        <button type="button" class="custom-button-2 ">Lihat Detail</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-xl-3 d-flex justify-content-center ">
-                <div class="card card-body-third h-100 col-10 col-md-12">
-                    <img src="{{url_for('static', filename='img/varian_4.png')}}" class="card-img-top  img-fluid"
-                        alt="...">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Nama Kue </h5>
-                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, quod.
-                        </p>
-                    </div>
-                    <div class="text-center mb-3">
-                        <button type="button" class="custom-button-2 ">Lihat Detail</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-xl-3 d-flex justify-content-center">
-                <div class="card card-body-third h-100 col-10 col-md-12">
-                    <img src="{{url_for('static', filename='img/dummy_cake.png')}}" class="card-img-top  img-fluid"
-                    alt="...">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Nama Kue </h5>
-                        <p class="card-text"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, exercitatione
-                        </p>
-                    </div>
-                    <div class="text-center mb-3">
-                        <button type="button" class="custom-button-2 ">Lihat Detail</button>
-                    </div>
-                </div>
-            </div>
             {% for cake_product in cakes %}
             <!-- Looping start disini !! -->
             <div class="col-md-6 col-xl-3 d-flex justify-content-center">
                 <div class="card card-body-third h-100 col-10 col-md-12">
                     <!-- Source Gambar -->
-                    <img src="{{url_for('static', filename='img/foto_produk/' + cake_product.foto )}}" class="card-img-top  img-fluid" alt="...">
+                    <img src="{{url_for('static', filename='img/foto_produk/' + cake_product.foto )}}"
+                        class="card-img-top  img-fluid" alt="...">
                     <div class="card-body text-center">
                         <!-- Nama Kue  -->
                         <h5 class="card-title "> {{ cake_product.nama }} </h5>
@@ -96,13 +36,14 @@
                         <p class="card-text"> {{ cake_product.detail }} </p>
                     </div>
                     <div class="text-center mb-3">
-                        <button type="button" class="custom-button-2 ">Lihat Detail</button>
+                        <a href="{{ url_for('details', id_kue = cake_product.id_kue) }}">
+                            <button type="button" class="custom-button-2">Lihat Detail</button>
+                        </a>
                     </div>
                 </div>
             </div>
             <!-- Looping end disini !! -->
             {% endfor %}
-            
         </div>
     </div>
 
