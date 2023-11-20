@@ -1,12 +1,12 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField, ValidationError, BooleanField, TextAreaField
 from flask_wtf.file import FileField
-from wtforms.validators import DataRequired, EqualTo, Length, data_required
+from wtforms.validators import DataRequired, EqualTo, Length, data_required, length
 
 # Register Form 
 class RegisterForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired()])
-    password_hash = PasswordField("Password", validators=[DataRequired(), EqualTo('confirm_password', message='password harus sama!')])
+    password_hash = PasswordField("Password", validators=[DataRequired(), EqualTo('confirm_password', message='password harus sama!'), length(8)])
     confirm_password = PasswordField("Konfirmasi Password", validators=[DataRequired()])
     first_name = StringField("Nama Depan", validators=[DataRequired()])
     last_name = StringField("Nama Belakang")
