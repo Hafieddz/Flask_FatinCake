@@ -187,7 +187,7 @@ def index():
     register_form = RegisterForm()
     login_form = LoginForm()
     login = None
-    cake_product = Cake.query.order_by(Cake.id_kue).limit(5)
+    cake_product = Cake.query.order_by(Cake.id_kue).limit(4)
 
     if current_user.is_authenticated:
         login = 'Yes'
@@ -426,7 +426,6 @@ class Cake(db.Model):
 
     def __repr__(self):
         return '<nama %r>' %self.nama 
-
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -32,7 +32,7 @@
                 </div>
                 <div class="mb-3">
                   {{ add_product.harga.label(class="form-label") }}
-                  {{ add_product.harga(class="form-control" ,placeholder="Ketik di sini")}}
+                  {{ add_product.harga(class="form-control", type="number" ,placeholder="Ketik di sini")}}
                 </div>
                 <div class="mb-3">
                   {{ add_product.varian.label(class="form-label") }}
@@ -134,7 +134,7 @@
                       </div>
                       <div class="mb-3">
                         {{ update_product.harga.label(class="form-label") }}
-                        {{ update_product.harga(class="form-control" , value = cake_product.harga)}}
+                        {{ update_product.harga(class="form-control", type = "number"  , value = cake_product.harga)}}
                       </div>
                       <div class="mb-3">
                         {{ update_product.varian.label(class="form-label") }}
