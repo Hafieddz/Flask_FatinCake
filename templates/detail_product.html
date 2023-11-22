@@ -45,22 +45,26 @@
 <div class="container">
     <div class="row">
         <div class="col-6 mb-5">
-            <img src="{{url_for('static', filename='img/foto_produk/' + cake.foto )}}" class="img-fluid my-5" alt="...">
+            <img src="{{url_for('static', filename='img/foto_produk/' + cake.foto )}}" class="img-fluid my-5 shadow-lg" alt="..."
+                style="width: 555px; max-height: 509px; min-height: 500px; border-radius: 20px;">
             <div class="container text-start details-description ">
                 <div class="title d-flex gap-5 mb-4">
                     <div class="detail">
-                        <h1> Detail </h1>
+                        <span id="_detail">
+                            Detail
+                        </span>
                     </div>
                     <div class="penyimpanan">
-                        <h2> Penyimpanan </h2>
+                        <span id="_penyimpanan">
+                            Penyimpanan
+                        </span>
                     </div>
                 </div>
-                <h3 class="details">
-                    <span>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet non enim deserunt eius fugiat
-                        reprehenderit quam corporis aut! Repellendus, ipsum.
+                <div class="details">
+                    <span id="details">
+                        {{ cake.detail }}
                     </span>
-                </h3>
+                </div>
             </div>
         </div>
 
@@ -69,7 +73,7 @@
                 <h1 class="text-start"> Fatin Cake </h1>
                 <h2 class="text-start pt-3"> {{ cake.nama }} </h2>
                 <h3 class="text-start text-pink"> IDR {{ cake.harga }} </h3>
-                <h3 class="text-start text-secondary pt-3"> Ukuran </h3>
+                <h3 class="text-start text-secondary    pt-3"> Ukuran </h3>
                 <h3 class="text-start text-pink"> {{ cake.ukuran }} </h3>
                 <h3 class="text-start text-secondary pt-3"> Varian Kue </h3>
                 <h3 class="text-start text-pink"> {{ cake.varian }} </h3>
@@ -116,7 +120,8 @@
                     <i class="fa-solid fa-plus fa-xl" style="color: #000000;"> </i>
                 </button>
             </div>
-            <button type="button" class="btn add-cart-button col-xl-7 mb-3" id="add-to-cart"> Tambah ke keranjang </button>
+            <button type="button" class="btn add-cart-button col-xl-7 mb-3" id="add-to-cart"> Tambah ke keranjang
+            </button>
             {% endif %}
         </div>
     </div>
@@ -142,5 +147,38 @@
         </div>
     </div>
 </div>
+
+<script>
+
+    let detail = document.querySelector('.detail');
+    detail.addEventListener('click', details);
+
+    let penyimpanan = document.querySelector('.penyimpanan');
+    penyimpanan.addEventListener('click', penyimpanan_);
+
+    let _detail = document.getElementById('_detail');
+    let _penyimpanan = document.getElementById('_penyimpanan');
+
+    const data = {
+        detail: "{{ cake.detail }}",
+        penyimpanan_first : "Mohon segera simpan dalam kulkas.",
+        penyimpanan_second : "Produk ini bisa bertahan 3 sampai 4 hari di dalam kulkas dan 1 sampai 2 jam pada suhu ruang.",
+    };
+
+    data.penyimpanan_full = `${data.penyimpanan_first}<br><br>${data.penyimpanan_second}`;
+
+    function penyimpanan_() {
+        document.querySelector('.details span').innerHTML = data.penyimpanan_full
+        _penyimpanan.style.color = "pink";
+        _detail.style.color = "grey";
+    }
+
+
+    function details() {
+        document.querySelector('.details span').textContent = data.detail;
+        _detail.style.color = "pink";
+        _penyimpanan.style.color = "grey";
+    }
+</script>
 
 {% endblock %}

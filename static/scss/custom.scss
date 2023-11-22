@@ -98,8 +98,8 @@ label {
 
 .modal-button {
     height: 57px !important;
-    border-radius: 12px !important ; 
-    background: $color-dark-pink !important ;
+    border-radius: 12px !important;
+    background: $color-dark-pink !important;
     border: 1px solid $color-dark-pink;
     padding: 12px 16px !important;
     font-size: 20px !important;
@@ -108,9 +108,9 @@ label {
 }
 
 .modal-button:hover {
-        background: white !important;
-        color: $color-dark-pink !important;
-        transition: 0.25s ease-in-out;
+    background: white !important;
+    color: $color-dark-pink !important;
+    transition: 0.25s ease-in-out;
 
 }
 
@@ -129,7 +129,7 @@ form {
     .modal-button:hover {
         background: white;
         color: $color-dark-pink;
-        transition: 0.25s ease-in-out ;
+        transition: 0.25s ease-in-out;
     }
 
     .modal-button:active {
@@ -138,7 +138,8 @@ form {
     }
 }
 
-.header-text, .header-text:hover {
+.header-text,
+.header-text:hover {
     color: $color-dark-pink ;
     font-family: 'Pacifico';
     font-size: 30px;
@@ -152,7 +153,8 @@ form {
     text-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.text-pink, .text-pink:hover {
+.text-pink,
+.text-pink:hover {
     color: $color-dark-pink ;
 }
 
@@ -190,7 +192,7 @@ form {
         height: 20vw;
         object-fit: cover;
     }
-    
+
 }
 
 @media only screen and (max-width: 810px) {
@@ -199,7 +201,7 @@ form {
         height: 100% !important;
         object-fit: cover !important;
     }
-  }
+}
 
 
 .footer-bg {
@@ -214,13 +216,13 @@ form {
     background-color: white;
     border: 1px solid $color-dark-pink ;
     color: $color-dark-pink ;
-    transition: 0.25s ease-in-out ;
+    transition: 0.25s ease-in-out;
 }
 
 .button-custom:hover {
     background-color: $color-dark-pink;
     color: white;
-    transition: 0.25s ease-in-out ;
+    transition: 0.25s ease-in-out;
 
 }
 
@@ -236,7 +238,7 @@ form {
 .pricing-content .button-custom:hover {
     border: 1px solid white;
     background-color: #f5c9cd;
-    transition: 0.25s ease-in-out ;
+    transition: 0.25s ease-in-out;
 
 }
 
@@ -255,7 +257,7 @@ form {
 .custom-button-2:hover {
     background-color: white;
     color: $color-dark-pink;
-    transition: 0.25s ease-in-out ;
+    transition: 0.25s ease-in-out;
 
 }
 
@@ -392,7 +394,7 @@ hr {
     color: white;
     padding: 10px 20px;
     border-radius: 20px;
-    transition: 0.25s ease-in-out ;
+    transition: 0.25s ease-in-out;
 }
 
 .menu-item {
@@ -427,24 +429,24 @@ hr {
     background-color: white;
     border: 2px solid pink;
     border-radius: 15px;
-    transition: 0.25s ease-in-out ;
+    transition: 0.25s ease-in-out;
 
 }
 
 
 .details-button:hover {
-    color: white ;
-    opacity: 0.5 ;
-    border: 2px solid pink ;
-    transition: 0.25s ease-in-out ;
+    color: white;
+    opacity: 0.5;
+    border: 2px solid pink;
+    transition: 0.25s ease-in-out;
     border-radius: 15px;
 
 }
 
 .details-button:active {
-    color: white ;
-    opacity: 0.5 ;
-    border: 2px solid pink ;
+    color: white;
+    opacity: 0.5;
+    border: 2px solid pink;
     border-radius: 15px;
 
 }
@@ -462,7 +464,7 @@ hr {
 .add-cart-button:hover {
     color: white;
     border-color: white;
-    background: var(--primary-color-dark-pink, #ffb1b9) ;
+    background: var(--primary-color-dark-pink, #ffb1b9);
 }
 
 .add-cart-button:active {
@@ -488,6 +490,31 @@ p {
     text-align: start;
 
 }
+
+span#_detail {
+    font-size: 1.4rem;
+    color: pink;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+span#_penyimpanan {
+    font-size: 1.4rem;
+    color: gray;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+span#details {
+    font-size: 0.9rem;
+    color: gray;
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
+
+}
+
 
 .details-description h3 {
     font-family: 'Poppins', sans-serif;
@@ -542,14 +569,15 @@ p {
     background-color: $color-dark-pink;
     border: 1px solid $color-dark-pink;
     color: white;
-    transition: .25s ease-in-out ;
+    transition: .25s ease-in-out;
 }
 
-.profile-btn:hover, .profile-btn:active {
+.profile-btn:hover,
+.profile-btn:active {
     background-color: white;
     border: 1px solid $color-dark-pink;
     color: $color-dark-pink;
-    transition: .25s ease-in-out ;
+    transition: .25s ease-in-out;
 }
 
 .loader {
@@ -665,11 +693,11 @@ button {
 // Remove arrow di input number
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 /* Firefox */
 input[type=number] {
-  -moz-appearance: textfield;
+    -moz-appearance: textfield;
 }

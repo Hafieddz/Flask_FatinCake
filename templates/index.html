@@ -30,12 +30,12 @@
           <div class="card card-body-second h-100 col-10 col-md-12">
               <!-- Source Gambar -->
               <img src="{{url_for('static', filename='img/foto_produk/' + cake_product.foto )}}"
-                  class="card-img-top  img-fluid" alt="...">
+                  class="card-img-top img-fluid shadow-lg" alt="...">
               <div class="card-body text-center">
                   <!-- Nama Kue  -->
                   <h5 class="card-title "> {{ cake_product.nama }} </h5>
                   <!-- Detail Singkat  -->
-                  <p class="card-text"> {{ cake_product.detail }} </p>
+                  <p class="card-text"> IDR {{ cake_product.harga }} </p>
               </div>
               <div class="text-center mb-3">
                   <a href="{{ url_for('details', id_kue = cake_product.id_kue) }}">
@@ -67,7 +67,7 @@
           <div class="card card-body-third h-100 col-10 col-md-12">
               <!-- Source Gambar -->
               <img src="{{url_for('static', filename='img/foto_produk/' + cake_product.foto )}}"
-                  class="card-img-top  img-fluid" alt="...">
+                  class="card-img-top img-fluid shadow-lg" alt="...">
               <div class="card-body text-center">
                   <!-- Nama Kue  -->
                   <h5 class="card-title "> {{ cake_product.nama }} </h5>
@@ -110,7 +110,7 @@
           <div class="card card-body-second h-100 col-10 col-md-12">
               <!-- Source Gambar -->
               <img src="{{url_for('static', filename='img/foto_produk/' + cake_product.foto )}}"
-                  class="card-img-top  img-fluid" alt="...">
+                  class="card-img-top img-fluid shadow-lg" alt="...">
               <div class="card-body text-center">
                   <!-- Nama Kue  -->
                   <h5 class="card-title "> {{ cake_product.nama }} </h5>
