@@ -12402,6 +12402,10 @@ span#details {
   text-align: start;
 }
 
+.details {
+  height: 20vh;
+}
+
 .success-pop h1, .success-pop .h1 {
   font-size: 25px;
   text-align: center;
