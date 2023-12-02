@@ -3,10 +3,10 @@
 {% block tittle %} Home - Fatin Cake {% endblock %}
 
 {% block navhome %}
-<li class="nav-item d-flex align-items-center page-now ">
+<li class="nav-item d-flex align-items-center ">
     <a class="nav-link text-pink" aria-current="page" href="{{ url_for('index') }}"> Home </a>
     <img src=" {{url_for('static', filename='img/navbar-home-active.svg')}} "
-        class="img-fluid animated ms-2 " alt="">
+        class="img-fluid animated ms-2 active-nav " alt="">
 </li>
 {% endblock %}
   
@@ -30,7 +30,7 @@
           <div class="card card-body-second h-100 col-10 col-md-12">
               <!-- Source Gambar -->
               <img src="{{url_for('static', filename='img/foto_produk/' + cake_product.foto )}}"
-                  class="card-img-top img-fluid shadow-lg" alt="...">
+                  class="card-img-top img-fluid shadow-lg" alt="">
               <div class="card-body text-center">
                   <!-- Nama Kue  -->
                   <h5 class="card-title "> {{ cake_product.nama }} </h5>
@@ -39,7 +39,7 @@
               </div>
               <div class="text-center mb-3">
                   <a href="{{ url_for('details', id_kue = cake_product.id_kue) }}">
-                      <button type="button" class="custom-button-2">Lihat Detail</button>
+                      <button type="button" class="custom-button-2"> Detail</button>
                   </a>
               </div>
           </div>
@@ -72,7 +72,7 @@
                   <!-- Nama Kue  -->
                   <h5 class="card-title "> {{ cake_product.nama }} </h5>
                   <!-- Detail Singkat  -->
-                  <p class="card-text"> {{ cake_product.detail }} </p>
+                  <p class="card-text"> IDR {{ cake_product.harga }} </p>
               </div>
               <div class="text-center mb-3">
                   <a href="{{ url_for('details', id_kue = cake_product.id_kue) }}">
@@ -115,7 +115,7 @@
                   <!-- Nama Kue  -->
                   <h5 class="card-title "> {{ cake_product.nama }} </h5>
                   <!-- Detail Singkat  -->
-                  <p class="card-text"> {{ cake_product.detail }} </p>
+                  <p class="card-text"> IDR {{ cake_product.harga }} </p>
               </div>
               <div class="text-center mb-3">
                   <a href="{{ url_for('details', id_kue = cake_product.id_kue) }}">

@@ -45,8 +45,8 @@
 <div class="container">
     <div class="row">
         <div class="col-6 mb-5">
-            <img src="{{url_for('static', filename='img/foto_produk/' + cake.foto )}}" class="img-fluid my-5 shadow-lg" alt="..."
-                style="width: 555px; max-height: 509px; min-height: 500px; border-radius: 20px;">
+            <img src="{{url_for('static', filename='img/foto_produk/' + cake.foto )}}" class="img-fluid my-5 shadow-lg"
+                alt="..." style="width: 555px; max-height: 509px; min-height: 500px; border-radius: 20px;">
             <div class="container text-start details-description ">
                 <div class="title d-flex gap-5 mb-4">
                     <div class="detail">
@@ -91,15 +91,18 @@
                     <i class="fa-solid fa-minus fa-xl" style="color: #000000;"> </i>
                 </button>
                 <p class="cart-value">
-                    <span> 0 </span>
+                    <span id="cart-span"> 1 </span>
                 </p>
                 <button class="details-button ms-2 increase-cart" type="button">
                     <i class="fa-solid fa-plus fa-xl" style="color: #000000;"> </i>
                 </button>
             </div>
-            <button type="button" class="btn add-cart-button col-xl-7 mb-3" data-bs-toggle="modal"
-                data-bs-target="#add_cart"> Tambah ke keranjang
-            </button>
+            <form method="POST" action="{{ url_for('add_to_cart', cake_id = cake.id_kue) }}" id="cart-form">
+                {{ test_form.hidden_tag() }}
+                <div class="mb-3">
+                    {{ test_form.submit_test(class="btn add-cart-button col-xl-7 mb-3") }}
+                </div>
+            </form>
             {% else %}
             <!-- User Belum Login -->
             <div class="content mt-3">
@@ -114,7 +117,7 @@
                     <i class="fa-solid fa-minus fa-xl" style="color: #000000;"> </i>
                 </button>
                 <p class="cart-value">
-                    <span> 0 </span>
+                    <span id="cart-span"> 0 </span>
                 </p>
                 <button class="details-button ms-2 increase-cart" type="button">
                     <i class="fa-solid fa-plus fa-xl" style="color: #000000;"> </i>
@@ -139,9 +142,6 @@
                 </div>
                 <div class="content text-center success-pop p-4">
                     <h1> Produk berhasil ditambahkan ke keranjang</h1>
-                    <!-- 
-    <button type="button" class="btn add-cart-button col-xl-4 col-5 mt-3 text-center"> OK </button>  
--->
                 </div>
             </div>
         </div>
@@ -161,8 +161,8 @@
 
     const data = {
         detail: "{{ cake.detail }}",
-        penyimpanan_first : "Mohon segera simpan dalam kulkas.",
-        penyimpanan_second : "Produk ini bisa bertahan 3 sampai 4 hari di dalam kulkas dan 1 sampai 2 jam pada suhu ruang.",
+        penyimpanan_first: "Mohon segera simpan dalam kulkas.",
+        penyimpanan_second: "Produk ini bisa bertahan 3 sampai 4 hari di dalam kulkas dan 1 sampai 2 jam pada suhu ruang.",
     };
 
     data.penyimpanan_full = `${data.penyimpanan_first}<br><br>${data.penyimpanan_second}`;
@@ -179,6 +179,25 @@
         _detail.style.color = "pink";
         _penyimpanan.style.color = "grey";
     }
+
+
+    // Mengambil value keranjang dan mengirim data nya ke flask 
+
+    $(document).ready(function () {
+        // Menanggapi klik pada tombol submit_test
+        $("form#cart-form").submit(function () {
+            // Mendapatkan nilai dari <span>
+            var cartValue = $("#cart-span").text();
+            
+            // Menambahkan nilai sebagai input tersembunyi dalam formulir
+            $("<input />").attr("type", "hidden")
+                .attr("name", "cartValue")
+                .attr("value", cartValue)
+                .appendTo("#cart-form");
+        });
+    });
+
+
 </script>
 
 {% endblock %}
