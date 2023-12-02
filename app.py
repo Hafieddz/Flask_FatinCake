@@ -426,6 +426,7 @@ def add_to_cart(cake_id):
         cake = Cake.query.get_or_404(cake_id)
         # Variabel yang dimasukkan ke dalam database
         cart_value = int(request.form.get('cartValue'))
+        messages = request.form['message']
         sub_total = cake.harga
         id = current_user.id
         id_kue = cake_id
@@ -439,6 +440,7 @@ def add_to_cart(cake_id):
             # Menambahkan jumlah produk ke kue yang sudah ada sebelumnya
             is_cart_details.quantity += cart_value
             is_cart_details.sub_total = sub_total * is_cart_details.quantity
+            is_cart_details.message = messages
             total_price = cart_value * sub_total
             # Mengupdate total_price pada cart
             is_cart.total_price = is_cart.total_price + total_price
@@ -449,7 +451,7 @@ def add_to_cart(cake_id):
             
             # Values yang akan dimasukkan ke dalam database
             add_to_cart = Cart(id_cart = id, total_price = total_price, user_id = id)
-            add_to_cart_details = CartDetails(id_cart = id , quantity = cart_value, sub_total = sub_total, id_kue = id_kue)
+            add_to_cart_details = CartDetails(id_cart = id , quantity = cart_value, sub_total = sub_total, id_kue = id_kue, message = messages)
     
             # Lakukan percobaan apabila belum ada id_cart yang sama (user belum punya cart) harusnya berhasil
             try:
@@ -541,6 +543,7 @@ class CartDetails(db.Model):
     id_kue = db.Column(db.Integer, db.ForeignKey('cake.id_kue'), nullable= False)
     quantity = db.Column(db.Integer, nullable = False)
     sub_total = db.Column(db.Float, nullable = False)
+    message = db.Column(db.Text, nullable = False) 
 
 if __name__ == "__main__":
     app.run(debug=True)

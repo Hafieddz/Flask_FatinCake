@@ -48,4 +48,5 @@ class AddForm(FlaskForm):
     submit_add = SubmitField("Tambah") 
 
 class TestForm(FlaskForm):
+    message = TextAreaField("Detail", validators=[DataRequired()])
     submit_test = SubmitField('Tambah ke keranjang')

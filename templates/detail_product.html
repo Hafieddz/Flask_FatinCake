@@ -45,7 +45,7 @@
 <div class="container">
     <div class="row">
         <div class="col-6 mb-5">
-            <img src="{{url_for('static', filename='img/foto_produk/' + cake.foto )}}" class="img-fluid my-5 shadow-lg"
+            <img src="{{url_for('static', filename='img/foto_produk/' + cake.foto )}}" class="img-fluid my-5 shadow-lg "
                 alt="..." style="width: 555px; max-height: 509px; min-height: 500px; border-radius: 20px;">
             <div class="container text-start details-description ">
                 <div class="title d-flex gap-5 mb-4">
@@ -79,28 +79,28 @@
                 <h3 class="text-start text-pink"> {{ cake.varian }} </h3>
             </div>
             {% if login %}
-            <div class="content mt-3">
-                <h2 class="text-start" style="font-size: 18px;"> Ketikkan ucapan selebrasimu </h2>
-                <div class="mb-3 col-xl-7">
-                    <textarea class="form-control " id="exampleFormControlTextarea1" rows="3"
-                        placeholder="Ketik di sini" style="border-radius: 15px; padding: 10px;"></textarea>
-                </div>
-            </div>
-            <div class="content justify-content-center align-items-center d-flex col-xl-7 mb-3">
-                <button class="details-button me-2 decrease-cart" type="button">
-                    <i class="fa-solid fa-minus fa-xl" style="color: #000000;"> </i>
-                </button>
-                <p class="cart-value">
-                    <span id="cart-span"> 1 </span>
-                </p>
-                <button class="details-button ms-2 increase-cart" type="button">
-                    <i class="fa-solid fa-plus fa-xl" style="color: #000000;"> </i>
-                </button>
-            </div>
             <form method="POST" action="{{ url_for('add_to_cart', cake_id = cake.id_kue) }}" id="cart-form">
                 {{ test_form.hidden_tag() }}
+                <div class="content mt-3">
+                    <h2 class="text-start" style="font-size: 18px;"> Ketikkan ucapan selebrasimu </h2>
+                    <div class="mb-3 col-xl-7">
+                        {{ test_form.message(class="form-control", rows="3", placeholder="Ketik di sini",
+                        style="border-radius: 15px; padding: 10px;") }}
+                    </div>
+                </div>
+                <div class="content justify-content-center align-items-center d-flex col-xl-7 mb-3">
+                    <button class="details-button me-2 decrease-cart" type="button">
+                        <i class="fa-solid fa-minus fa-xl" style="color: #000000;"> </i>
+                    </button>
+                    <p class="cart-value">
+                        <span id="cart-span"> 1 </span>
+                    </p>
+                    <button class="details-button ms-2 increase-cart" type="button">
+                        <i class="fa-solid fa-plus fa-xl" style="color: #000000;"> </i>
+                    </button>
+                </div>
                 <div class="mb-3">
-                    {{ test_form.submit_test(class="btn add-cart-button col-xl-7 mb-3") }}
+                    {{ test_form.submit_test(class="btn custom-button-2 col-xl-7 mb-3") }}
                 </div>
             </form>
             {% else %}
@@ -188,7 +188,6 @@
         $("form#cart-form").submit(function () {
             // Mendapatkan nilai dari <span>
             var cartValue = $("#cart-span").text();
-            
             // Menambahkan nilai sebagai input tersembunyi dalam formulir
             $("<input />").attr("type", "hidden")
                 .attr("name", "cartValue")
