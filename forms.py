@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField, ValidationError, BooleanField, TextAreaField
+from wtforms import StringField, SubmitField, PasswordField, ValidationError, BooleanField, TextAreaField, IntegerField
 from flask_wtf.file import FileAllowed, FileField
 from wtforms.validators import DataRequired, EqualTo, Length, data_required, length
 
@@ -46,3 +46,6 @@ class AddForm(FlaskForm):
     ukuran = StringField("Ukuran", validators=[DataRequired()])
     detail = TextAreaField("Detail", validators=[DataRequired()])
     submit_add = SubmitField("Tambah") 
+
+class TestForm(FlaskForm):
+    submit_test = SubmitField('Tambah ke keranjang')

@@ -1,7 +1,10 @@
+from re import sub
 from flask import Flask, redirect, render_template, request, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Nullable, String, false, log
 from sqlalchemy.engine import url
+from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm import backref
 from sqlalchemy.sql.expression import Update
 from sqlalchemy.sql.functions import user
 from sqlalchemy.util import methods_equivalent
@@ -307,26 +310,52 @@ def cart():
     register_form = RegisterForm()
     login_form = LoginForm()
     login = 'Yes'
+    id = current_user.id
 
-    return render_template('cart.html', login = login, register_form = register_form, login_form = login_form)
+    # Cek apakah ada keranjang
+    user_cart = Cart.query.filter_by(user_id=id).first()
+
+    if not user_cart:
+        return render_template('empty_cart.html', login=login, register_form=register_form, login_form=login_form)
+
+    # Jika ada cart, lanjutt
+    cart_details = (db.session.query(
+        CartDetails.id,
+        Cake.nama.label('cake_name'),
+        Cake.foto.label('cake_photo'),
+        Cake.ukuran.label('cake_ukuran'),
+        CartDetails.quantity,
+        CartDetails.sub_total
+    )
+    .join(Cake, CartDetails.id_kue == Cake.id_kue)
+    .join(Cart, CartDetails.id_cart == Cart.id_cart)
+    .join(Users, Cart.user_id == Users.id)
+    .filter(Users.id == id)
+    .all()
+    )
+
+    user_cart = Cart.query.filter_by(user_id=id).first()
+    total_price = user_cart.total_price if user_cart else 0
+
+    return render_template('cart.html', login = login, register_form = register_form, login_form = login_form, cart_details = cart_details, total_price = total_price)
         
-
 # Detail Page
 @app.route('/details/<int:id_kue>', methods=['GET', 'POST']  )
 def details(id_kue):
     register_form = RegisterForm()
     login_form = LoginForm()
     login = None
+    test_form = TestForm()
 
     cake = Cake.query.get_or_404(id_kue)
     
 
     if current_user.is_authenticated:
         login = 'Yes'
-        return render_template("detail_product.html", login = login, register_form = register_form, login_form = login_form, cake = cake)
+        return render_template("detail_product.html", login = login, register_form = register_form, login_form = login_form, cake = cake, test_form = test_form)
     else:
         flash(f"Akun Belum Login, Silahkan Login Terlebih Dahulu!", "danger")
-        return render_template("detail_product.html", register_form = register_form, login_form = login_form, cake = cake)
+        return render_template("detail_product.html", register_form = register_form, login_form = login_form, cake = cake, test_form = test_form)
         
 
 # Account Page
@@ -383,11 +412,81 @@ def logout():
     return redirect(url_for('index')) 
 
 # Empty Cart (Delete After Ready!)
-@app.route('/carts')
+@app.route('/carts', methods = ['GET', 'POST'])
+@login_required
 def carts():
     form = LoginForm()
-    return render_template('cart_empty.html', form = form)
+    Login = 'Yes'
 
+    return render_template('empty_cart.html', form = form, login = login)
+
+@app.route('/user/add_products/<int:cake_id>', methods = ['GET', 'POST'])
+def add_to_cart(cake_id):
+    if request.method == 'POST':
+        cake = Cake.query.get_or_404(cake_id)
+        # Variabel yang dimasukkan ke dalam database
+        cart_value = int(request.form.get('cartValue'))
+        sub_total = cake.harga
+        id = current_user.id
+        id_kue = cake_id
+        # Query cart_details berdasarkan id_kue
+        is_cart_details = CartDetails.query.filter_by(id_cart = id, id_kue = id_kue).first()
+        # Query cart 
+        is_cart = Cart.query.filter_by(user_id = id).first()
+
+        # Jika terdapat id_kue yang sama 
+        if is_cart_details:
+            # Menambahkan jumlah produk ke kue yang sudah ada sebelumnya
+            is_cart_details.quantity += cart_value
+            is_cart_details.sub_total = sub_total * is_cart_details.quantity
+            total_price = cart_value * sub_total
+            # Mengupdate total_price pada cart
+            is_cart.total_price = is_cart.total_price + total_price
+            
+        else:
+            total_price = cart_value * sub_total
+            sub_total = cart_value * sub_total
+            
+            # Values yang akan dimasukkan ke dalam database
+            add_to_cart = Cart(id_cart = id, total_price = total_price, user_id = id)
+            add_to_cart_details = CartDetails(id_cart = id , quantity = cart_value, sub_total = sub_total, id_kue = id_kue)
+    
+            # Lakukan percobaan apabila belum ada id_cart yang sama (user belum punya cart) harusnya berhasil
+            try:
+                db.session.add(add_to_cart)
+                db.session.commit()
+
+                db.session.add(add_to_cart_details)
+                db.session.commit()
+                flash(f'Produk berhasil ditambahkan!', 'success')
+                return redirect(url_for('details', id_kue = cake_id))
+
+            # Terjadi apabila user sudah punya keranjang, akan tetapi produk tersebut dimasukkan ke dalam cart_details dan update total_price pada cart
+            except IntegrityError as e:
+                db.session.rollback()
+                is_cart.total_price = is_cart.total_price + total_price
+    
+                db.session.add(add_to_cart_details)
+                db.session.commit()
+                flash('Produk Berhasil Ditambahkan!', 'success')
+                return redirect(url_for('details', id_kue = cake_id))
+            
+            # Terjadi apabila datanya tidak bisa dimasukkan
+            except Exception as e:
+                db.session.rollback()
+                flash(f'gagal update data, Error : {e}', 'error')
+                return redirect(url_for('index'))
+        try :
+            db.session.commit()
+            flash('Produk berhasil ditambahkan!', 'success')
+            return redirect(url_for('details', id_kue = cake_id))
+
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Gagal update data --> Except e = 2, Error : {e}.', 'error')
+            return redirect(url_for('details', id_kue = cake_id))
+
+    return redirect(url_for('cart'))
 
 # DATABASE MODEL 
 class Users(db.Model, UserMixin):
@@ -399,6 +498,8 @@ class Users(db.Model, UserMixin):
     no_telp = db.Column(db.String(20), nullable=False)
     role = db.Column(db.String(20),server_default = 'user')
     foto_profile = db.Column(db.Text, nullable=False)
+    cart = db.relationship('Cart', backref='users_carts')
+
 
     @property
     def password(self):
@@ -423,9 +524,23 @@ class Cake(db.Model):
     detail = db.Column(db.Text, nullable=False)
     varian = db.Column(db.String(30), nullable=False)
     ukuran = db.Column(db.String(30), nullable=False)
+    cart_details = db.relationship('CartDetails', backref='cake_carts')
 
     def __repr__(self):
         return '<nama %r>' %self.nama 
+    
+class Cart(db.Model):
+    id_cart = db.Column(db.Integer,primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable= False)
+    total_price = db.Column(db.Integer, nullable=False)
+    cart_details = db.relationship('CartDetails', backref='cart')
+
+class CartDetails(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    id_cart = db.Column(db.Integer, db.ForeignKey('cart.id_cart'), nullable= False)
+    id_kue = db.Column(db.Integer, db.ForeignKey('cake.id_kue'), nullable= False)
+    quantity = db.Column(db.Integer, nullable = False)
+    sub_total = db.Column(db.Float, nullable = False)
 
 if __name__ == "__main__":
     app.run(debug=True)
