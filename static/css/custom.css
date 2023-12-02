@@ -12154,6 +12154,22 @@ form .modal-button:active {
   transition: 0.25s ease-in-out;
 }
 
+.button-custom-2 {
+  border-radius: 10px;
+  align-items: center;
+  padding: 10px 15px;
+  background-color: #fff8de;
+  border: 1px solid #F3808B;
+  color: #F3808B;
+  transition: 0.25s ease-in-out;
+}
+
+.button-custom-2:hover {
+  background-color: #F3808B;
+  color: white;
+  transition: 0.25s ease-in-out;
+}
+
 .pricing-content .button-custom {
   padding: 10px 15px;
   border: 1px solid white;

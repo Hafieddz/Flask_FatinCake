@@ -24,6 +24,7 @@ $text-color-light-grey : #979797;
 
 // sass --watch ./scss/custom.scss ./css/custom.css
 
+
 html {
     height: 100%;
 }
@@ -240,6 +241,23 @@ form {
 }
 
 .button-custom:hover {
+    background-color: $color-dark-pink;
+    color: white;
+    transition: 0.25s ease-in-out;
+
+}
+
+.button-custom-2 {
+    border-radius: 10px;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #fff8de;
+    border: 1px solid $color-dark-pink ;
+    color: $color-dark-pink ;
+    transition: 0.25s ease-in-out;
+}
+
+.button-custom-2:hover {
     background-color: $color-dark-pink;
     color: white;
     transition: 0.25s ease-in-out;

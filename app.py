@@ -300,7 +300,7 @@ def custome():
     if current_user.is_authenticated:
         login = 'Yes'
 
-    return render_template("custome_cake.html", register_form = register_form, login_form = login_form)
+    return render_template("custome_cake.html", register_form = register_form, login_form = login_form, login = login)
         
 
 # Cart Page

@@ -105,11 +105,13 @@
                     {% block navlogin %}
                     <!-- Muncul Ketika Sudah Login -->
                     {% if login %}
+                    {% block nav_profile %}
                     <li class="nav-item d-flex align-items-center">
                         <a class="nav-link text-white" href="{{ url_for('profile') }}"> Akun </a>
                         <img src="{{url_for('static', filename='img/navbar-user.svg')}}"
                             class="img-fluid animated ms-1 " alt="">
                     </li>
+                    {% endblock %}
                     <!-- Muncul Ketika Belum Login -->
                     {% else %}
                     <li class="nav-item d-flex align-items-center">

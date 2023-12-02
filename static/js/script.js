@@ -17,7 +17,7 @@ window.addEventListener("load", () => {
 const navbarEl = document.querySelector('.navbar');
 
 window.addEventListener('scroll', () =>{
-  if(window.scrollY >= 56 ) {
+  if(window.scrollY >= 56 && window.innerWidth > 1000 ) {
     navbarEl.classList.add('navbar-scrolled')
   } else if (window.scrollY < 56) {
     navbarEl.classList.remove('navbar-scrolled')
