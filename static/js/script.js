@@ -12,6 +12,23 @@ window.addEventListener("load", () => {
 
 // End Of Loader
 
+// Navbar
+
+const navbarEl = document.querySelector('.navbar');
+
+window.addEventListener('scroll', () =>{
+  if(window.scrollY >= 56 ) {
+    navbarEl.classList.add('navbar-scrolled')
+  } else if (window.scrollY < 56) {
+    navbarEl.classList.remove('navbar-scrolled')
+
+  }
+
+});
+
+
+// End Of Navbar
+
 
 // Cart Logic 
 
@@ -21,7 +38,7 @@ btn_plus.addEventListener('click', addCart);
 let btn_minus = document.querySelector('.decrease-cart');
 btn_minus.addEventListener('click', minCart);
 
-let value = 0;
+let value = 1;
 
 function addCart() {
 	value++;
@@ -29,7 +46,7 @@ function addCart() {
 }
 
 function minCart() {
-  if(value > 0) {
+  if(value > 1) {
     value--;
     document.querySelector('.cart-value span').textContent = value;
   } else {

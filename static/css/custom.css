@@ -12065,13 +12065,31 @@ form .modal-button:active {
   line-height: normal;
 }
 
-.page-now {
-  text-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-
 .text-pink,
 .text-pink:hover {
   color: #F3808B;
+}
+
+.nav-link {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+}
+
+.navbar-scrolled {
+  background-color: black;
+  opacity: 50%;
+  transition: 0.5s;
+}
+
+.navbar-scrolled:hover {
+  background-color: #F9BFC4;
+  opacity: 100%;
+  transition: 0.5s;
+}
+
+.navbar {
+  transition: 0.5s;
 }
 
 .nav-back-color {
@@ -12255,6 +12273,20 @@ hr {
   color: black;
 }
 
+img.img_empty_cart {
+  width: 450px;
+}
+
+h1.cart_empty, .cart_empty.h1 {
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+
+p.cart_empty {
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
 .pricing-content h1, .pricing-content .h1 {
   font-size: 16px;
   font-family: "Poppins", sans-serif;
@@ -12386,6 +12418,10 @@ span#_penyimpanan {
   color: gray;
   font-weight: 700;
   font-family: "Poppins", sans-serif;
+}
+
+span#_penyimpanan:hover, span#_detail:hover {
+  cursor: pointer;
 }
 
 span#details {
