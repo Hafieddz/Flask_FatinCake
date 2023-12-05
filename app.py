@@ -1,7 +1,8 @@
+from operator import and_
 from re import sub
-from flask import Flask, redirect, render_template, request, url_for, flash
+from flask import Flask, redirect, render_template, request, url_for, flash, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Nullable, String, false, log
+from sqlalchemy import Nullable, String, false, log, and_, func
 from sqlalchemy.engine import url
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import backref
@@ -490,6 +491,46 @@ def add_to_cart(cake_id):
 
     return redirect(url_for('cart'))
 
+@app.route('/user/delete_cart/<int:detail_id>', methods = ['GET', 'POST'])
+@login_required
+def delete_cart(detail_id):
+    # Mengambil id cart_details (produk pada cart yg ingin dihapus)
+    id = detail_id
+    user_id = current_user.id
+    # Query datanya 
+    cart_to_delete = CartDetails.query.get_or_404(id)
+    # Query cart berdasarkan user_id
+    current_cart = Cart.query.get_or_404(user_id)
+    # Mengambil total price pada keranjang yg ingin dihapus (sub_total)
+    deletedProductPrice = cart_to_delete.sub_total
+    # Mengambil data total price 
+    total_price = current_cart.total_price
+    
+    # Update total price pada tabel cart, misal x = 46.000 - 16.000 = 30.000
+    newPrice = total_price - deletedProductPrice
+    # Mengupdate kolom total_price
+    current_cart.total_price = newPrice
+    
+    carts_id = current_cart.id_cart
+    
+    try :
+        db.session.delete(cart_to_delete)
+        # Menghitung jumlah data yang ada pada cart_details user
+        cart_details_row = CartDetails.query.filter(CartDetails.id_cart == carts_id).count()
+    
+        if cart_details_row == 0:
+            # Jika tidak ada produk lagi, hapus juga entri cart
+            db.session.delete(current_cart)
+            
+        db.session.commit()
+        flash(f'Produk berhasil dihapus!', 'success')
+        
+        return redirect(url_for('cart'))
+    
+    except :
+        flash(f'Produk gagal dihapus!', 'danger')
+        return redirect(url_for('cart'))
+    
 # DATABASE MODEL 
 class Users(db.Model, UserMixin):
     id = db.Column(db.Integer,primary_key=True)

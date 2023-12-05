@@ -1,0 +1,3 @@
+NPM Scripts :
+1. Flask = npm run flask_run
+2. Sass = npm run sass_run
