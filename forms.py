@@ -24,7 +24,7 @@ class UserForm(FlaskForm):
     first_name = StringField("Nama Depan", validators=[DataRequired()])
     last_name = StringField("Nama Belakang")
     phone_number = StringField("No Telepon", validators=[DataRequired()])
-    profile_pic = FileField("Profile Picture", validators=[DataRequired(), FileAllowed(['jpg', 'png', 'jpeg'], 'Hanya bisa upload gambar!')])
+    profile_pic = FileField("Profile Picture", validators=[FileAllowed(['jpg', 'png', 'jpeg'], 'Hanya bisa upload gambar!')])
     submit_form = SubmitField("Update Data")
     
 # Update Product Form
@@ -32,9 +32,9 @@ class UpdateForm(FlaskForm):
     nama = StringField("Nama Kue", validators=[DataRequired()])
     harga = StringField("Harga Kue", validators=[DataRequired()])
     varian = StringField("Varian", validators=[DataRequired()])
-    foto = FileField("Foto Produk", validators=[DataRequired(), FileAllowed(['jpg', 'png', 'jpeg'], 'Hanya bisa upload gambar!')])
+    foto = FileField("Foto Produk", validators= [FileAllowed(['jpg', 'png', 'jpeg'], 'Hanya bisa upload gambar')])
     ukuran = StringField("Ukuran", validators=[DataRequired()])
-    detail = TextAreaField("Detail", validators=[DataRequired()])
+    detail = TextAreaField("Detail")
     submit_update = SubmitField("Update")
 
 # Add Product Form

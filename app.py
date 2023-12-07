@@ -2,7 +2,7 @@ from operator import and_
 from re import sub
 from flask import Flask, redirect, render_template, request, url_for, flash, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Nullable, String, false, log, and_, func
+from sqlalchemy import Nullable, PoolProxiedConnection, String, false, log, and_, func
 from sqlalchemy.engine import url
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import backref
@@ -49,8 +49,9 @@ def load_user(user_id):
 @app.route('/update_product/<int:id_kue>', methods=['POST', 'GET'])
 def update(id_kue):
     if current_user.role == 'admin':
-        update_form = UpdateForm()
         product_to_update = Cake.query.get_or_404(id_kue)
+        cake_photo = product_to_update.foto
+        cake_detail = product_to_update.detail
         if request.method == 'POST':
             product_to_update.nama = request.form['nama'] 
             product_to_update.harga = request.form['harga'] 
@@ -58,19 +59,36 @@ def update(id_kue):
             product_to_update.ukuran = request.form['ukuran'] 
             product_to_update.detail = request.form['detail'] 
             product_to_update.foto = request.files['foto']
+            
+            # Cek apakah ada foto yang diupdate
+            if 'foto' in request.files and request.files['foto'].filename != '':
+                if cake_photo:
+                    try:
+                        # Menghapus file gambar sebelumnya
+                        os.remove(os.path.join(app.config['UPLOAD_FOLDER_2'], cake_photo))
+                    except Exception as e:
+                        # Jika gambar tidak bisa dihapus
+                        flash(f'Error deleting previous image: {str(e)}', "error")
+                # Upload gambar 
+                pic_filename = secure_filename(request.files['foto'].filename)
+                saver = request.files['foto']
+                product_to_update.foto = pic_filename
+                saver.save(os.path.join(app.config['UPLOAD_FOLDER_2'], pic_filename))
+            else:
+                # Jika tidak ada jangan lakukan perubahan
+                product_to_update.foto = cake_photo
 
-            pic_filename = secure_filename(product_to_update.foto.filename)
-            saver = request.files['foto']
-            product_to_update.foto = pic_filename
+                # Jika tidak ada perubahan pada detail jangan lakukan perubahan
+            if not product_to_update.detail:
+                product_to_update.detail = cake_detail
 
             try:
                 db.session.commit()
-                saver.save(os.path.join(app.config['UPLOAD_FOLDER_2'], pic_filename))
                 flash(f'Produk berhasil di update!', "success")
                 return redirect(url_for('admin_product'))
             
-            except:
-                flash(f'Data gagal di update!', "danger")
+            except IntegrityError as e :
+                flash(f'Data gagal di update! error : {e}' , "danger")
                 return redirect(url_for('admin_product'))
         else:
             return redirect(url_for('admin_product'))
@@ -376,24 +394,36 @@ def update_profile():
     user_form = UserForm()
     id = current_user.id
     user_profile = Users.query.get_or_404(id)
+    user_photo = user_profile.foto_profile
 
     if request.method == 'POST':
             user_profile.nama_depan = request.form['first_name'] 
             user_profile.nama_belakang = request.form['last_name'] 
             user_profile.no_telp = request.form['phone_number'] 
             user_profile.foto_profile = request.files['profile_pic']
-
-            # Ambil nama gambar
-            pic_filename = secure_filename(user_profile.foto_profile.filename)
-            # Set UUID (Buat nama gambar jadi unique)
-            pic_name = str(uuid.uuid1()) + "_" + pic_filename
-            #Save gambar
-            saver = request.files['profile_pic'] 
-            #Save nama file ke database
-            user_profile.foto_profile = pic_name
+            
+            # Cek apakah user mengupdate foto profile
+            if 'profile_pic' in request.files and request.files['profile_pic'].filename != '':
+                    # Jika ada perubahan pada foto profile
+                if user_photo:
+                    try:
+                        # Menghapus file gambar sebelumnya
+                        os.remove(os.path.join(app.config['UPLOAD_FOLDER_1'], user_photo))
+                    except Exception as e:
+                        # Jika gambar tidak bisa dihapus
+                        flash(f'Error deleting previous image: {str(e)}', "error")
+                # Upload gambar 
+                pic_filename = secure_filename(request.files['profile_pic'].filename)
+                pic_name = str(uuid.uuid1()) + "_" + pic_filename
+                saver = request.files['profile_pic']
+                user_profile.foto_profile = pic_name
+                saver.save(os.path.join(app.config['UPLOAD_FOLDER_1'], pic_name))
+            # Jika tidak ada perubahan pada foto profile 
+            else:
+                user_profile.foto_profile = user_photo
+            # Simpan data 
             try:
                 db.session.commit()
-                saver.save(os.path.join(app.config['UPLOAD_FOLDER_1'], pic_name))
                 flash(f'Data berhasil di update!', "success")
                 return redirect(url_for('profile'))
             

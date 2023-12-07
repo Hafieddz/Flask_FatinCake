@@ -176,7 +176,7 @@ form {
 }
 
 .navbar {
-    transition: 0.50s;   
+    transition: 0.50s;
 }
 
 .nav-back-color {
@@ -416,8 +416,47 @@ p.cart_empty {
     cursor: pointer;
 }
 
+.order-details {
+    h2 {
+        color: $subtle-2;
+        font-size: 1.25rem;
+        font-weight: 500;
+    }
+    h3 {
+        color: $subtle-2;
+        font-weight: 400;
+        font-size: 1rem;
+        font-family: 'Poppins', sans-serif;
+    }
+    h4 {
+        color: $color-dark-pink;
+        font-size: 1rem;
+        font-weight: 600;
+
+    }
+    h5 {
+        color: black;
+        font-size: 1rem;
+        font-weight: 300;
+    }
+}
+
+h2.order-pricing {
+    color: $subtle-2;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+h3.order-pricing {
+    color: $color-dark-pink;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
 .pricing-content h1 {
-    font-size: 16px;
+    font-size: 0.875rem;
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
     color: $text-color-light-grey;
@@ -560,7 +599,8 @@ span#_penyimpanan {
 
 }
 
-span#_penyimpanan:hover, span#_detail:hover {
+span#_penyimpanan:hover,
+span#_detail:hover {
     cursor: pointer;
 
 }
