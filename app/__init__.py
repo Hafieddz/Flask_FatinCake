@@ -9,7 +9,7 @@ from .models.models import Users
 
 def create_app():
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://fatincake:fatin2cake_@localhost/fatin_blueprint'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://fatincake:fatin2cake_@localhost/fatin_db'
     app.config['SECRET_KEY'] = "this is very secret"
     
     db.init_app(app)
