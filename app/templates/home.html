@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block body %}
+
+<h1>
+    Ini adalah halaman home
+</h1>
+
+<a href="{{ url_for('main.index') }}"> Ke Halaman Index </a>
+<br>
+<a href="{{ url_for('admin.admin_home') }}"> Ke Halaman Admin </a>
+<br>
+<a href="{{ url_for('main.profile') }}"> Ke Halaman Profile </a>
+
+<div class="container-fluid mt-5 px-5">
+    <h2>
+        Anda harus login ketika ingin masuk di halaman ini!
+    </h2>
+
+    <a href="{{ url_for('main.logout') }}">
+        Logout
+    </a>
+    
+    
+</div>
+
+{% endblock %}

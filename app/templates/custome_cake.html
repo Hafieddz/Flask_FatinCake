@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+
+{% block tittle %} Custome Cake - Fatin Cake {% endblock %}
+
+{% block navcustome %}
+
+<li class="nav-item d-flex align-items-center">
+    <a class="nav-link text-pink" href="{{ url_for('main.custome') }}"> Custom Cake </a>
+    <img src="{{url_for('static', filename='img/navbar-custome-active.svg')}}" class="img-fluid animated ms-2 " alt="">
+</li>
+
+{% endblock %}
+
+
+{% block body %}
+
+<div class="container mt-5">
+
+    <div class="row">
+        <div class="col-xl-7 col-12 ">
+            <img src="{{url_for('static', filename='img/custome_cake.png')}}" class="img-fluid w-100">
+        </div>
+
+        <div class="col-12 col-xl-5 my-5 text-center">
+
+            <h2> DIY Cake </h2>
+
+            <h4 class="mt-4"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate fuga ducimus molestiae
+                vel voluptatum repellat?</h2>
+
+                <h1 class="mt-5 text-center" style="font-size: 30px;"> Mulai dari IDR 100,000</h1>
+
+                <div class="text-center mb-3">
+                    <button type="button" class="custom-button-2 mt-5 "
+                        style="border-radius: 10px !important; padding: 10px 20px !important;"> MAKE YOUR DREAM CAKE
+                    </button>
+                </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- Example Testing -->
+
+<div style="background-color:  #F3808B;">
+
+    <div class="container-fluid my-3 custome-text">
+        <h1 class="text-center"> UKURAN KUE</h1>
+
+        <div class="container my-5">
+            <div class="row justify-content-around gap-1">
+                <div class="col-lg-4 col-9 menu-item ">
+                    <img src="{{url_for('static', filename='img/custom_1.png')}}"
+                        class="img-fluid img-custome shadow-lg" alt="">
+                    <h4 class="mt-3"> 16 cm </h4>
+                </div>
+
+                <div class="col-lg-4 col-9 menu-item ">
+                    <img src="{{url_for('static', filename='img/custom_2.png')}}"
+                        class="img-fluid img-custome shadow-lg" alt="">
+                    <h4 class="mt-3"> 18 cm </h4>
+                </div>
+
+                <div class="col-lg-4 col-9 menu-item ">
+                    <img src="{{url_for('static', filename='img/custom_3.png')}}"
+                        class="img-fluid img-custome shadow-lg" alt="">
+                    <h4 class="mt-3"> 20 cm </h4>
+                </div>
+
+                <div class="col-lg-4 col-9 menu-item ">
+                    <img src="{{url_for('static', filename='img/custom_4.png')}}"
+                        class="img-fluid img-custome shadow-lg" alt="">
+                    <h4 class="mt-3"> 22 cm </h4>
+                </div>
+
+                <div class="col-lg-4 col-9 menu-item ">
+                    <img src="{{url_for('static', filename='img/custom_5.png')}}"
+                        class="img-fluid img-custome shadow-lg" alt="">
+                    <h4 class="mt-3"> 24 cm </h4>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div style="background-color:   #F9BFC4;">
+
+    <div class="container-fluid my-3 custome-text">
+        <h1 class="mt-3 text-center"> VARIAN KUE </h1>
+
+        <div class="container my-5">
+            <div class="row justify-content-around gap-5">
+                <div class="col-lg-4 col-9 menu-item ">
+                    <img src="{{url_for('static', filename='img/varian_1.png')}}"
+                        class="img-fluid w-100 img-custome shadow-lg" alt="">
+                    <h4 class="mt-3"> Brownies </h4>
+                    <p class="ingredients">
+                        Kekayaan cokelat dalam setiap gigitan. Tekstur lembut di dalam dengan lapisan luar yang renyah.
+                    </p>
+                </div>
+
+                <div class="col-lg-4 col-9 menu-item ">
+                    <img src="{{url_for('static', filename='img/varian_2.png')}}"
+                        class="img-fluid img-custome shadow-lg" alt="">
+                    <h4 class="mt-3"> Red Velvet </h4>
+                    <p class="ingredients">
+                        Kekhasan kue merah muda dengan rasa lembut dan penampilan yang memukau.
+                    </p>
+                </div>
+
+                <div class="col-lg-4 col-9 menu-item ">
+                    <img src="{{url_for('static', filename='img/varian_3.png')}}"
+                        class="img-fluid img-custome shadow-lg" alt="">
+                    <h4 class="mt-3"> Pandan </h4>
+                    <p class="ingredients">
+                        Aroma unik pandan menghadirkan cita rasa segar dan lembut dalam setiap suapan.
+                    </p>
+                </div>
+
+                <div class="col-lg-4 col-9 menu-item ">
+                    <img src="{{url_for('static', filename='img/varian_4.png')}}"
+                        class="img-fluid img-custome shadow-lg" alt="">
+                    <h4 class="mt-3"> Rainbow </h4>
+                    <p class="ingredients">
+                        Kue berlapis dengan warna cerah yang menghadirkan keceriaan dalam setiap potongan.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
