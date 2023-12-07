@@ -103,8 +103,59 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body">
-                <div class="container p-3 ">
+                <div class="container p-3" name="Judul Modal">
                     <h1 style="font-size: 35px;"> Buat Pesanan </h1>
+                    <div class="container p-2" name="Isi Modal">
+                        {% for detail in cart_details %}
+                        <div class="row mb-2">
+                            <div class="col-3">
+                                <img src="{{url_for('static', filename='img/foto_produk/' + detail.cake_photo)}}"
+                                    alt="foto_kue" style="width: 90px; max-height: 150px; min-height: 90px; border-radius: 10px;">
+                            </div>
+                            <div class="col-9 order-details py-2">
+                                <h2 class="m-0"> {{ detail.cake_name }} </h2>
+                                <h3 class="m-0 mb-1"> {{ detail.cake_ukuran }} </h3>
+                                <div class="col-12 d-flex justify-content-between">
+                                    <h4 class="m-0 text-start"> IDR {{ detail.sub_total }} </h4>
+                                    <h5 class="m-0 text-end me-4"> x {{ detail.quantity }} </h5>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="container p-2">
+                        <div class="form-floating mb-3 ">
+                            <input type="text" class="form-control" placeholder="something">
+                            <label for="floatingInput"> Nama </label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" placeholder="something">
+                            <label for="floatingInput"> Tanggal Pengambilan </label>
+                        </div>
+                        <div class="form-floating">
+                            <select class="form-select mb-2" id="floatingSelect"
+                                aria-label="Floating label select example">
+                                <option selected> Pilih Metode Pembayaran </option>
+                                <option value="1">BRI</option>
+                                <option value="2">BNI</option>
+                                <option value="3">GOPAY</option>
+                            </select>
+                            <label for="floatingSelect"> Metode Pembayaran </label>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-6">
+                                <h2 class="order-pricing m-0 mb-1 ms-3"> Total Pembayaran</h2>
+                                <h3 class="order-pricing m-0 ms-3"> IDR {{ total_price }}</h3>
+                            </div>
+                            <div class="col-6">
+                                <button class="custom-button-2 ">
+                                    Buat Pesanan
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -114,12 +165,12 @@
 <script>
     function removeTheCart(id) {
         Swal.fire({
-            icon : 'error',
+            icon: 'error',
             title: `Apakah anda ingin menghapus produk ini?`,
             showCancelButton: true,
-            showDenyButton : true,
-            showConfirmButton : false,
-            denyButtonText : "Hapus"
+            showDenyButton: true,
+            showConfirmButton: false,
+            denyButtonText: "Hapus"
         }).then((result) => {
             if (result.isDenied) {
                 window.location.href = 'user/delete_cart/' + id;
