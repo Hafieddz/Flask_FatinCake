@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+
+{% block tittle %} Cart - Fatin Cake {% endblock %}
+
+{% block navcart %}
+<li class="nav-item d-flex align-items-center">
+    <a class="nav-link text-pink" href="{{ url_for('main.cart') }}"> Cart </a>
+    <img src="{{url_for('static', filename='img/navbar-cart-active.svg')}}" class="img-fluid animated ms-2 " alt="">
+</li>
+{% endblock %}
+
+{% block modal %}
+
+<div>
+
+</div>
+
+{% endblock %}
+
+{% block body %}
+
+<div class="container px-4 px-xl-0" id="cart-header">
+    <div class="cart-text mt-5">
+        <h1>
+            Shopping Cart
+        </h1>
+    </div>
+    <hr>
+</div>
+ 
+<div class="container cart-list mb-5">
+
+    {% for detail in cart_details %}
+    <div class="row d-block">
+        <div class="col-12 mt-3 d-flex gap-xl-5 gap-4 mb-3">
+            <div class="col-md-2 col-3 d-flex align-items-center">
+                <img src="{{url_for('static', filename='img/foto_produk/' + detail.cake_photo)}}"
+                    class="img-fluid shadow-sm" style="border-radius: 20px;">
+            </div>
+            <div class="content col-xl-9 col-8 align-items-center gap-md-5 gap-3 d-flex ">
+                <div class="col-5 col-md-4 col-xl-4">
+                    <h1 class="fs-5">
+                        {{ detail.cake_name }}
+                    </h1>
+                    <h2 class="fs-6">
+                        {{ detail.cake_ukuran }}
+                    </h2>
+                    <div class="d-flex align-content-center gap-3">
+                        <!-- Bagian Remove Cart -->
+                        <i class="fa-solid fa-trash fa-sm py-3 cart-remove" onclick="removeTheCart('{{ detail.id }}')">
+                        </i>
+                        <h2 class="fs-6 py-1 cart-remove" onclick="removeTheCart('{{ detail.id }}')">
+                            Remove
+                        </h2>
+                        <!-- Bagian Remove Cart -->
+                    </div>
+                </div>
+                <div class="content d-md-flex col py-4">
+                    <div class="col-4 col-md-5 text-center" name="cart-list-2">
+                        <h3 class="fs-6">
+                            Total
+                        </h3>
+                        <h4 class="fs-6">
+                            x {{ detail.quantity }}
+                        </h4>
+                    </div>
+                    <div class="col-12 col-md-7 d-md-flex text-center " name="cart-list-3">
+                        <div class="col ">
+                            <h2 class="fs-6 ">
+                                Total Harga
+                            </h2>
+                            <h2 class="fs-6">
+                                IDR {{ detail.sub_total }}
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Loop -->
+    {% endfor %}
+
+    <div class="container pricing-content justify-content-lg-end d-flex  ">
+        <div class="content d-flex  align-items-center justify-content-around gap-md-3 gap-4   ">
+            <div class="content d-flex gap-sm-3 gap-2 my-md-0 my-3 me-sm-2 ">
+                <h1 class="fs-5" style="margin: 0;"> Total Harga </h1>
+                <h2 class="fs-5" style="margin: 0;"> IDR {{total_price }} </h2>
+            </div>
+
+            <div class="content d-flex justify-content-center">
+                <button class="custom-button-2 " style="border-radius: 10px;" data-bs-toggle="modal"
+                    data-bs-target="#create_order">
+                    Buat Pesanan
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="create_order" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container p-3" name="Judul Modal">
+                    <h1 style="font-size: 35px;"> Buat Pesanan </h1>
+                    <div class="container p-2" name="Isi Modal">
+                        {% for detail in cart_details %}
+                        <div class="row mb-2">
+                            <div class="col-3">
+                                <img src="{{url_for('static', filename='img/foto_produk/' + detail.cake_photo)}}"
+                                    alt="foto_kue"
+                                    style="width: 90px; max-height: 150px; min-height: 90px; border-radius: 10px;">
+                            </div>
+                            <div class="col-9 order-details py-2">
+                                <h2 class="m-0"> {{ detail.cake_name }} </h2>
+                                <h3 class="m-0 mb-1"> {{ detail.cake_ukuran }} </h3>
+                                <div class="col-12 d-flex justify-content-between">
+                                    <h4 class="m-0 text-start"> IDR {{ detail.sub_total }} </h4>
+                                    <h5 class="m-0 text-end me-4"> x {{ detail.quantity }} </h5>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <form action="{{ url_for('main.add_orders') }}" method="POST">
+                        <div class="container p-2">
+                             {{ order_form.hidden_tag() }}
+                             <div class="form-floating mb-3">
+                                 {{ order_form.nama(type="text", class="form-control")}}
+                                 {{ order_form.nama.label() }}
+                            </div>
+                            <div class="form-floating mb-3">
+                                {{ order_form.tanggal(type="date", class="form-control")}}
+                                {{ order_form.tanggal.label() }}
+                            </div>
+                            <div class="form-floating mb-3">
+                                {{ order_form.waktu(type="time", class="form-control")}}
+                                {{ order_form.waktu.label() }}
+                            </div>
+                            <div class="form-floating">
+                                <select class="form-select mb-2" id="metodePembayaran" name="metodePembayaran" aria-label="Floating label select example" required>
+                                    <option disabled selected value=""> Pilih Metode Pembayaran </option>
+                                    <option value="BRI">BRI</option>
+                                    <option value="BNI">BNI</option>
+                                    <option value="GOPAY">GOPAY</option>
+                                </select>
+                                <label for="floatingSelect"> Metode Pembayaran </label>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-6">
+                                    <h2 class="order-pricing m-0 mb-1 ms-3"> Total Pembayaran</h2>
+                                    <h3 class="order-pricing m-0 ms-3"> IDR {{ total_price }}</h3>
+                                </div>
+                                <div class="col-6">
+                                    <button type="submit" class="custom-button-2 ">
+                                        Buat Pesanan
+                                    </button>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+    function removeTheCart(id) {
+        Swal.fire({
+            icon: 'error',
+            title: `Apakah anda ingin menghapus produk ini?`,
+            showCancelButton: true,
+            showDenyButton: true,
+            showConfirmButton: false,
+            denyButtonText: "Hapus"
+        }).then((result) => {
+            if (result.isDenied) {
+                window.location.href = 'user/delete_cart/' + id;
+            }
+        });
+    }
+</script>
+{% endblock %}  

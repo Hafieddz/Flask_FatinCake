@@ -1,12 +1,12 @@
 {
-  "name": "static",
+  "name": "blueprint_fatincake",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "sass_run" : "cd static && sass --watch ./scss/custom.scss ./css/custom.css",
-    "flask_run" : "flask run --debug"
+    "sass_run" : "cd app && cd static && sass --watch ./scss/custom.scss ./css/custom.css",
+    "flask" : "flask run --debug"
   },
   "keywords": [],
   "author": "",

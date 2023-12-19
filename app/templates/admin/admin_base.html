@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Pacifico&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/75f28d3810.js" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='node_modules/bootstrap/dist/css/bootstrap.min.css') }}">
+
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+
+    <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <title> {% block title %} {% endblock %} </title>
+</head>
+
+<body
+    style="background: rgb(249,191,196);
+           background: radial-gradient(circle, rgba(249,191,196,1) 0%, rgba(253,233,235,1) 37%, rgba(254,246,247,1) 75%, rgba(255,255,255,1) 100%);">
+    <!-- Loader -->
+    <div class="loader">
+
+    </div>
+
+    <!-- Begin alerts -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <script>
+
+        Swal.fire({
+
+            title: "{{ category.title() }}!",
+            // success , error , warning ,info
+
+            text: "{{ message }}",
+            // Custom message flashed from your flask routes
+
+            icon: "{{ category }}" == "danger" ? "error" : "{{ category }}"
+            // success , error , warning ,info
+
+        })
+
+    </script>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <!-- End alerts -->
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg nav-back-color sticky-top ">
+        <div class="container-fluid">
+            <div class="nav-item col-5 col-sm-4 col-xl-5 p-2">
+                <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                    <img src="{{ url_for('static', filename = 'img/admin-profile.svg') }}"
+                        class="img-fluid col-3 col-sm-4 col-md-2 col-xl-1">
+                </a>
+            </div>
+
+            <div class="d-flex text-end me-2">
+                <a href="{{ url_for('main.index') }}" style="text-decoration: none;">
+                    <p class="navbar-brand header-text  "> Fatin Cake </p>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Off Canvas-->
+
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header d-block">
+            <div class="col-12 d-flex gap-3 align-items-center mt-2">
+                <img src="{{ url_for('static', filename = 'img/admin-profile.svg') }}" class="img-fluid col-xl-2">
+                <h5 class="m-0 text-black fs-3"> Admin </h5>
+            </div>
+            <hr style="border: 2px solid black; opacity: 100;">
+        </div>
+        <div class="offcanvas-body">
+            <div class="list-offcanvas px-2 ">
+                {% block canvas_home %}
+                <div class="d-flex gap-3 align-items-center ">
+                    <img width="43" height="43"
+                        src="https://img.icons8.com/external-kmg-design-detailed-outline-kmg-design/64/external-dashboard-user-interface-kmg-design-detailed-outline-kmg-design.png"
+                        alt="external-dashboard-user-interface-kmg-design-detailed-outline-kmg-design" class="mx-2" />
+                    <a class="col-5" href="{{ url_for('admin.admin_dashboard') }}"> Beranda </a>
+                </div>
+                {% endblock %}
+                {% block canvas_product %}
+                <div class="d-flex gap-3 align-items-center mt-4">
+                    <img width="43" height="43" src="https://img.icons8.com/ios/50/product--v1.png" alt="product--v1"
+                        class="mx-2" />
+                    <a class="col-5" href="{{ url_for('admin.admin_product') }}"> Produk </a>
+                </div>
+                {% endblock %}
+                {% block canvas_order %}
+                <div class="d-flex gap-3 align-items-center mt-4">
+                    <img width="43" height="43" src="https://img.icons8.com/ios/50/order-completed--v2.png"
+                        alt="order-completed--v2" class="mx-2" />
+                    <a class="col-5" href="{{ url_for('admin.admin_order') }}"> Pesanan </a>
+                </div>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+    <!-- Off Canvas-->
+    <!-- Navbar -->
+
+    {% block body %}
+
+
+
+    {% endblock %}
+
+    <script src="{{ url_for('static', filename='node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <!-- Java Script Links -->
+    <script src="{{ url_for('static', filename='js/script.js') }}" type="module"> </script>
+
+</body>
+
+</html>

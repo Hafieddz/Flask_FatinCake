@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+
+{% block tittle %} Profile - Fatin Cake {% endblock %}
+
+{% block modal %}
+
+<div>
+
+</div>
+
+{% endblock %}
+
+{% block nav_profile %}
+<li class="nav-item d-flex align-items-center">
+    <a class="nav-link text-pink" href="{{ url_for('main.profile') }}"> Akun </a>
+    <img src="{{url_for('static', filename='img/navbar-profile-active.svg')}}" class="img-fluid animated ms-1 " alt="">
+</li>
+{% endblock %}
+
+
+{% block body %}
+
+<div class="container-fluid">
+    {% if empty_order %}
+    {% else %}
+    <div class="row gap-5 my-4 user-profile justify-content-center">
+        <div class="col-10 col-xl-4 ">
+            <div class="profile-content shadow-lg rounded p-5 ">
+                <!-- Foto Profile -->
+                {% if current_user.foto_profile %}
+                <!-- Kalau user punya foto profile (harusnya ada) -->
+                <div class="col-xl-12 col-12 d-flex justify-content-md-center mb-3 justify-content-start ">
+                    <img src="{{url_for('static', filename='img/profile/' + current_user.foto_profile)}}"
+                        class="img-fluid animated ms-1 profile-img" alt="">
+                </div>
+                {% else %}
+                <!-- Default Foto Profile -->
+                <div class="col-xl-12 col-12 d-flex justify-content-md-center mb-3 justify-content-start ">
+                    <img src="{{url_for('static', filename='img/kanan_profile.jpeg')}}"
+                        class="img-fluid animated ms-1 profile-img" alt="">
+                </div>
+                {% endif %}
+                <div class="content px-md-4 text-sm-start text-md-center text-xl-start">
+                    <h1 class="fs-3"> {{ user_profile.nama_depan }} {{ user_profile.nama_belakang }}</h1>
+                    <h2 class="fs-5"> {{ user_profile.email }} </h2>
+                    <h2 class="fs-5"> {{ user_profile.no_telp }} </h2>
+                </div>
+
+                <div class="d-flex justify-content-between px-2">
+                    <div class="col text-center">
+                        <a href="{{ url_for('main.logout') }}">
+                            <button class="profile-btn mt-3 col-xl-8 col-5 col-sm-4 col-md-4 text-center">
+                                Log Out
+                            </button>
+                        </a>
+                    </div>
+
+                    <div class="col text-center">
+                        <button class="profile-btn mt-3 col-xl-8 col-5 col-sm-4 col-md-4 text-center"
+                            data-bs-toggle="modal" data-bs-target="#editProfile">
+                            Edit Profile
+                        </button>
+                    </div>
+
+                    <!-- Modal Update Product  -->
+                    <div class=" modal modal fade" id="editProfile" tabindex="-1" aria-labelledby="editProfileLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <h1 class="mx-4 mt-4"> Edit Profile </h1>
+
+                                    <div class="content p-2 m-4">
+                                        <form method="POST" action="{{ url_for('main.update_profile') }}"
+                                            enctype="multipart/form-data">
+                                            <div class="row justify-content-center">
+                                                <div class="col-12">
+                                                    <!-- Form -->
+                                                    {{ user_form.hidden_tag() }}
+                                                    <div class="mb-3">
+                                                        {{ user_form.first_name.label(class="form-label") }}
+                                                        {{ user_form.first_name(class="form-control", value =
+                                                        user_profile.nama_depan)}}
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        {{ user_form.last_name.label(class="form-label") }}
+                                                        {{ user_form.last_name(class="form-control", value =
+                                                        user_profile.nama_belakang)}}
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        {{ user_form.phone_number.label(class="form-label") }}
+                                                        {{ user_form.phone_number(class="form-control", value =
+                                                        user_profile.no_telp)}}
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        {{ user_form.profile_pic.label(class="form-label") }}
+                                                        {{ user_form.profile_pic(class="form-control",
+                                                        type="file", value = user_profile.profile_pic)}}
+                                                    </div>
+                                                    <div class="mb-3 px-5">
+                                                        {{ user_form.submit_form(class="modal-button col-12") }}
+                                                    </div>
+                                                    <!-- Form -->
+                                                </div>
+                                            </div>
+                                            <!-- End Row -->
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal Update Product -->
+
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-7 col-10 shadow-lg rounded-2 px-4 py-3">
+            <h1 class="fs-2 p-2 text-secondary fw-bold">
+                Riwayat Pesanan
+            </h1>
+            {% for item in order_details %}
+            <div class="content d-flex gap-5 my-3 ">
+                <div class="col-xl-2 col-3 d-flex align-items-center ">
+                    <img src="{{url_for('static', filename='img/foto_produk/' + item.cake_photo)}}" class="img-fluid shadow-lg" alt="" style="border-radius: 20px;">
+                </div>
+                <div class="details user-profile py-md-2 ">
+                    <h1 class="fs-5 text-secondary fw-bolder"> {{ item.cake_name }}</h1>
+                    <h1 class="fs-6 text-secondary"> Total Harga : IDR {{ item.sub_total }}</h1>
+                    <h1 class="fs-6 text-secondary"> Jumlah Pesanan : {{ item.quantity}} </h1>
+                    <h1 class="fs-6 text-secondary"> Status Pesanan : {{ item.status_pesanan }} </h1>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+
+    {% endif %}
+</div>
+
+{% endblock %}

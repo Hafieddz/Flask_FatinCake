@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+
+{% block tittle %} Details - Fatin Cake {% endblock %}
+
+{% block active %}
+<nav class="collapse navbar-collapse justify-content-end me-4" id="navbarNav">
+    <ul class="navbar-nav gap-4">
+        <li class="nav-item d-flex align-items-center page-now ">
+            <a class="nav-link text-white" aria-current="page" href="{{ url_for('main.index') }}"> Home </a>
+            <img src=" {{url_for('static', filename='img/navbar-home.svg')}} " class="img-fluid animated ms-2 " alt="">
+        </li>
+        <li class="nav-item d-flex align-items-center">
+            <a class="nav-link text-white" href=""> All Product </a>
+            <img src="{{url_for('static', filename='img/navbar-product.svg')}}" class="img-fluid animated ms-2 " alt="">
+        </li>
+        <li class="nav-item d-flex align-items-center">
+            <a class="nav-link text-white" href="{{ url_for('custome') }}"> Custom Cake </a>
+            <img src="{{url_for('static', filename='img/navbar-custome.svg')}}" class="img-fluid animated ms-2 " alt="">
+        </li>
+        <li class="nav-item d-flex align-items-center">
+            <a class="nav-link text-white" href="{{ url_for('cart') }}"> Cart </a>
+            <img src="{{url_for('static', filename='img/navbar-cart.svg')}}" class="img-fluid animated ms-2 " alt="">
+        </li>
+        <!-- Muncul Ketika Sudah Login -->
+        {% if email %}
+        <li class="nav-item d-flex align-items-center ">
+            <div class="nav-link text-white" href=""> {{ email }} </div>
+            <img src="{{url_for('static', filename='img/navbar-user.svg')}}" class="img-fluid animated ms-1 " alt="">
+        </li>
+        <!-- Muncul Ketika Belum Login -->
+        {% else %}
+        <li class="nav-item d-flex align-items-center">
+            <a class="nav-link text-white" href="" data-bs-toggle="modal" data-bs-target="#loginModal"> Login </a>
+            <img src="{{url_for('static', filename='img/navbar-user.svg')}}" class="img-fluid animated ms-2 " alt="">
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+
+{% endblock %}
+
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-6 mb-5">
+            <img src="{{url_for('static', filename='img/foto_produk/' + cake.foto )}}" class="img-fluid my-5 shadow-lg "
+                alt="..." style="width: 555px; max-height: 509px; min-height: 500px; border-radius: 20px;">
+            <div class="container text-start details-description ">
+                <div class="title d-flex gap-5 mb-4">
+                    <div class="detail">
+                        <span id="_detail">
+                            Detail
+                        </span>
+                    </div>
+                    <div class="penyimpanan">
+                        <span id="_penyimpanan">
+                            Penyimpanan
+                        </span>
+                    </div>
+                </div>
+                <div class="col details">
+                    <span id="details">
+                        {{ cake.detail }}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col mt-5 ms-3">
+            <div class="content details-content">
+                <h1 class="text-start"> Fatin Cake </h1>
+                <h2 class="text-start pt-3"> {{ cake.nama }} </h2>
+                <h3 class="text-start text-pink"> IDR {{ cake.harga }} </h3>
+                <h3 class="text-start text-secondary    pt-3"> Ukuran </h3>
+                <h3 class="text-start text-pink"> {{ cake.ukuran }} </h3>
+                <h3 class="text-start text-secondary pt-3"> Varian Kue </h3>
+                <h3 class="text-start text-pink"> {{ cake.varian }} </h3>
+            </div>
+            {% if login %}
+            <form method="POST" action="{{ url_for('main.add_to_cart', cake_id = cake.id_kue) }}" id="cart-form">
+                {{ test_form.hidden_tag() }}
+                <div class="content mt-3">
+                    <h2 class="text-start" style="font-size: 18px;"> Ketikkan ucapan selebrasimu </h2>
+                    <div class="mb-3 col-xl-7">
+                        {{ test_form.message(class="form-control", rows="3", placeholder="Ketik di sini",
+                        style="border-radius: 15px; padding: 10px;") }}
+                    </div>
+                </div>
+                <div class="content justify-content-center align-items-center d-flex col-xl-7 mb-3">
+                    <button class="details-button me-2 decrease-cart" type="button">
+                        <i class="fa-solid fa-minus fa-xl" style="color: #000000;"> </i>
+                    </button>
+                    <p class="cart-value">
+                        <span id="cart-span"> 1 </span>
+                    </p>
+                    <button class="details-button ms-2 increase-cart" type="button">
+                        <i class="fa-solid fa-plus fa-xl" style="color: #000000;"> </i>
+                    </button>
+                </div>
+                <div class="mb-3">
+                    {{ test_form.submit_test(class="custom-button-2 col-xl-7 mb-3") }}
+                </div>
+            </form>
+            {% else %}
+            <!-- User Belum Login -->
+            <div class="content mt-3">
+                <h2 class="text-start" style="font-size: 18px;"> Ketikkan ucapan selebrasimu </h2>
+                <div class="mb-3 col-xl-7">
+                    <textarea class="form-control " id="exampleFormControlTextarea1" rows="3"
+                        placeholder="Ketik di sini" style="border-radius: 15px; padding: 10px;"></textarea>
+                </div>
+            </div>
+            <div class="content justify-content-center align-items-center d-flex col-xl-7 mb-3">
+                <button class="details-button me-2 decrease-cart" type="button">
+                    <i class="fa-solid fa-minus fa-xl" style="color: #000000;"> </i>
+                </button>
+                <p class="cart-value">
+                    <span id="cart-span"> 0 </span>
+                </p>
+                <button class="details-button ms-2 increase-cart" type="button">
+                    <i class="fa-solid fa-plus fa-xl" style="color: #000000;"> </i>
+                </button>
+            </div>
+            <button type="button" class="btn add-cart-button col-xl-7 mb-3" id="add-to-cart"> Tambah ke keranjang
+            </button>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+
+<div class="modal fade" id="add_cart" tabindex="-1" aria-labelledby="add to cart" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body justify-content-center">
+                <div class="d-flex justify-content-center">
+                    <img src="{{ url_for('static', filename = 'img/success.png') }}" alt="" class="img-fluid"
+                        style="width: 150px; height: 150px;">
+                </div>
+                <div class="content text-center success-pop p-4">
+                    <h1> Produk berhasil ditambahkan ke keranjang</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    let detail = document.querySelector('.detail');
+    detail.addEventListener('click', details);
+
+    let penyimpanan = document.querySelector('.penyimpanan');
+    penyimpanan.addEventListener('click', penyimpanan_);
+
+    let _detail = document.getElementById('_detail');
+    let _penyimpanan = document.getElementById('_penyimpanan');
+
+    const data = {
+        detail: "{{ cake.detail }}",
+        penyimpanan_first: "Mohon segera simpan dalam kulkas.",
+        penyimpanan_second: "Produk ini bisa bertahan 3 sampai 4 hari di dalam kulkas dan 1 sampai 2 jam pada suhu ruang.",
+    };
+
+    data.penyimpanan_full = `${data.penyimpanan_first}<br><br>${data.penyimpanan_second}`;
+
+    function penyimpanan_() {
+        document.querySelector('.details span').innerHTML = data.penyimpanan_full
+        _penyimpanan.style.color = "pink";
+        _detail.style.color = "grey";
+    }
+
+
+    function details() {
+        document.querySelector('.details span').textContent = data.detail;
+        _detail.style.color = "pink";
+        _penyimpanan.style.color = "grey";
+    }
+
+
+    // Mengambil value keranjang dan mengirim data nya ke flask 
+    $(document).ready(function () {
+        // Menanggapi klik pada tombol submit_test
+        $("form#cart-form").submit(function () {
+            // Mendapatkan nilai dari <span>
+            var cartValue = $("#cart-span").text();
+            // Menambahkan nilai sebagai input tersembunyi dalam formulir
+            $("<input />").attr("type", "hidden")
+                .attr("name", "cartValue")
+                .attr("value", cartValue)
+                .appendTo("#cart-form");
+        });
+    });
+
+
+</script>
+
+{% endblock %}  
