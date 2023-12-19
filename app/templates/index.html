@@ -59,21 +59,21 @@
 
    <div class="container py-4">
     <div class="row row-cols-1 row-cols-md-4 g-4">
-      {% for cake_product in cake_product %}
+      {% for chocolate_product in chocolate_product %}
       <!-- Looping start disini !! -->
       <div class="col-md-6 col-xl-3 d-flex justify-content-center">
           <div class="card card-body-third h-100 col-10 col-md-12">
               <!-- Source Gambar -->
-              <img src="{{url_for('static', filename='img/foto_produk/' + cake_product.foto )}}"
+              <img src="{{url_for('static', filename='img/foto_produk/' + chocolate_product.foto )}}"
                   class="card-img-top img-fluid shadow-lg" alt="...">
               <div class="card-body text-center">
                   <!-- Nama Kue  -->
-                  <h5 class="card-title "> {{ cake_product.nama }} </h5>
+                  <h5 class="card-title "> {{ chocolate_product.nama }} </h5>
                   <!-- Detail Singkat  -->
-                  <p class="card-text"> IDR {{ cake_product.harga }} </p>
+                  <p class="card-text"> IDR {{ chocolate_product.harga }} </p>
               </div>
               <div class="text-center mb-3">
-                  <a href="{{ url_for('main.details', id_kue = cake_product.id_kue) }}">
+                  <a href="{{ url_for('main.details', id_kue = chocolate_product.id_kue) }}">
                       <button type="button" class="custom-button-2">Lihat Detail</button>
                   </a>
               </div>
@@ -101,21 +101,21 @@
 
   <div class="container py-4">
     <div class="row row-cols-1 row-cols-md-4 g-4">
-      {% for cake_product in cake_product %}
+      {% for rainbow_product in rainbow_product %}
       <!-- Looping start disini !! -->
       <div class="col-md-6 col-xl-3 d-flex justify-content-center">
           <div class="card card-body-second h-100 col-10 col-md-12">
               <!-- Source Gambar -->
-              <img src="{{url_for('static', filename='img/foto_produk/' + cake_product.foto )}}"
+              <img src="{{url_for('static', filename='img/foto_produk/' + rainbow_product.foto )}}"
                   class="card-img-top img-fluid shadow-lg" alt="...">
               <div class="card-body text-center">
                   <!-- Nama Kue  -->
-                  <h5 class="card-title "> {{ cake_product.nama }} </h5>
+                  <h5 class="card-title "> {{ rainbow_product.nama }} </h5>
                   <!-- Detail Singkat  -->
-                  <p class="card-text"> IDR {{ cake_product.harga }} </p>
+                  <p class="card-text"> IDR {{ rainbow_product.harga }} </p>
               </div>
               <div class="text-center mb-3">
-                  <a href="{{ url_for('main.details', id_kue = cake_product.id_kue) }}">
+                  <a href="{{ url_for('main.details', id_kue = rainbow_product.id_kue) }}">
                       <button type="button" class="custom-button-2">Lihat Detail</button>
                   </a>
               </div>

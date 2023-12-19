@@ -27,11 +27,13 @@ def index():
     login_form = LoginForm()
     login = None
     cake_product = Cake.query.order_by(Cake.id_kue).limit(4)
-
+    chocolate_product = Cake.query.filter_by(varian='Coklat').order_by(Cake.id_kue).limit(4).all()
+    rainbow_product = Cake.query.filter_by(varian='Rainbow').order_by(Cake.id_kue).limit(4).all()
+    
     if current_user.is_authenticated:
         login = 'Yes'
     
-    return render_template("index.html", login = login, register_form = register_form, login_form = login_form, cake_product = cake_product)
+    return render_template("index.html", login = login, register_form = register_form, login_form = login_form, cake_product = cake_product, chocolate_product = chocolate_product, rainbow_product = rainbow_product)
 
 # Login Route 
 @main.route('/login', methods=['POST'])
