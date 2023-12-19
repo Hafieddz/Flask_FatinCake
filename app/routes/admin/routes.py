@@ -169,26 +169,7 @@ def admin_order():
         login = 'Yes'
 
     if current_user.role == 'admin':
-        orders = (
-            db.session.query(
-                Users.id,
-                Orders.id_orders,
-                Orders.pickup_date,
-                Orders.picktup_time,
-                Orders.total_price,
-                Orders.order_status,
-                Orders.payment_methods,
-                Cake.foto.label('cake_photo'),
-                Cake.nama.label('cake_name'),
-                OrderDetails.quantity,
-                OrderDetails.sub_total
-            )
-            .select_from(Users)
-            .join(Orders, Users.id == Orders.user_id)
-            .outerjoin(OrderDetails, Orders.id_orders == OrderDetails.id_orders)
-            .outerjoin(Cake, OrderDetails.id_kue == Cake.id_kue)
-            .all()
-        )
+        orders = Orders.query.order_by(Orders.id_orders)
         return render_template("admin/admin_order.html", login = login, register_form = register_form, login_form = login_form, orders = orders)
     else :
         flash("Anda tidak bisa mengakses halaman ini!", "error")
