@@ -27,7 +27,7 @@
     </div>
     <hr>
 </div>
-
+ 
 <div class="container cart-list mb-5">
 
     {% for detail in cart_details %}
@@ -110,7 +110,8 @@
                         <div class="row mb-2">
                             <div class="col-3">
                                 <img src="{{url_for('static', filename='img/foto_produk/' + detail.cake_photo)}}"
-                                    alt="foto_kue" style="width: 90px; max-height: 150px; min-height: 90px; border-radius: 10px;">
+                                    alt="foto_kue"
+                                    style="width: 90px; max-height: 150px; min-height: 90px; border-radius: 10px;">
                             </div>
                             <div class="col-9 order-details py-2">
                                 <h2 class="m-0"> {{ detail.cake_name }} </h2>
@@ -123,43 +124,49 @@
                         </div>
                         {% endfor %}
                     </div>
-                    <div class="container p-2">
-                        <div class="form-floating mb-3 ">
-                            <input type="text" class="form-control" placeholder="something">
-                            <label for="floatingInput"> Nama </label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" placeholder="something">
-                            <label for="floatingInput"> Tanggal Pengambilan </label>
-                        </div>
-                        <div class="form-floating">
-                            <select class="form-select mb-2" id="floatingSelect"
-                                aria-label="Floating label select example">
-                                <option selected> Pilih Metode Pembayaran </option>
-                                <option value="1">BRI</option>
-                                <option value="2">BNI</option>
-                                <option value="3">GOPAY</option>
-                            </select>
-                            <label for="floatingSelect"> Metode Pembayaran </label>
-                        </div>
-                    </div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-6">
-                                <h2 class="order-pricing m-0 mb-1 ms-3"> Total Pembayaran</h2>
-                                <h3 class="order-pricing m-0 ms-3"> IDR {{ total_price }}</h3>
+                    <form action="{{ url_for('main.add_orders') }}" method="POST">
+                        <div class="container p-2">
+                             {{ order_form.hidden_tag() }}
+                             <div class="form-floating mb-3">
+                                 {{ order_form.nama(type="text", class="form-control")}}
+                                 {{ order_form.nama.label() }}
                             </div>
-                            <div class="col-6">
-                                <button class="custom-button-2 ">
-                                    Buat Pesanan
-                                </button>
+                            <div class="form-floating mb-3">
+                                {{ order_form.tanggal(type="date", class="form-control")}}
+                                {{ order_form.tanggal.label() }}
+                            </div>
+                            <div class="form-floating mb-3">
+                                {{ order_form.waktu(type="time", class="form-control")}}
+                                {{ order_form.waktu.label() }}
+                            </div>
+                            <div class="form-floating">
+                                <select class="form-select mb-2" id="metodePembayaran" name="metodePembayaran" aria-label="Floating label select example" required>
+                                    <option disabled selected value=""> Pilih Metode Pembayaran </option>
+                                    <option value="BRI">BRI</option>
+                                    <option value="BNI">BNI</option>
+                                    <option value="GOPAY">GOPAY</option>
+                                </select>
+                                <label for="floatingSelect"> Metode Pembayaran </label>
                             </div>
                         </div>
-                    </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-6">
+                                    <h2 class="order-pricing m-0 mb-1 ms-3"> Total Pembayaran</h2>
+                                    <h3 class="order-pricing m-0 ms-3"> IDR {{ total_price }}</h3>
+                                </div>
+                                <div class="col-6">
+                                    <button type="submit" class="custom-button-2 ">
+                                        Buat Pesanan
+                                    </button>
+                                </div>
+                            </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <script>
@@ -178,4 +185,4 @@
         });
     }
 </script>
-{% endblock %}
+{% endblock %}  

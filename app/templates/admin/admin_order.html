@@ -14,13 +14,13 @@
     <div class="row product-page">
         <div class="col d-flex justify-content-start align-items-center p-3 da ">
             <h1> Order (Pesanan) </h1>
-        </div>     
+        </div>
     </div>
 
     <table class="table border-black  text-center table-hover custom-table text-white ">
         <thead>
             <tr>
-                <th class="p-3" scope="col"> No. </t`h>
+                <th class="p-3" scope="col"> No. </th>
                 <th class="p-3" scope="col"> ID - Pesananan </th>
                 <th class="p-3" scope="col"> Tanggal Pengambilan</th>
                 <th class="p-3" scope="col"> Waktu Pengambilan</th>
@@ -31,69 +31,60 @@
             </tr>
         </thead>
         <tbody>
+            <!-- Loop Sini -->
+            {% for item in orders %}
             <tr>
-                <td class="p-3" scope="row">1</td>
-                <td class="p-3"> 0001</td>
-                <td class="p-3"> 23/12/2023</td>
-                <td class="p-3"> 15:00 WITA</td>
-                <td class="p-3"> Gopay </td>
+                <td class="p-3" scope="row"> {{ loop.index }} </td>
+                <td class="p-3"> {{ item.id_orders }} </td>
+                <td class="p-3"> {{ item.pickup_date }} </td>
+                <td class="p-3"> {{ item.picktup_time }} WITA </td>
+                <td class="p-3"> {{ item.payment_methods }} </td>
                 <td class="p-3">
-                    <button type="button" class="btn btn-dark"> Detail </button>
+                    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#cake_detail{{ item.id_orders }}"> 
+                        Detail
+                     </button>
                 </td>
-                <td class="p-3"> IDR 350000 </td>
+                <td class="p-3"> IDR {{ item.total_price }} </td>
                 <td class="p-3">
                     <button type="button" class="btn btn-success">Terima</button>
                     <button type="button" class="btn btn-danger">Tolak</button>
                 </td>
-            </tr>
-            <tr>
-                <td class="p-3" scope="row">1</td>
-                <td class="p-3"> 0002</td>
-                <td class="p-3"> 23/12/2023</td>
-                <td class="p-3"> 15:00 WITA</td>
-                <td class="p-3"> BNI </td>
-                <td class="p-3">
-                    <button type="button" class="btn btn-dark"> Detail </button>
-                </td>
-                <td class="p-3"> IDR 350000 </td>
-                <td class="p-3">
-                    <button type="button" class="btn btn-success">Terima</button>
-                    <button type="button" class="btn btn-danger">Tolak</button>
-                </td>
-            </tr>
-            <tr>
-                <td class="p-3" scope="row">1</td>
-                <td class="p-3"> 0003</td>
-                <td class="p-3"> 23/12/2023</td>
-                <td class="p-3"> 15:00 WITA</td>
-                <td class="p-3"> BRI </td>
-                <td class="p-3">
-                    <button type="button" class="btn btn-dark"> Detail </button>
-                </td>
-                <td class="p-3"> IDR 350000 </td>
-                <td class="p-3">
-                    <button type="button" class="btn btn-success">Terima</button>
-                    <button type="button" class="btn btn-danger">Tolak</button>
-                </td>
-            </tr>
-            <tr>
-                <td class="p-3" scope="row">1</td>
-                <td class="p-3"> 0004</td>
-                <td class="p-3"> 23/12/2023</td>
-                <td class="p-3"> 15:00 WITA</td>
-                <td class="p-3"> BCA </td>
-                <td class="p-3">
-                    <button type="button" class="btn btn-dark"> Detail </button>
-                </td>
-                <td class="p-3"> IDR 350000 </td>
-                <td class="p-3">
-                    <button type="button" class="btn btn-success">Terima</button>
-                    <button type="button" class="btn btn-danger">Tolak</button>
-                </td>
-            </tr>
-        
+            </tr>                                                               
+            <!-- Modal -->
+            <div class="modal fade" id="cake_detail{{ item.id_orders }}" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="container p-3" name="Judul Modal">
+                                <h1 style="font-size: 35px;"> Daftar Pesanan {{ item.id_orders }} </h1>
+                                <div class="container p-2" name="Isi Modal">
+                                    {% for order_details_item in cake_detail %}
+                                    <div class="row mb-2">
+                                        <div class="col-3">
+                                            <img src="{{url_for('static', filename='img/foto_produk/' + order_details_item.cake_foto )}}"
+                                                alt="foto_kue"
+                                                style="width: 90px; max-height: 150px; min-height: 90px; border-radius: 10px;">
+                                        </div>
+                                        <div class="col-9 order-details py-2">
+                                            <h2 class="m-0"> {{ order_details_item.cake_name }} </h2>
+                                            <h3 class="m-0 mb-1"> {{ order_details_item.cake_ukuran }} </h3>
+                                            <div class="col-12 d-flex justify-content-between">
+                                                <h4 class="m-0 text-start">  {{ order_details_item.order_details_sub_total }}  </h4>
+                                                <h5 class="m-0 text-end me-4"> x {{ order_details_item.order_details_quantity }} </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Modal -->
+            {% endfor %}
         </tbody>
     </table>
 </div>
 
-{% endblock %}
+{% endblock %}  

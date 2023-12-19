@@ -13,8 +13,7 @@
 {% block nav_profile %}
 <li class="nav-item d-flex align-items-center">
     <a class="nav-link text-pink" href="{{ url_for('main.profile') }}"> Akun </a>
-    <img src="{{url_for('static', filename='img/navbar-profile-active.svg')}}"
-        class="img-fluid animated ms-1 " alt="">
+    <img src="{{url_for('static', filename='img/navbar-profile-active.svg')}}" class="img-fluid animated ms-1 " alt="">
 </li>
 {% endblock %}
 
@@ -72,22 +71,26 @@
                                     <h1 class="mx-4 mt-4"> Edit Profile </h1>
 
                                     <div class="content p-2 m-4">
-                                        <form method="POST" action="{{ url_for('main.update_profile') }}" enctype="multipart/form-data">
+                                        <form method="POST" action="{{ url_for('main.update_profile') }}"
+                                            enctype="multipart/form-data">
                                             <div class="row justify-content-center">
                                                 <div class="col-12">
                                                     <!-- Form -->
                                                     {{ user_form.hidden_tag() }}
                                                     <div class="mb-3">
                                                         {{ user_form.first_name.label(class="form-label") }}
-                                                        {{ user_form.first_name(class="form-control", value = user_profile.nama_depan)}}
+                                                        {{ user_form.first_name(class="form-control", value =
+                                                        user_profile.nama_depan)}}
                                                     </div>
                                                     <div class="mb-3">
                                                         {{ user_form.last_name.label(class="form-label") }}
-                                                        {{ user_form.last_name(class="form-control", value = user_profile.nama_belakang)}}
+                                                        {{ user_form.last_name(class="form-control", value =
+                                                        user_profile.nama_belakang)}}
                                                     </div>
                                                     <div class="mb-3">
                                                         {{ user_form.phone_number.label(class="form-label") }}
-                                                        {{ user_form.phone_number(class="form-control", value = user_profile.no_telp)}}
+                                                        {{ user_form.phone_number(class="form-control", value =
+                                                        user_profile.no_telp)}}
                                                     </div>
                                                     <div class="mb-3">
                                                         {{ user_form.profile_pic.label(class="form-label") }}
@@ -116,49 +119,19 @@
             <h1 class="fs-2 p-2 text-secondary fw-bold">
                 Riwayat Pesanan
             </h1>
+            {% for item in order_details %}
             <div class="content d-flex gap-5 my-3 ">
                 <div class="col-xl-2 col-3 d-flex align-items-center ">
-                    <img src="{{url_for('static', filename='img/dummy_cake.png')}}" class="img-fluid" alt="">
+                    <img src="{{url_for('static', filename='img/foto_produk/' + item.cake_photo)}}" class="img-fluid shadow-lg" alt="" style="border-radius: 20px;">
                 </div>
-                <div class="details user-profile ">
-                    <h1 class="fs-5 text-secondary fw-bolder"> Nama Kue</h1>
-                    <h1 class="fs-6 text-secondary"> IDR 1.200.000 </h1>
-                    <h1 class="fs-6 text-secondary"> Status Pesanan : Diterima </h1>
-                </div>
-            </div>
-
-            <div class="content d-flex gap-5 my-3 ">
-                <div class="col-xl-2 col-3 align-items-center d-flex">
-                    <img src="{{url_for('static', filename='img/dummy_cake.png')}}" class="img-fluid" alt="">
-                </div>
-                <div class="details user-profile ">
-                    <h1 class="fs-5 text-secondary fw-bolder"> Nama Kue</h1>
-                    <h1 class="fs-6 text-secondary"> IDR 1.200.000 </h1>
-                    <h1 class="fs-6 text-secondary"> Status Pesanan : Diterima </h1>
+                <div class="details user-profile py-md-2 ">
+                    <h1 class="fs-5 text-secondary fw-bolder"> {{ item.cake_name }}</h1>
+                    <h1 class="fs-6 text-secondary"> Total Harga : IDR {{ item.sub_total }}</h1>
+                    <h1 class="fs-6 text-secondary"> Jumlah Pesanan : {{ item.quantity}} </h1>
+                    <h1 class="fs-6 text-secondary"> Status Pesanan : {{ item.status_pesanan }} </h1>
                 </div>
             </div>
-
-            <div class="content d-flex gap-5 my-3 ">
-                <div class="col-xl-2 col-3 align-items-center d-flex">
-                    <img src="{{url_for('static', filename='img/dummy_cake.png')}}" class="img-fluid" alt="">
-                </div>
-                <div class="details user-profile ">
-                    <h1 class="fs-5 text-secondary fw-bolder"> Nama Kue</h1>
-                    <h1 class="fs-6 text-secondary"> IDR 1.200.000 </h1>
-                    <h1 class="fs-6 text-secondary"> Status Pesanan : Diterima </h1>
-                </div>
-            </div>
-
-            <div class="content d-flex gap-5 my-3 ">
-                <div class="col-xl-2 col-3 align-items-center d-flex">
-                    <img src="{{url_for('static', filename='img/dummy_cake.png')}}" class="img-fluid" alt="">
-                </div>
-                <div class="details user-profile ">
-                    <h1 class="fs-5 text-secondary fw-bolder"> Nama Kue</h1>
-                    <h1 class="fs-6 text-secondary"> IDR 1.200.000 </h1>
-                    <h1 class="fs-6 text-secondary"> Status Pesanan : Diterima </h1>
-                </div>
-            </div>
+            {% endfor %}
         </div>
 
     </div>
