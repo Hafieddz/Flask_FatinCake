@@ -1,3 +1,4 @@
+from pickle import GET
 from flask import Blueprint, redirect, render_template, request, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from flask import Flask
@@ -8,8 +9,8 @@ import uuid as uuid
 from werkzeug.utils import secure_filename
 
 
-from ...forms.forms import LoginForm, RegisterForm, UserForm, TestForm
-from ...models.models import Users, Cake, Cart, CartDetails, generate_password_hash, check_password_hash
+from ...forms.forms import LoginForm, OrderForm, RegisterForm, UserForm, TestForm
+from ...models.models import OrderDetails, Orders, Users, Cake, Cart, CartDetails, generate_password_hash, check_password_hash
 from ...extension import db
 
 main = Blueprint('main', __name__)
@@ -125,6 +126,7 @@ def custome():
 def cart():
     register_form = RegisterForm()
     login_form = LoginForm()
+    order_form = OrderForm()
     login = 'Yes'
     id = current_user.id
 
@@ -132,7 +134,7 @@ def cart():
     user_cart = Cart.query.filter_by(user_id=id).first()
 
     if not user_cart:
-        return render_template('empty_cart.html', login=login, register_form=register_form, login_form=login_form)
+        return render_template('empty_cart.html', login=login, register_form=register_form, login_form=login_form, order_form = order_form)
 
     # Jika ada cart, lanjutt
     cart_details = (db.session.query(
@@ -149,11 +151,10 @@ def cart():
     .filter(Users.id == id)
     .all()
     )
+  
+    total_price = user_cart.total_price
 
-    user_cart = Cart.query.filter_by(user_id=id).first()
-    total_price = user_cart.total_price if user_cart else 0
-
-    return render_template('cart.html', login = login, register_form = register_form, login_form = login_form, cart_details = cart_details, total_price = total_price)
+    return render_template('cart.html', login = login, register_form = register_form, login_form = login_form, cart_details = cart_details, total_price = total_price, order_form = order_form)
         
 # Detail Page
 @main.route('/details/<int:id_kue>', methods=['GET', 'POST']  )
@@ -182,8 +183,17 @@ def profile():
     user_form = UserForm()
     id = current_user.id
     user_profile = Users.query.get_or_404(id)
+    
+    order_details = db.session.query(
+        OrderDetails.quantity,
+        OrderDetails.sub_total,
+        Cake.foto.label('cake_photo'),
+        Cake.nama.label('cake_name'),
+        Cake.harga.label('cake_price'),
+        Orders.order_status.label('status_pesanan')
+    ).join(Cake, OrderDetails.id_kue == Cake.id_kue).join(Orders, OrderDetails.id_orders == Orders.id_orders).filter(Orders.user_id == id).all()
         
-    return render_template('profile.html', user_profile = user_profile, user_form = user_form, login = login)
+    return render_template('profile.html', user_profile = user_profile, user_form = user_form, login = login, order_details = order_details)
 
 # Update Profile Logic
 @main.route('/update_profile', methods=['GET', 'POST'])
@@ -352,3 +362,77 @@ def delete_cart(detail_id):
     except :
         flash(f'Produk gagal dihapus!', 'danger')
         return redirect(url_for('main.cart'))
+    
+# Tambah Pesanan
+@main.route('/orders', methods = ['GET', 'POST'])
+@login_required
+def add_orders():
+    id = current_user.id
+    user_cart = Cart.query.filter_by(user_id=id).first()
+    total_price = user_cart.total_price
+    
+    if request.method == 'POST':
+        # Data Untuk Tabel Orders
+        nama = request.form['nama']
+        tanggal = request.form['tanggal']
+        waktu = request.form['waktu']
+        metode_pembayaran = request.form.get('metodePembayaran')
+        status_pesanan = "Menunggu Konfirmasi"
+        
+        try:
+            # Query item-item yang ada di keranjang user
+            cart_details = (db.session.query(
+                CartDetails.id,
+                Cake.id_kue.label('cake_id'),
+                Cake.detail.label('cake_message'),
+                CartDetails.quantity,
+                CartDetails.sub_total
+            )
+            .join(Cake, CartDetails.id_kue == Cake.id_kue)
+            .join(Cart, CartDetails.id_cart == Cart.id_cart)
+            .join(Users, Cart.user_id == Users.id)
+            .filter(Users.id == id)
+            .all())
+            
+            # Masukkan Data ke Database!
+            add_to_order = Orders(
+                user_id=id,
+                pickup_date=tanggal,
+                picktup_time=waktu,
+                total_price=total_price,
+                order_status=status_pesanan,
+                payment_methods=metode_pembayaran
+            )
+            
+            db.session.add(add_to_order)
+            db.session.commit()
+            
+            order_id = Orders.query.filter_by(user_id=id).order_by(Orders.id_orders.desc()).first()
+
+            for cart_item in cart_details:
+                order_detail = OrderDetails(
+                    id_orders=order_id.id_orders,
+                    id_kue=cart_item.cake_id,
+                    quantity=cart_item.quantity,
+                    sub_total=cart_item.sub_total,
+                    message=cart_item.cake_message
+                )
+
+                db.session.add(order_detail)
+
+            db.session.commit()
+            
+            # Delete data yang ada di cart
+            CartDetails.query.filter_by(id_cart=id).delete()
+            Cart.query.filter_by(id_cart=id).delete()
+    
+            db.session.commit()
+            
+            flash('Pesanan Anda berhasil!', 'success')
+            return redirect(url_for('main.cart'))
+        
+
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Gagal update data, Error: {e}', 'error')
+            return redirect(url_for('main.cart'))
