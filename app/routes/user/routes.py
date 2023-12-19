@@ -17,7 +17,7 @@ main = Blueprint('main', __name__)
 app = Flask(__name__)
 
 # Upload Folder Untuk User (Foto Profile)
-UPLOAD_FOLDER_1 = 'static/img/profile'
+UPLOAD_FOLDER_1 = 'app/static/img/profile'
 app.config['UPLOAD_FOLDER_1'] = UPLOAD_FOLDER_1
 
 # Home Page / Index
@@ -173,7 +173,6 @@ def details(id_kue):
         login = 'Yes'
         return render_template("detail_product.html", login = login, register_form = register_form, login_form = login_form, cake = cake, test_form = test_form)
     else:
-        flash(f"Akun Belum Login, Silahkan Login Terlebih Dahulu!", "danger")
         return render_template("detail_product.html", register_form = register_form, login_form = login_form, cake = cake, test_form = test_form)
         
 

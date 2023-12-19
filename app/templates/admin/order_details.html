@@ -1,0 +1,17 @@
+{% for order_detail in order_details %}
+<div class="row mb-2">
+    <div class="col-3">
+        <img src="{{url_for('static', filename='img/foto_produk/' + order_detail.cake_foto )}}"
+            alt="foto_kue"
+            style="width: 90px; max-height: 150px; min-height: 90px; border-radius: 10px;">
+    </div>
+    <div class="col-9 order-details py-2">
+        <h2 class="m-0"> {{ order_detail.cake_name }} </h2>
+        <h3 class="m-0 mb-1"> {{ order_detail.cake_ukuran }} </h3>
+        <div class="col-12 d-flex justify-content-between">
+            <h4 class="m-0 text-start">  {{ order_detail.sub_total }}  </h4>
+            <h5 class="m-0 text-end me-4"> x {{ order_detail.quantity }} </h5>
+        </div>
+    </div>
+</div>
+{% endfor %}

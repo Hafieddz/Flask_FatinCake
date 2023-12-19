@@ -13,8 +13,11 @@ from ...extension import db
 admin = Blueprint('admin', __name__)
 app = Flask(__name__)
 
-UPLOAD_FOLDER_2 = 'static/img/foto_produk'
+UPLOAD_FOLDER_2 = 'app/static/img/foto_produk'
 app.config['UPLOAD_FOLDER_2'] = UPLOAD_FOLDER_2
+
+if not os.path.exists(UPLOAD_FOLDER_2):
+    os.makedirs(UPLOAD_FOLDER_2)
 
 # Update Product Route
 @admin.route('/update_product/<int:id_kue>', methods=['POST', 'GET'])
@@ -173,4 +176,19 @@ def admin_order():
         return render_template("admin/admin_order.html", login = login, register_form = register_form, login_form = login_form, orders = orders)
     else :
         flash("Anda tidak bisa mengakses halaman ini!", "error")
-        return redirect(url_for('main.index'))
+        return redirect(url_for('main.index'))  
+    
+@admin.route('/get_order_details/<int:order_id>', methods=['GET'])
+@login_required
+def get_order_details(order_id):
+    # Ambil data OrderDetails berdasarkan order_id
+    order_details = db.session.query(
+        OrderDetails.id_kue,
+        OrderDetails.quantity,
+        OrderDetails.sub_total,
+        Cake.foto.label('cake_foto'),
+        Cake.nama.label('cake_name'),
+        Cake.ukuran.label('cake_ukuran')
+    ).join(Cake, OrderDetails.id_kue == Cake.id_kue).filter(OrderDetails.id_orders == order_id).all()
+
+    return render_template('admin/order_details.html', order_details=order_details)

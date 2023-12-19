@@ -40,16 +40,17 @@
                 <td class="p-3"> {{ item.picktup_time }} WITA </td>
                 <td class="p-3"> {{ item.payment_methods }} </td>
                 <td class="p-3">
-                    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#cake_detail{{ item.id_orders }}"> 
+                    <button type="button" class="btn btn-dark" data-bs-toggle="modal"
+                        data-bs-target="#cake_detail{{ item.id_orders }}">
                         Detail
-                     </button>
+                    </button>
                 </td>
                 <td class="p-3"> IDR {{ item.total_price }} </td>
                 <td class="p-3">
                     <button type="button" class="btn btn-success">Terima</button>
                     <button type="button" class="btn btn-danger">Tolak</button>
                 </td>
-            </tr>                                                               
+            </tr>
             <!-- Modal -->
             <div class="modal fade" id="cake_detail{{ item.id_orders }}" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
@@ -58,23 +59,21 @@
                             <div class="container p-3" name="Judul Modal">
                                 <h1 style="font-size: 35px;"> Daftar Pesanan {{ item.id_orders }} </h1>
                                 <div class="container p-2" name="Isi Modal">
-                                    {% for order_details_item in cake_detail %}
-                                    <div class="row mb-2">
-                                        <div class="col-3">
-                                            <img src="{{url_for('static', filename='img/foto_produk/' + order_details_item.cake_foto )}}"
-                                                alt="foto_kue"
-                                                style="width: 90px; max-height: 150px; min-height: 90px; border-radius: 10px;">
-                                        </div>
-                                        <div class="col-9 order-details py-2">
-                                            <h2 class="m-0"> {{ order_details_item.cake_name }} </h2>
-                                            <h3 class="m-0 mb-1"> {{ order_details_item.cake_ukuran }} </h3>
-                                            <div class="col-12 d-flex justify-content-between">
-                                                <h4 class="m-0 text-start">  {{ order_details_item.order_details_sub_total }}  </h4>
-                                                <h5 class="m-0 text-end me-4"> x {{ order_details_item.order_details_quantity }} </h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {% endfor %}
+                                    <!-- Tambahkan AJAX untuk mengambil data OrderDetails berdasarkan order.id_orders -->
+                                    <div id="order_details_{{ item.id_orders }}"></div>
+                                    <script>
+                                        $(document).ready(function () {
+                                            $('#cake_detail{{ item.id_orders }}').on('show.bs.modal', function (e) {
+                                                $.ajax({
+                                                    url: '/get_order_details/{{ item.id_orders }}',
+                                                    type: 'GET',
+                                                    success: function (response) {
+                                                        $('#order_details_{{ item.id_orders }}').html(response);
+                                                    }
+                                                });
+                                            });
+                                        });
+                                    </script>
                                 </div>
                             </div>
                         </div>
@@ -87,4 +86,4 @@
     </table>
 </div>
 
-{% endblock %}  
+{% endblock %}
