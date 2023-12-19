@@ -47,6 +47,13 @@ class AddForm(FlaskForm):
     detail = TextAreaField("Detail", validators=[DataRequired()])
     submit_add = SubmitField("Tambah") 
 
+# Add Cart Form
 class TestForm(FlaskForm):
     message = TextAreaField("Detail", validators=[DataRequired()])
     submit_test = SubmitField('Tambah ke keranjang')
+
+# Order Form
+class OrderForm(FlaskForm):
+    nama = StringField("Nama", validators=[DataRequired()])
+    tanggal = StringField("Tanggal Pengambilan", validators=[DataRequired()])
+    waktu = StringField("Waktu Pengambilan", validators=[DataRequired()])
