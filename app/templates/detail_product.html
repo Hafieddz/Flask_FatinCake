@@ -44,11 +44,11 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-6 mb-5">
-            <img src="{{url_for('static', filename='img/foto_produk/' + cake.foto )}}" class="img-fluid my-5 shadow-lg "
-                alt="..." style="width: 555px; max-height: 509px; min-height: 500px; border-radius: 20px;">
-            <div class="container text-start details-description ">
-                <div class="title d-flex gap-5 mb-4">
+        <div class="col-xl-6 col-12 mb-0 mb-xl-5 text-center">
+            <img src="{{url_for('static', filename='img/foto_produk/' + cake.foto )}}" class="img-fluid my-5 shadow-lg detail-img"
+                alt="..." style="max-width: 500px ; max-height: 500px; border-radius: 20px;">
+            <div class="container text-start details-description px-5 p-xl-0 ">
+                <div class="title d-flex gap-5 mb-0 mb-xl-5 justify-content-around justify-content-xl-start">
                     <div class="detail">
                         <span id="_detail">
                             Detail
@@ -60,7 +60,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="col details">
+                <div class="col details text-start p-0 px-md-5 p-xl-0 mt-2">
                     <span id="details">
                         {{ cake.detail }}
                     </span>

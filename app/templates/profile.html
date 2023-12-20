@@ -46,17 +46,17 @@
                     <h2 class="fs-5"> {{ user_profile.no_telp }} </h2>
                 </div>
 
-                <div class="d-flex justify-content-between px-2">
+                <div class="d-md-flex d-block justify-content-between px-2">
                     <div class="col text-center">
                         <a href="{{ url_for('main.logout') }}">
-                            <button class="profile-btn mt-3 col-xl-8 col-5 col-sm-4 col-md-4 text-center">
+                            <button class="profile-btn mt-3 col-xl-8 col-12 col-sm-4 col-md-4 text-center">
                                 Log Out
                             </button>
                         </a>
                     </div>
 
                     <div class="col text-center">
-                        <button class="profile-btn mt-3 col-xl-8 col-5 col-sm-4 col-md-4 text-center"
+                        <button class="profile-btn mt-3 col-xl-8 col-12 col-sm-4 col-md-4 text-center"
                             data-bs-toggle="modal" data-bs-target="#editProfile">
                             Edit Profile
                         </button>
@@ -110,8 +110,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Modal Update Product -->
-
                 </div>
             </div>
         </div>

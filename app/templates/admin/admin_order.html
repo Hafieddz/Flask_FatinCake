@@ -22,12 +22,14 @@
             <tr>
                 <th class="p-3" scope="col"> No. </th>
                 <th class="p-3" scope="col"> ID - Pesananan </th>
+                <th class="p-3" scope="col"> Nama </th>
                 <th class="p-3" scope="col"> Tanggal Pengambilan</th>
                 <th class="p-3" scope="col"> Waktu Pengambilan</th>
                 <th class="p-3" scope="col"> Metode Pembayaran</th>
                 <th class="p-3" scope="col"> Detail Kue </th>
                 <th class="p-3" scope="col"> Total Harga </th>
                 <th class="p-3" scope="col"> Aksi </th>
+                <th class="p-3" scope="col"> Status </th>
             </tr>
         </thead>
         <tbody>
@@ -36,6 +38,7 @@
             <tr>
                 <td class="p-3" scope="row"> {{ loop.index }} </td>
                 <td class="p-3"> {{ item.id_orders }} </td>
+                <td class="p-3"> {{ item.nama }} </td>
                 <td class="p-3"> {{ item.pickup_date }} </td>
                 <td class="p-3"> {{ item.picktup_time }} WITA </td>
                 <td class="p-3"> {{ item.payment_methods }} </td>
@@ -46,10 +49,24 @@
                     </button>
                 </td>
                 <td class="p-3"> IDR {{ item.total_price }} </td>
+                {% if item.order_status == 'Menunggu Konfirmasi' %}
                 <td class="p-3">
-                    <button type="button" class="btn btn-success">Terima</button>
-                    <button type="button" class="btn btn-danger">Tolak</button>
+                    <!-- Terima Pesanan -->
+                    <a href="{{ url_for('admin.accept_order', id_orders = item.id_orders) }}">
+                        <button type="button" class="btn btn-success">Terima</button>
+                    </a>
+                    <!-- Tolak Pesanan -->
+                    <a href="{{ url_for('admin.reject_order', id_orders = item.id_orders) }}">
+                        <button type="button" class="btn btn-danger">Tolak</button>
+                    </a>
                 </td>
+                {% else %}
+                <td class="p-3">
+                    <button disabled type="button" class="btn btn-success">Terima</button>
+                    <button disabled type="button" class="btn btn-danger">Tolak</button>
+                </td>
+                {% endif %}
+                <td class="p-3"> {{ item.order_status}} </td>
             </tr>
             <!-- Modal -->
             <div class="modal fade" id="cake_detail{{ item.id_orders }}" tabindex="-1" aria-hidden="true">
@@ -57,10 +74,10 @@
                     <div class="modal-content">
                         <div class="modal-body">
                             <div class="container p-3" name="Judul Modal">
-                                <h1 style="font-size: 35px;"> Daftar Pesanan {{ item.id_orders }} </h1>
+                                <h1 style="font-size: 35px;"> Daftar Pesanan </h1>
                                 <div class="container p-2" name="Isi Modal">
-                                    <!-- Tambahkan AJAX untuk mengambil data OrderDetails berdasarkan order.id_orders -->
-                                    <div id="order_details_{{ item.id_orders }}"></div>
+                                    <!-- AJAX Untuk Mengambil Data Order Details -->
+                                    <div id="order_details_{{ item.id_orders }}"> </div>
                                     <script>
                                         $(document).ready(function () {
                                             $('#cake_detail{{ item.id_orders }}').on('show.bs.modal', function (e) {
@@ -74,6 +91,7 @@
                                             });
                                         });
                                     </script>
+                                    <!-- End Of AJAX -->
                                 </div>
                             </div>
                         </div>

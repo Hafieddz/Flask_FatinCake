@@ -2,7 +2,9 @@
 
 {% block canvas_home %}
 <div class="d-flex gap-3 align-items-center ">
-    <img width="43" height="43" src="https://img.icons8.com/external-kmg-design-detailed-outline-kmg-design/64/external-dashboard-user-interface-kmg-design-detailed-outline-kmg-design.png" alt="external-dashboard-user-interface-kmg-design-detailed-outline-kmg-design" class="mx-2"  />
+    <img width="43" height="43"
+        src="https://img.icons8.com/external-kmg-design-detailed-outline-kmg-design/64/external-dashboard-user-interface-kmg-design-detailed-outline-kmg-design.png"
+        alt="external-dashboard-user-interface-kmg-design-detailed-outline-kmg-design" class="mx-2" />
     <a class="col-5 main-page" href="#"> Beranda </a>
 </div>
 {% endblock %}
@@ -12,25 +14,40 @@
 {% block body %}
 
 <div class="container mt-5 ">
-    <div class="row gap-4 p-4">
-        <div class="col-12 d-flex gap-4">
-            <div class="col admin-dashboard" style= "height: 200px">
-                
-            </div>
-            <div class="col admin-dashboard" style= "height: 200px">
-                
-            </div>
-            <div class="col admin-dashboard" style= "height: 200px">
-                
-            </div>
-            <div class="col admin-dashboard" style= "height: 200px">
-                
-            </div>
+    <div class="row gap-4 justify-content-around mb-5">
+        <div class="col admin-dashboard text-center py-2">
+            <h1 class="fs-1">
+                Total Produk
+            </h1>
+            <h2 class="fs-3 py-5">
+                {{ product_total }}
+            </h1>
         </div>
-        <div class="col-12 d-flex justify-content-center">
-            <div class="col-8 admin-dashboard" style=" height: 250px;">
-
-            </div>
+        <div class="col admin-dashboard text-center py-2">
+            <h1 class="fs-1">
+                Total Pesanan
+            </h1>
+            <h2 class="fs-3 py-5">
+                {{ orders_total }}
+            </h1>
+        </div>
+    </div>
+    <div class="row gap-4 justify-content-around ">
+        <div class="col admin-dashboard text-center py-2">
+            <h1 class="fs-1">
+                Pesanan Ditolak
+            </h1>
+            <h2 class="fs-3 py-5">
+                {{ rejected_order }}
+            </h1>
+        </div>
+        <div class="col admin-dashboard text-center py-2">
+            <h1 class="fs-1">
+                Pesanan Diterima
+            </h1>
+            <h2 class="fs-3 py-5">
+                {{ accepted_order }}
+            </h1>
         </div>
     </div>
 </div>
