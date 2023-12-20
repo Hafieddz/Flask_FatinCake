@@ -63,6 +63,7 @@ class CartDetails(db.Model):
 class Orders(db.Model):
     id_orders = db.Column(db.Integer, primary_key = True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable= False)
+    nama = db.Column(db.String(100), nullable=False)
     pickup_date = db.Column(db.String(20), nullable=False)
     picktup_time = db.Column(db.String(20), nullable=False)
     total_price = db.Column(db.Integer, nullable=False)
