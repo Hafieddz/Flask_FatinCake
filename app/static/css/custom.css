@@ -12032,11 +12032,28 @@ form .modal-button:active {
   object-fit: cover;
 }
 
+.detail-img {
+  width: 490px;
+  height: 500px;
+}
+
 @media only screen and (max-width: 810px) {
   .card-img-top {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
+  }
+}
+@media only screen and (max-width: 590px) {
+  .detail-img {
+    height: 350px;
+    width: 350px;
+  }
+}
+@media only screen and (max-width: 350px) {
+  .detail-img {
+    height: 200px;
+    width: 200px;
   }
 }
 .footer-bg {
@@ -12553,8 +12570,14 @@ button {
 }
 
 .admin-dashboard {
-  background-color: #B0B0B0;
+  background-color: #F3808B;
   box-shadow: 5px 10px 15px 1px rgba(0, 0, 0, 0.25);
+  height: 250px;
+  border-radius: 20px;
+}
+.admin-dashboard h2, .admin-dashboard .h2, .admin-dashboard h1, .admin-dashboard .h1 {
+  color: black;
+  font-family: "Poppins", sans-serif;
 }
 
 input::-webkit-outer-spin-button,
