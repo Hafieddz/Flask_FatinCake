@@ -398,6 +398,7 @@ def add_orders():
             # Masukkan Data ke Database!
             add_to_order = Orders(
                 user_id=id,
+                nama = nama,
                 pickup_date=tanggal,
                 picktup_time=waktu,
                 total_price=total_price,

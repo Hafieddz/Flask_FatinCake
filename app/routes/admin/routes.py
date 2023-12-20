@@ -1,3 +1,4 @@
+from itertools import product
 from flask import Blueprint, redirect, render_template, request, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from flask import Flask
@@ -127,15 +128,13 @@ def add_product():
 @admin.route('/admin/dashboard', methods=['GET', 'POST'])
 @login_required
 def admin_dashboard():
-    register_form = RegisterForm()
-    login_form = LoginForm()
-    login = None
-
-    if current_user.is_authenticated:
-        login = 'Yes'
-
+    
     if current_user.role == 'admin':
-        return render_template("admin/admin.html", login = login, register_form = register_form, login_form = login_form)
+        product_total = Cake.query.count()
+        orders_total = Orders.query.count()
+        accepted_order = Orders.query.filter(Orders.order_status == 'Pesanan Diterima').count()
+        rejected_order = Orders.query.filter(Orders.order_status == 'Pesanan Ditolak').count()
+        return render_template("admin/admin.html", product_total = product_total, orders_total = orders_total, accepted_order = accepted_order, rejected_order = rejected_order)
     else :
         flash("Anda tidak bisa mengakses halaman ini!", "error")
         return redirect(url_for('main.index'))
@@ -192,3 +191,33 @@ def get_order_details(order_id):
     ).join(Cake, OrderDetails.id_kue == Cake.id_kue).filter(OrderDetails.id_orders == order_id).all()
 
     return render_template('admin/order_details.html', order_details=order_details)
+
+@admin.route('/accept_order/<int:id_orders>', methods=['GET', 'POST'])
+@login_required
+def accept_order(id_orders):
+    id = id_orders
+    if current_user.role == 'admin':
+        status = Orders.query.get_or_404(id)
+        status.order_status = 'Pesanan Diterima'
+        db.session.commit()
+        flash(f'Pesanan Diterima', 'success')
+        return redirect(url_for('admin.admin_order'))
+    else:
+        flash("Anda tidak bisa mengakses halaman ini!", "error")
+        return redirect(url_for('main.index'))  
+    
+@admin.route('/reject_order/<int:id_orders>', methods=['GET', 'POST'])
+@login_required
+def reject_order(id_orders):
+    id = id_orders
+    
+    if current_user.role == 'admin':
+        status = Orders.query.get_or_404(id)
+        status.order_status = 'Pesanan Ditolak'
+        db.session.commit()
+        flash(f'Pesanan Ditolak', 'success')
+        return redirect(url_for('admin.admin_order'))
+        
+    else:
+        flash("Anda tidak bisa mengakses halaman ini!", "error")
+        return redirect(url_for('main.index'))  
